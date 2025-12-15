@@ -6,50 +6,12 @@
 /*   By: abounoua <abounoua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:51:01 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/15 16:26:18 by abounoua         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:59:33 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 #include <stdio.h>
-
-t_list	*lstnew(int data)
-{
-	t_list	*node;
-
-	node = malloc(sizeof(t_list));
-	if (!node)
-		return (NULL);
-	node->next = NULL;
-	node->prev = NULL;
-	node->data = data;
-	return (node);
-}
-
-void	lstadd_front(t_list **lst, t_list *node)
-{
-	if (lst && *lst)
-	{
-		node->next = *lst;
-		(*lst)->prev = node;
-	}
-	*lst = node;
-}
-
-void	*free_lst(t_list *lst)
-{
-	t_list	*node;
-	t_list	*temp;
-	
-	node = lst;
-	while (node)
-	{
-		temp = node->next;
-		free(node);
-		node = temp;
-	}
-	return (NULL);
-}
 
 t_stack	*init_stack(void)
 {
@@ -65,7 +27,7 @@ t_stack	*init_stack(void)
 
 void	*free_stack(t_stack *stack)
 {
-	free_lst(stack->top);
+	free_lst(stack->top, &free);
 	free(stack);
 	return (NULL);
 }
@@ -73,15 +35,22 @@ void	*free_stack(t_stack *stack)
 void	push(t_stack **stack, int data)
 {
 	t_list	*node;
+	int		*p_data;
 
-	node = lstnew(data);
-	if (!node || !stack)
+	if (!stack)
 		return ;
+	p_data = malloc(sizeof(int));
+	if (!p_data)
+		return ;
+	*p_data = data;
+	node = lstnew(p_data);
+	if (!node)
+		return (free(p_data));
 	if (!(*stack))
 	{
 		*stack = init_stack();
 		if (!(*stack))
-			return (free(node));
+			return (lst_delone(node, &free));
 		(*stack)->top = node;
 		(*stack)->size = 1;
 	}
@@ -92,11 +61,26 @@ void	push(t_stack **stack, int data)
 	}
 }
 
+int	stack_is_empty(t_stack *stack)
+{
+	return (stack->size == 0);
+}
+
+int	pop(t_stack *stack)
+{
+	int	data;
+
+	data = *(int *)(stack->top->data);
+	lstdel_front(&(stack->top), &free);
+	stack->size--;
+	return (data);
+}
+
 void	print_list(t_list *lst)
 {
 	while (lst)
 	{
-		printf("%d\n", lst->data);
+		printf("%d\n", *(int *)(lst->data));
 		lst = lst->next;
 	}
 }
@@ -106,34 +90,42 @@ int	main(void)
 	t_list	*lst;
 	t_list	*node;
 	t_stack	*stack;
+	int		*a = malloc(sizeof(int));
+	int		*b = malloc(sizeof(int));
+	int		*c = malloc(sizeof(int));
+	int		*d = malloc(sizeof(int));
 
+	*a = 0;
+	*b = 1;
+	*c = 2;
+	*d = 3;
 	lst = NULL;
 	
 	printf("=============    Tests chained lists    =============\n");
-	node = lstnew(0);
+	node = lstnew(a);
 	if (!node)
-		return (free_lst(lst), 1);
+		return (free_lst(lst, &free), 1);
 	lstadd_front(&lst, node);
 
 	
-	node = lstnew(1);
+	node = lstnew(b);
 	if (!node)
-		return (free_lst(lst), 1);
+		return (free_lst(lst, &free), 1);
 	lstadd_front(&lst, node);
 
 	
-	node = lstnew(2);
+	node = lstnew(c);
 	if (!node)
-		return (free_lst(lst), 1);
+		return (free_lst(lst, &free), 1);
 	lstadd_front(&lst, node);
 
 
-	node = lstnew(3);
+	node = lstnew(d);
 	if (!node)
-		return (free_lst(lst), 1);
+		return (free_lst(lst, &free), 1);
 	lstadd_front(&lst, node);
 	print_list(lst);
-	free_lst(lst);
+	free_lst(lst, &free);
 	printf("=====================================================\n\n");
 	
 	printf("==================    Tests stacks    ==================\n");
@@ -149,6 +141,17 @@ int	main(void)
 	push(&stack, 2);
 	push(&stack, 1);
 	push(&stack, 0);
+	print_list(stack->top);
+	printf("\nSize : %zu\n", stack->size);
+	printf("pop: %i\n", pop(stack));
+	printf("pop: %i\n", pop(stack));
+	printf("pop: %i\n", pop(stack));
+	printf("pop: %i\n", pop(stack));
+	printf("pop: %i\n", pop(stack));
+	printf("pop: %i\n", pop(stack));
+	printf("pop: %i\n", pop(stack));
+	printf("pop: %i\n", pop(stack));
+	printf("pop: %i\n", pop(stack));
 	print_list(stack->top);
 	printf("\nSize : %zu", stack->size);
 	free_stack(stack);
