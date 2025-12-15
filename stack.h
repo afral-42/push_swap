@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:12:08 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/15 18:01:07 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:41:35 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,8 @@ void	lstdel_front(t_list **lst, void (*del)(void *));
 int		pop(t_stack *stack);
 int		stack_is_empty(t_stack *stack);
 void	push(t_stack **stack, int data);
+void	lst_swap_head_nodes(t_list **lst);
+void	lst_rotate(t_list **lst);
+void	lst_reverse_rotate(t_list **lst);
 
 #endif

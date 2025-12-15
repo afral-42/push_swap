@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:51:01 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/15 17:59:33 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:44:31 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,22 @@ int	pop(t_stack *stack)
 	return (data);
 }
 
+void	swap(t_stack *stack)
+{
+	lst_swap_head_nodes(&(stack->top));
+}
+
+void	rotate(t_stack *stack)
+{
+	lst_rotate(&(stack->top));
+}
+
+void	reverse_rotate(t_stack *stack)
+{
+	lst_reverse_rotate(&(stack->top));
+}
+
+
 void	print_list(t_list *lst)
 {
 	while (lst)
@@ -84,6 +100,7 @@ void	print_list(t_list *lst)
 		lst = lst->next;
 	}
 }
+
 
 int	main(void)
 {
@@ -143,6 +160,21 @@ int	main(void)
 	push(&stack, 0);
 	print_list(stack->top);
 	printf("\nSize : %zu\n", stack->size);
+	printf("\nswap: \n");
+	swap(stack);
+	print_list(stack->top);
+	printf("\nrotate: \n");
+	rotate(stack);
+	print_list(stack->top);
+	printf("\nrotate: \n");
+	rotate(stack);
+	print_list(stack->top);
+	printf("\nreverse rotate: \n");
+	reverse_rotate(stack);
+	print_list(stack->top);
+	printf("\nreverse rotate: \n");
+	reverse_rotate(stack);
+	print_list(stack->top);
 	printf("pop: %i\n", pop(stack));
 	printf("pop: %i\n", pop(stack));
 	printf("pop: %i\n", pop(stack));
