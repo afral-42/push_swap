@@ -1,6 +1,5 @@
-#include "../stack.h"
-#include "assert.h"
-
+#include <assert.h>
+#include "tests.h"
 
 void	test_lstnew(void)
 {
@@ -43,11 +42,108 @@ void	test_lstadd_front(void)
 
 void	test_lst_rotate(void)
 {
+	t_list	*lst;
 
+	lst = generate_list(1);
+	lst_rotate(&lst);
+	assert(*(int *)(lst->data) == 1);
+	assert(lst->next == NULL);
+	assert(lst->prev == NULL);
+	free_lst(lst, &free);
+	lst = generate_list(2);
+	lst_rotate(&lst);
+	check_list_integrity(lst);
+	assert(*(int *)(lst->data) == 2);
+	assert(*(int *)(lst->next->data) == 1);
+	free_lst(lst, &free);
+	lst = generate_list(3);
+	lst_rotate(&lst);
+	check_list_integrity(lst);
+	assert(*(int *)(lst->data) == 2);
+	assert(*(int *)(lst->next->data) == 3);
+	assert(*(int *)(lst->next->next->data) == 1);
+	free_lst(lst, &free);
+	lst = generate_list(4);
+	lst_rotate(&lst);
+	check_list_integrity(lst);
+	assert(*(int *)(lst->data) == 2);
+	assert(*(int *)(lst->next->data) == 3);
+	assert(*(int *)(lst->next->next->data) == 4);
+	assert(*(int *)(lst->next->next->next->data) == 1);
+	free_lst(lst, &free);
+}
+
+void	test_lst_reverse_rotate(void)
+{
+	t_list	*lst;
+
+	lst = generate_list(1);
+	lst_reverse_rotate(&lst);
+	assert(*(int *)(lst->data) == 1);
+	assert(lst->next == NULL);
+	assert(lst->prev == NULL);
+	free_lst(lst, &free);
+	lst = generate_list(2);
+	lst_reverse_rotate(&lst);
+	check_list_integrity(lst);
+	assert(*(int *)(lst->data) == 2);
+	assert(*(int *)(lst->next->data) == 1);
+	free_lst(lst, &free);
+	lst = generate_list(3);
+	lst_reverse_rotate(&lst);
+	check_list_integrity(lst);
+	assert(*(int *)(lst->data) == 3);
+	assert(*(int *)(lst->next->data) == 1);
+	assert(*(int *)(lst->next->next->data) == 2);
+	free_lst(lst, &free);
+	lst = generate_list(4);
+	lst_reverse_rotate(&lst);
+	check_list_integrity(lst);
+	assert(*(int *)(lst->data) == 4);
+	assert(*(int *)(lst->next->data) == 1);
+	assert(*(int *)(lst->next->next->data) == 2);
+	assert(*(int *)(lst->next->next->next->data) == 3);
+	free_lst(lst, &free);
+}
+
+void	test_lst_swap_head_nodes(void)
+{
+	t_list	*lst;
+
+	lst = generate_list(1);
+	lst_swap_head_nodes(&lst);
+	assert(*(int *)(lst->data) == 1);
+	assert(lst->next == NULL);
+	assert(lst->prev == NULL);
+	free_lst(lst, &free);
+	lst = generate_list(2);
+	lst_swap_head_nodes(&lst);
+	check_list_integrity(lst);
+	assert(*(int *)(lst->data) == 2);
+	assert(*(int *)(lst->next->data) == 1);
+	free_lst(lst, &free);
+	lst = generate_list(3);
+	lst_swap_head_nodes(&lst);
+	check_list_integrity(lst);
+	assert(*(int *)(lst->data) == 2);
+	assert(*(int *)(lst->next->data) == 1);
+	assert(*(int *)(lst->next->next->data) == 3);
+	free_lst(lst, &free);
+	lst = generate_list(4);
+	lst_swap_head_nodes(&lst);
+	check_list_integrity(lst);
+	assert(*(int *)(lst->data) == 2);
+	assert(*(int *)(lst->next->data) == 1);
+	assert(*(int *)(lst->next->next->data) == 3);
+	assert(*(int *)(lst->next->next->next->data) == 4);
+	free_lst(lst, &free);
 }
 
 int	main(void)
 {
 	test_lstnew();
 	test_lstadd_front();
+	test_lst_rotate();
+	test_lst_reverse_rotate();
+	test_lst_swap_head_nodes();
 }

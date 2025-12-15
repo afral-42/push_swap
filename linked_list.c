@@ -77,7 +77,7 @@ void	lst_swap_head_nodes(t_list **lst)
 	cpy_second_node->prev = NULL;
 	cpy_second_node->next = cpy_head;
 	if (cpy_third_node)
-		cpy_third_node->prev = cpy_second_node;
+		cpy_third_node->prev = cpy_head;
 	*lst = cpy_second_node;
 }
 
