@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:51:01 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/15 18:44:31 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:53:48 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,15 @@ void	reverse_rotate(t_stack *stack)
 	lst_reverse_rotate(&(stack->top));
 }
 
+void	push_op(t_stack **a, t_stack *b)
+{
+	int	data;
+
+	if (b->size == 0)
+		return ;
+	data = pop(b);
+	push(a, data);
+}
 
 void	print_list(t_list *lst)
 {
@@ -107,6 +116,7 @@ int	main(void)
 	t_list	*lst;
 	t_list	*node;
 	t_stack	*stack;
+	t_stack	*stackb;
 	int		*a = malloc(sizeof(int));
 	int		*b = malloc(sizeof(int));
 	int		*c = malloc(sizeof(int));
@@ -186,6 +196,13 @@ int	main(void)
 	printf("pop: %i\n", pop(stack));
 	print_list(stack->top);
 	printf("\nSize : %zu", stack->size);
+	stackb = NULL;
+	push_op(&stackb, stack);
+	printf("push_op\nstack:\n");
+	print_list(stack->top);
+	printf("stackb:\n");
+	print_list(stackb->top);
 	free_stack(stack);
+	free_stack(stackb);
 	printf("\n=====================================================\n\n");
 }
