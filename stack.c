@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:51:01 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/15 18:53:48 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/15 19:09:59 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	print_list(t_list *lst)
 	}
 }
 
-
+/*
 int	main(void)
 {
 	t_list	*lst;
@@ -206,3 +206,4 @@ int	main(void)
 	free_stack(stackb);
 	printf("\n=====================================================\n\n");
 }
+*/
