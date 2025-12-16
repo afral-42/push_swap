@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abounoua <abounoua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:51:01 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/16 14:30:47 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/16 17:34:46 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
-#include <stdio.h>
 
 t_stack	*init_stack(void)
 {
@@ -32,7 +31,7 @@ void	*free_stack(t_stack *stack)
 	return (NULL);
 }
 
-void	push_st(t_stack *stack, int data)
+void	push(t_stack *stack, int data)
 {
 	t_list	*node;
 
@@ -45,17 +44,29 @@ void	push_st(t_stack *stack, int data)
 	stack->size++;
 }
 
-int	stack_is_empty(t_stack *stack)
+double	compute_disorder(t_stack *stack)
 {
-	return (stack->size == 0);
-}
-
-int	pop_st(t_stack *stack)
-{
-	int	data;
-
-	data = stack->top->data;
-	lstdel_front(&(stack->top));
-	stack->size--;
-	return (data);
+	int		mistakes;
+	int		total_pairs;
+	t_list	*first;
+	t_list	*second;
+	
+	if (!(stack->top) || !(stack->top->next))
+		return (0);
+	mistakes = 0;
+	total_pairs = 0;
+	first = stack->top;
+	while (first != NULL)
+	{
+		second = first->next;
+		while (second != NULL)
+		{
+			total_pairs += 1;
+			if (first->data > second->data)
+				mistakes += 1;
+			second = second->next;
+		}
+		first = first->next;
+	}
+	return ((double)mistakes / total_pairs);
 }

@@ -2,8 +2,7 @@ SRCS = \
 	stack.c \
 	linked_list.c \
 	operations.c \
-	compute_disorder.c \
-	push_swap.c
+	compute_disorder.c
 
 BUILD_DIRECTORY = build
 OBJS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.o, $(SRCS))
@@ -40,9 +39,6 @@ all:
 $(BUILD_DIRECTORY)/%.o: %.c
 	@mkdir -p $(BUILD_DIRECTORY)
 	$(CC) -c $< -o $@
-
-check:
-	@echo $(filter-out $(BUILD_DIRECTORY)/push_swap.o, $(OBJS))
 
 test: $(TESTS)
 

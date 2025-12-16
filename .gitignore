@@ -1,6 +1,6 @@
 a.out
 *.o
 *.d
-
+test.c
 build/
 tests/build/
