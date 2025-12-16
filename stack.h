@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:12:08 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/16 14:33:07 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:13:06 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	push_st(t_stack *stack, int data);
 
 void	push(t_stack *a, t_stack *b);
 void	reverse_rotate(t_stack *stack);
+void	double_reverse_rotate(t_stack *a, t_stack *b);
 void	rotate(t_stack *stack);
+void	double_rotate(t_stack *a, t_stack *b);
 void	double_swap(t_stack *a, t_stack *b);
 void	swap(t_stack *stack);
 

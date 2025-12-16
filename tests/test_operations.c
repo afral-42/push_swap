@@ -145,6 +145,51 @@ void	test_push(void)
 	free_stack(b);
 }
 
+void	test_double_rotate(void)
+{
+	t_stack	*a;
+	t_stack	*b;
+
+	a = generate_stack(4);
+	b = generate_stack(4);
+	double_rotate(a, b);
+	assert(a->size == 4);
+	assert(a->top->data == 2);
+	assert(a->top->next->data == 3);
+	assert(a->top->next->next->data == 4);
+	assert(a->top->next->next->next->data == 1);
+	assert(b->size == 4);
+	assert(b->top->data == 2);
+	assert(b->top->next->data == 3);
+	assert(b->top->next->next->data == 4);
+	assert(b->top->next->next->next->data == 1);
+	free_stack(a);
+	free_stack(b);
+}
+
+void	test_double_reverse_rotate(void)
+{
+	t_stack	*a;
+	t_stack	*b;
+
+	a = generate_stack(4);
+	b = generate_stack(4);
+	double_reverse_rotate(a, b);
+	assert(a->size == 4);
+	assert(a->top->data == 4);
+	assert(a->top->next->data == 1);
+	assert(a->top->next->next->data == 2);
+	assert(a->top->next->next->next->data == 3);
+	assert(b->size == 4);
+	assert(b->top->data == 4);
+	assert(b->top->next->data == 1);
+	assert(b->top->next->next->data == 2);
+	assert(b->top->next->next->next->data == 3);
+	free_stack(a);
+	free_stack(b);
+}
+
+
 int	main(void)
 {
 	test_swap();
@@ -152,4 +197,6 @@ int	main(void)
 	test_rotate();
 	test_reverse_rotate();
 	test_push();
+	test_double_rotate();
+	test_double_reverse_rotate();
 }

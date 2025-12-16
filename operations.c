@@ -20,11 +20,23 @@ void	rotate(t_stack *stack)
 	lst_rotate(&(stack->top));
 }
 
+void	double_rotate(t_stack *a, t_stack *b)
+{
+	rotate(a);
+	rotate(b);
+}
+
 void	reverse_rotate(t_stack *stack)
 {
 	if (stack->size == 0)
 		return ;
 	lst_reverse_rotate(&(stack->top));
+}
+
+void	double_reverse_rotate(t_stack *a, t_stack *b)
+{
+	reverse_rotate(a);
+	reverse_rotate(b);
 }
 
 void	push(t_stack *a, t_stack *b)
