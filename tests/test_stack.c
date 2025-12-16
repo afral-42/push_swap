@@ -25,6 +25,7 @@ void	test_push_st(void)
 	push_st(stack, 1);
 	assert(stack->size == 3);
 	assert(stack->top->data == 1);
+	free_stack(stack);
 }
 
 void	test_pop_st(void)
@@ -47,6 +48,7 @@ void	test_pop_st(void)
 	assert(data == 3);
 	assert(stack->size == 0);
 	assert(stack->top == NULL);
+	free_stack(stack);
 }
 
 int	main(void)

@@ -15,11 +15,15 @@ void	double_swap(t_stack *a, t_stack *b)
 
 void	rotate(t_stack *stack)
 {
+	if (stack->size == 0)
+		return ;
 	lst_rotate(&(stack->top));
 }
 
 void	reverse_rotate(t_stack *stack)
 {
+	if (stack->size == 0)
+		return ;
 	lst_reverse_rotate(&(stack->top));
 }
 

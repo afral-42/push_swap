@@ -6,6 +6,7 @@ SRCS = \
 BUILD_DIRECTORY = build
 OBJS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.o, $(SRCS))
 DEPS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.d, $(SRCS))
+HEADERS = stack.h
 
 TESTS_DIRECTORY = tests
 TESTS_BUILD_DIRECTORY = $(TESTS_DIRECTORY)/build
@@ -20,7 +21,7 @@ TESTS_DEPS := $(patsubst %.o, %.d, $(TESTS_OBJS))
 TESTS_BIN := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(TESTS))
 TESTS_HELPERS_FILES = tests_helpers.c
 TESTS_HELPERS_SRCS := $(addprefix $(TESTS_DIRECTORY)/, $(TESTS_HELPERS_FILES))
-TESTS_HELPERS_OBJS = $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(patsubst %.c, %.o, $(TESTS_HELPERS_FILES)))
+TESTS_HELPERS_OBJS := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(patsubst %.c, %.o, $(TESTS_HELPERS_FILES)))
 TESTS_HELPERS_DEPS := $(patsubst %.o, %.d, $(TESTS_HELPER_OBJS))
 
 CFLAGS += -Wall -Wextra -Werror
@@ -32,13 +33,6 @@ CC += $(CFLAGS) $(CPPFLAGS)
 
 all:
 	@echo "To be implemented"
-
-check:
-	@echo $(TESTS_HELPERS_SRCS)
-	@echo $(TESTS_HELPERS_OBJS)
-	@echo $(TESTS_OBJS)
-	@echo $(TESTS)
-	@echo $(TESTS_SRCS)
 
 $(BUILD_DIRECTORY)/%.o: %.c
 	@mkdir -p $(BUILD_DIRECTORY)
@@ -55,15 +49,20 @@ test_%: $(TESTS_BUILD_DIRECTORY)/test_%
 
 memtest_%: $(TESTS_BUILD_DIRECTORY)/test_%
 	@echo ⏳ Running $@...
-	@valgrind -q --error-exitcode=1 ./$< > /dev/null
+	@valgrind -q --leak-check=full --error-exitcode=1 ./$< > /dev/null
 	@echo ✅ $@ passed!
 
 $(TESTS_BUILD_DIRECTORY)/test_%: $(TESTS_BUILD_DIRECTORY)/test_%.o $(TESTS_HELPERS_OBJS) $(OBJS)
-	$(CC) $^ -o $@
+	$(CC) -g $^ -o $@
 
 $(TESTS_BUILD_DIRECTORY)/%.o: $(TESTS_DIRECTORY)/%.c
 	@mkdir -p $(TESTS_BUILD_DIRECTORY)
-	$(CC) -c $< -o $@
+	$(CC) -g -c $< -o $@
+
+norm: $(SRCS)
+	@echo ⏳ Running norminette...
+	@norminette -R CheckForbiddenHeader $(SRCS) $(HEADERS)
+	@echo ✅ Norminette passed!
 
 clean:
 	rm -rfv $(BUILD_DIRECTORY) $(TESTS_BUILD_DIRECTORY)
