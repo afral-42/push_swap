@@ -1,3 +1,4 @@
+NAME = push_swap
 FILES = \
 	data_structures/stack.c \
 	data_structures/list.c \
@@ -34,7 +35,9 @@ CC += $(CFLAGS) $(CPPFLAGS)
 .PHONY: all clean fclean re test memtest test_% memtest_%
 .NOTINTERMEDIATE: $(TESTS_BIN) $(TESTS_OBJS) $(TESTS_HELPERS_OBJS) $(OBJS)
 
-all:
+all: $(NAME)
+
+$(NAME):
 	@echo "To be implemented"
 
 check:
