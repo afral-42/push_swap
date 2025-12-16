@@ -24,26 +24,25 @@ void	test_disorder_min(void)
 void	test_disorder_max(void)
 {
 	t_stack	*stack;
-	t_stack	*stack_cpy;
 
 	stack = generate_stack(2);
 	swap(stack);
 	assert(compute_disorder(stack) == 1.0);
 	free_stack(stack);
 	stack = generate_stack(3);
-	stack_cpy = generate_stack(0);
-	while (stack->size)
-		push(stack_cpy, stack);
-	assert(compute_disorder(stack_cpy) == 1.0);
+	stack->top->data = 3;
+	stack->top->next->data = 2;
+	stack->top->next->next->data = 1;
+	assert(compute_disorder(stack) == 1.0);
 	free_stack(stack);
-	free_stack(stack_cpy);
-	stack = generate_stack(10);
-	stack_cpy = generate_stack(0);
-	while (stack->size)
-		push(stack_cpy, stack);
-	assert(compute_disorder(stack_cpy) == 1.0);
+	stack = generate_stack(5);
+	stack->top->data = 5;
+	stack->top->next->data = 4;
+	stack->top->next->next->data = 3;
+	stack->top->next->next->next->data = 2;
+	stack->top->next->next->next->next->data = 1;
+	assert(compute_disorder(stack) == 1.0);
 	free_stack(stack);
-	free_stack(stack_cpy);
 }
 
 void	test_disorder_intermediate(void)

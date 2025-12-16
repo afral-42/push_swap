@@ -12,7 +12,6 @@
 
 #ifndef LIST_H
 # define LIST_H
-#endif
 
 # include <stdlib.h>
 
@@ -26,3 +25,5 @@ typedef	struct s_list
 t_list	*lstnew(int data);
 void	lstadd_front(t_list **lst, t_list *node);
 void	*free_lst(t_list *lst);
+
+#endif
