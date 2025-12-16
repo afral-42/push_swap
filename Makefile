@@ -1,7 +1,8 @@
 SRCS = \
 	stack.c \
 	linked_list.c \
-	operations.c
+	operations.c \
+	compute_disorder.c 
 
 BUILD_DIRECTORY = build
 OBJS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.o, $(SRCS))
@@ -13,7 +14,8 @@ TESTS_BUILD_DIRECTORY = $(TESTS_DIRECTORY)/build
 TESTS_FILES = \
 			test_linked_list.c \
 			test_stack.c \
-			test_operations.c
+			test_operations.c \
+			test_compute_disorder.c
 TESTS := $(patsubst %.c, %, $(TESTS_FILES))
 TESTS_SRCS := $(addprefix $(TESTS_DIRECTORY)/, $(TESTS_FILES))
 TESTS_OBJS := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(patsubst %.c, %.o, $(TESTS_FILES)))

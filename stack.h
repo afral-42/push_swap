@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:12:08 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/16 15:13:06 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/16 16:07:26 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void	rotate(t_stack *stack);
 void	double_rotate(t_stack *a, t_stack *b);
 void	double_swap(t_stack *a, t_stack *b);
 void	swap(t_stack *stack);
+
+double	compute_disorder(t_stack *stack);
 
 #endif
