@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:51:01 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/15 19:09:59 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/16 13:21:46 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,38 +27,22 @@ t_stack	*init_stack(void)
 
 void	*free_stack(t_stack *stack)
 {
-	free_lst(stack->top, &free);
+	free_lst(stack->top);
 	free(stack);
 	return (NULL);
 }
 
-void	push(t_stack **stack, int data)
+void	push(t_stack *stack, int data)
 {
 	t_list	*node;
-	int		*p_data;
 
 	if (!stack)
 		return ;
-	p_data = malloc(sizeof(int));
-	if (!p_data)
-		return ;
-	*p_data = data;
-	node = lstnew(p_data);
+	node = lstnew(data);
 	if (!node)
-		return (free(p_data));
-	if (!(*stack))
-	{
-		*stack = init_stack();
-		if (!(*stack))
-			return (lst_delone(node, &free));
-		(*stack)->top = node;
-		(*stack)->size = 1;
-	}
-	else
-	{
-		lstadd_front(&((*stack)->top), node);
-		(*stack)->size++;
-	}
+		return ;
+	lstadd_front(&(stack->top), node);
+	stack->size++;
 }
 
 int	stack_is_empty(t_stack *stack)
@@ -70,8 +54,8 @@ int	pop(t_stack *stack)
 {
 	int	data;
 
-	data = *(int *)(stack->top->data);
-	lstdel_front(&(stack->top), &free);
+	data = stack->top->data;
+	lstdel_front(&(stack->top));
 	stack->size--;
 	return (data);
 }
@@ -91,7 +75,7 @@ void	reverse_rotate(t_stack *stack)
 	lst_reverse_rotate(&(stack->top));
 }
 
-void	push_op(t_stack **a, t_stack *b)
+void	push_op(t_stack *a, t_stack *b)
 {
 	int	data;
 
@@ -105,7 +89,7 @@ void	print_list(t_list *lst)
 {
 	while (lst)
 	{
-		printf("%d\n", *(int *)(lst->data));
+		printf("%d\n", lst->data);
 		lst = lst->next;
 	}
 }
