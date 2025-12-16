@@ -12,6 +12,10 @@ HEADERS = \
 		stack.h \
 		list.h
 
+LIBFTPRINTF_DIR = libftprintf
+LIBFTPRINTF_FILE = libftprintf.a
+LIBFTPRINTF = $(LIBFTPRINTF_DIR)/$(LIBFTPRINTF_FILE)
+
 TESTS_DIRECTORY = tests
 TESTS_BUILD_DIRECTORY = $(TESTS_DIRECTORY)/build
 TESTS_FILES = \
@@ -29,7 +33,9 @@ TESTS_HELPERS_SRCS := $(addprefix $(TESTS_DIRECTORY)/, $(TESTS_HELPERS_FILES))
 TESTS_HELPERS_OBJS := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(patsubst %.c, %.o, $(TESTS_HELPERS_FILES)))
 TESTS_HELPERS_DEPS := $(patsubst %.o, %.d, $(TESTS_HELPER_OBJS))
 
-CFLAGS += -Wall -Wextra -Werror -Iincludes
+INCLUDES = -Iincludes -I$(LIBFTPRINTF_DIR) -I$(LIBFTPRINTF_DIR)/libft
+
+CFLAGS += -Wall -Wextra -Werror $(INCLUDES)
 CPPFLAGS += -MMD -MP
 CC += $(CFLAGS) $(CPPFLAGS)
 
@@ -38,15 +44,18 @@ CC += $(CFLAGS) $(CPPFLAGS)
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(LIBFTPRINTF) $(OBJS)
 	@echo "To be implemented"
+
+$(LIBFTPRINTF):
+	$(MAKE) -C $(LIBFTPRINTF_DIR)
 
 check:
 	echo $(OBJS)
 
 $(BUILD_DIRECTORY)/%.o: srcs/%.c
 	@mkdir -p $(dir $@)
-	$(CC) -c $< -o $@
+	$(CC) -c $^ -o $@
 
 test: $(TESTS)
 
@@ -62,7 +71,7 @@ memtest_%: $(TESTS_BUILD_DIRECTORY)/test_%
 	@valgrind -q --leak-check=full --error-exitcode=1 ./$< > /dev/null
 	@echo ✅ $@ passed!
 
-$(TESTS_BUILD_DIRECTORY)/test_%: $(TESTS_BUILD_DIRECTORY)/test_%.o $(TESTS_HELPERS_OBJS) $(filter-out $(BUILD_DIRECTORY)/push_swap.o, $(OBJS))
+$(TESTS_BUILD_DIRECTORY)/test_%: $(TESTS_BUILD_DIRECTORY)/test_%.o $(TESTS_HELPERS_OBJS) $(filter-out $(BUILD_DIRECTORY)/push_swap.o, $(OBJS)) $(LIBFTPRINTF)
 	$(CC) -g $^ -o $@
 
 $(TESTS_BUILD_DIRECTORY)/%.o: $(TESTS_DIRECTORY)/%.c
@@ -76,9 +85,11 @@ norm: $(SRCS)
 
 clean:
 	rm -rfv $(BUILD_DIRECTORY) $(TESTS_BUILD_DIRECTORY)
+	$(MAKE) -C $(LIBFTPRINTF_DIR) clean
 
 fclean: clean
 	rm -fv $(TESTS_BIN)
+	$(MAKE) -C $(LIBFTPRINTF_DIR) fclean
 
 re: fclean all
 
