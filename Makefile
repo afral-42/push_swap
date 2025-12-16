@@ -11,7 +11,7 @@ TESTS_BUILD_DIRECTORY = $(TESTS_DIRECTORY)/build
 TESTS := $(patsubst %.c, test_%, $(SRCS))
 TESTS_FILES := $(patsubst %.c, test_%.c, $(SRCS))
 TESTS_SRCS := $(addprefix $(TESTS_DIRECTORY)/, $(TESTS_FILES))
-TESTS_OBJS := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(patsubst %.c, $.o, $(TESTS_FILES)))
+TESTS_OBJS := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(patsubst %.c, %.o, $(TESTS_FILES)))
 TESTS_DEPS := $(patsubst %.o, %.d, $(TESTS_OBJS))
 TESTS_BIN := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(TESTS))
 TESTS_HELPERS_FILES = tests_helpers.c
@@ -24,6 +24,7 @@ CPPFLAGS += -MMD -MP
 CC += $(CFLAGS) $(CPPFLAGS)
 
 .PHONY: all clean fclean re test memtest test_% memtest_%
+.NOTINTERMEDIATE: $(TESTS_BIN) $(TESTS_OBJS) $(TESTS_HELPERS_OBJS) $(OBJS)
 
 all:
 	@echo "To be implemented"
@@ -31,6 +32,7 @@ all:
 check:
 	@echo $(TESTS_HELPERS_SRCS)
 	@echo $(TESTS_HELPERS_OBJS)
+	@echo $(TESTS_OBJS)
 
 $(BUILD_DIRECTORY)/%.o: %.c
 	@mkdir -p $(BUILD_DIRECTORY)
