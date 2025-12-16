@@ -8,8 +8,9 @@ BUILD_DIRECTORY = build
 SRCS = $(addprefix $(SRCS_DIRECTORY)/, $(FILES))
 OBJS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.o, $(FILES))
 DEPS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.d, $(FILES))
-HEADERS = stack.h \
-		  list.h
+HEADERS = \
+		stack.h \
+		list.h
 
 TESTS_DIRECTORY = tests
 TESTS_BUILD_DIRECTORY = $(TESTS_DIRECTORY)/build
