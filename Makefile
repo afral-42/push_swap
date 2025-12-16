@@ -13,6 +13,7 @@ TESTS_DIRECTORY = tests
 TESTS_BUILD_DIRECTORY = $(TESTS_DIRECTORY)/build
 TESTS_FILES = \
 			test_stack.c \
+			test_list.c \
 			test_operations.c \
 			test_compute_disorder.c
 TESTS := $(patsubst %.c, %, $(TESTS_FILES))
