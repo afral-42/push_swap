@@ -2,7 +2,8 @@ SRCS = \
 	stack.c \
 	linked_list.c \
 	operations.c \
-	compute_disorder.c 
+	compute_disorder.c \
+	push_swap.c
 
 BUILD_DIRECTORY = build
 OBJS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.o, $(SRCS))
@@ -40,6 +41,9 @@ $(BUILD_DIRECTORY)/%.o: %.c
 	@mkdir -p $(BUILD_DIRECTORY)
 	$(CC) -c $< -o $@
 
+check:
+	@echo $(filter-out $(BUILD_DIRECTORY)/push_swap.o, $(OBJS))
+
 test: $(TESTS)
 
 memtest: $(addprefix mem, $(TESTS))
@@ -54,7 +58,7 @@ memtest_%: $(TESTS_BUILD_DIRECTORY)/test_%
 	@valgrind -q --leak-check=full --error-exitcode=1 ./$< > /dev/null
 	@echo ✅ $@ passed!
 
-$(TESTS_BUILD_DIRECTORY)/test_%: $(TESTS_BUILD_DIRECTORY)/test_%.o $(TESTS_HELPERS_OBJS) $(OBJS)
+$(TESTS_BUILD_DIRECTORY)/test_%: $(TESTS_BUILD_DIRECTORY)/test_%.o $(TESTS_HELPERS_OBJS) $(filter-out $(BUILD_DIRECTORY)/push_swap.o, $(OBJS))
 	$(CC) -g $^ -o $@
 
 $(TESTS_BUILD_DIRECTORY)/%.o: $(TESTS_DIRECTORY)/%.c
