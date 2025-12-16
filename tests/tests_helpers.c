@@ -26,3 +26,13 @@ t_list	*generate_list(size_t size)
 		lstadd_front(&lst, lstnew(size--));
 	return (lst);
 }
+
+t_stack	*generate_stack(size_t size)
+{
+	t_stack	*stack;
+
+	stack = init_stack();
+	while (size)
+		push_st(stack, size--);
+	return (stack);
+}

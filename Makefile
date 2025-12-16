@@ -1,6 +1,7 @@
 SRCS = \
 	stack.c \
-	linked_list.c
+	linked_list.c \
+	operations.c
 
 BUILD_DIRECTORY = build
 OBJS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.o, $(SRCS))
@@ -8,8 +9,11 @@ DEPS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.d, $(SRCS))
 
 TESTS_DIRECTORY = tests
 TESTS_BUILD_DIRECTORY = $(TESTS_DIRECTORY)/build
-TESTS := $(patsubst %.c, test_%, $(SRCS))
-TESTS_FILES := $(patsubst %.c, test_%.c, $(SRCS))
+TESTS_FILES = \
+			test_linked_list.c \
+			test_stack.c \
+			test_operations.c
+TESTS := $(patsubst %.c, %, $(TESTS_FILES))
 TESTS_SRCS := $(addprefix $(TESTS_DIRECTORY)/, $(TESTS_FILES))
 TESTS_OBJS := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(patsubst %.c, %.o, $(TESTS_FILES)))
 TESTS_DEPS := $(patsubst %.o, %.d, $(TESTS_OBJS))
@@ -33,6 +37,8 @@ check:
 	@echo $(TESTS_HELPERS_SRCS)
 	@echo $(TESTS_HELPERS_OBJS)
 	@echo $(TESTS_OBJS)
+	@echo $(TESTS)
+	@echo $(TESTS_SRCS)
 
 $(BUILD_DIRECTORY)/%.o: %.c
 	@mkdir -p $(BUILD_DIRECTORY)

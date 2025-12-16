@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:51:01 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/16 13:21:46 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:30:47 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*free_stack(t_stack *stack)
 	return (NULL);
 }
 
-void	push(t_stack *stack, int data)
+void	push_st(t_stack *stack, int data)
 {
 	t_list	*node;
 
@@ -50,7 +50,7 @@ int	stack_is_empty(t_stack *stack)
 	return (stack->size == 0);
 }
 
-int	pop(t_stack *stack)
+int	pop_st(t_stack *stack)
 {
 	int	data;
 
@@ -59,135 +59,3 @@ int	pop(t_stack *stack)
 	stack->size--;
 	return (data);
 }
-
-void	swap(t_stack *stack)
-{
-	lst_swap_head_nodes(&(stack->top));
-}
-
-void	rotate(t_stack *stack)
-{
-	lst_rotate(&(stack->top));
-}
-
-void	reverse_rotate(t_stack *stack)
-{
-	lst_reverse_rotate(&(stack->top));
-}
-
-void	push_op(t_stack *a, t_stack *b)
-{
-	int	data;
-
-	if (b->size == 0)
-		return ;
-	data = pop(b);
-	push(a, data);
-}
-
-void	print_list(t_list *lst)
-{
-	while (lst)
-	{
-		printf("%d\n", lst->data);
-		lst = lst->next;
-	}
-}
-
-/*
-int	main(void)
-{
-	t_list	*lst;
-	t_list	*node;
-	t_stack	*stack;
-	t_stack	*stackb;
-	int		*a = malloc(sizeof(int));
-	int		*b = malloc(sizeof(int));
-	int		*c = malloc(sizeof(int));
-	int		*d = malloc(sizeof(int));
-
-	*a = 0;
-	*b = 1;
-	*c = 2;
-	*d = 3;
-	lst = NULL;
-	
-	printf("=============    Tests chained lists    =============\n");
-	node = lstnew(a);
-	if (!node)
-		return (free_lst(lst, &free), 1);
-	lstadd_front(&lst, node);
-
-	
-	node = lstnew(b);
-	if (!node)
-		return (free_lst(lst, &free), 1);
-	lstadd_front(&lst, node);
-
-	
-	node = lstnew(c);
-	if (!node)
-		return (free_lst(lst, &free), 1);
-	lstadd_front(&lst, node);
-
-
-	node = lstnew(d);
-	if (!node)
-		return (free_lst(lst, &free), 1);
-	lstadd_front(&lst, node);
-	print_list(lst);
-	free_lst(lst, &free);
-	printf("=====================================================\n\n");
-	
-	printf("==================    Tests stacks    ==================\n");
-	stack = NULL;
-	push(&stack, 10);
-	push(&stack, 9);
-	push(&stack, 8);
-	push(&stack, 7);
-	push(&stack, 6);
-	push(&stack, 5);
-	push(&stack, 4);
-	push(&stack, 3);
-	push(&stack, 2);
-	push(&stack, 1);
-	push(&stack, 0);
-	print_list(stack->top);
-	printf("\nSize : %zu\n", stack->size);
-	printf("\nswap: \n");
-	swap(stack);
-	print_list(stack->top);
-	printf("\nrotate: \n");
-	rotate(stack);
-	print_list(stack->top);
-	printf("\nrotate: \n");
-	rotate(stack);
-	print_list(stack->top);
-	printf("\nreverse rotate: \n");
-	reverse_rotate(stack);
-	print_list(stack->top);
-	printf("\nreverse rotate: \n");
-	reverse_rotate(stack);
-	print_list(stack->top);
-	printf("pop: %i\n", pop(stack));
-	printf("pop: %i\n", pop(stack));
-	printf("pop: %i\n", pop(stack));
-	printf("pop: %i\n", pop(stack));
-	printf("pop: %i\n", pop(stack));
-	printf("pop: %i\n", pop(stack));
-	printf("pop: %i\n", pop(stack));
-	printf("pop: %i\n", pop(stack));
-	printf("pop: %i\n", pop(stack));
-	print_list(stack->top);
-	printf("\nSize : %zu", stack->size);
-	stackb = NULL;
-	push_op(&stackb, stack);
-	printf("push_op\nstack:\n");
-	print_list(stack->top);
-	printf("stackb:\n");
-	print_list(stackb->top);
-	free_stack(stack);
-	free_stack(stackb);
-	printf("\n=====================================================\n\n");
-}
-*/

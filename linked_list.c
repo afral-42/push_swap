@@ -32,7 +32,8 @@ void	lstdel_front(t_list **lst)
 	tmp = (*lst)->next;
 	free(*lst);
 	*lst = tmp;
-	(*lst)->prev = NULL;
+	if (*lst)
+		(*lst)->prev = NULL;
 }
 
 void	*free_lst(t_list *lst)
