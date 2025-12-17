@@ -3,9 +3,11 @@ FILES = \
 	data_structures/stack.c \
 	data_structures/list.c \
 	data_structures/operations.c \
+	data_structures/operations_push.c \
 	data_structures/operations_rotate.c \
 	data_structures/operations_reverse_rotate.c \
-	data_structures/operations_swap.c
+	data_structures/operations_swap.c \
+	algorithms/insertion.c
 SRCS_DIRECTORY = srcs
 BUILD_DIRECTORY = build
 SRCS = $(addprefix $(SRCS_DIRECTORY)/, $(FILES))
@@ -14,7 +16,8 @@ DEPS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.d, $(FILES))
 HEADERS = \
 		stack.h \
 		list.h \
-		operations.h
+		operations.h \
+		algorithms.h
 
 LIBFTPRINTF_DIR = libftprintf
 LIBFTPRINTF_FILE = libftprintf.a
@@ -26,7 +29,8 @@ TESTS_FILES = \
 			test_stack.c \
 			test_list.c \
 			test_operations.c \
-			test_compute_disorder.c
+			test_compute_disorder.c \
+			test_insertion.c
 TESTS := $(patsubst %.c, %, $(TESTS_FILES))
 TESTS_SRCS := $(addprefix $(TESTS_DIRECTORY)/, $(TESTS_FILES))
 TESTS_OBJS := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(patsubst %.c, %.o, $(TESTS_FILES)))
@@ -59,7 +63,7 @@ check:
 
 $(BUILD_DIRECTORY)/%.o: $(SRCS_DIRECTORY)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) -c $^ -o $@
+	$(CC) -c $< -o $@
 
 test: $(TESTS)
 

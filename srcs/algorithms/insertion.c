@@ -6,7 +6,7 @@
 /*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 07:56:21 by arebilla          #+#    #+#             */
-/*   Updated: 2025/12/17 09:33:37 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/17 10:34:34 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	insertion_sort(t_stack *a)
 {
-	int		rotations_count;
+	size_t	rotations_count;
+	t_stack	*b;
 
+	b = init_stack();
 	rotations_count = 0;
 	while (a->size)
 	{
@@ -33,4 +35,5 @@ void	insertion_sort(t_stack *a)
 	}
 	while (b->size)
 		push_a(a, b);
+	free_stack(b);
 }
