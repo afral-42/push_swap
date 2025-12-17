@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:51:01 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/16 17:34:46 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 12:43:52 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	push(t_stack *stack, int data)
 		return ;
 	node = lstnew(data);
 	if (!node)
-		return ;
+		return ; // Il faut sécuriser cet appel pour savoir qu'il y a eu une erreur et stopper le programme (int push)
 	lstadd_front(&(stack->top), node);
 	stack->size++;
 }
