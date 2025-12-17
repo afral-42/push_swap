@@ -6,16 +6,53 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:25:15 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/17 17:50:32 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 19:17:52 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	parse_options(char *args)
+void	update_options(char *arg, int *options)
 {
-	args++;
-	return (0);
+	arg += 2;
+	if (!ft_strcmp(arg, "simple"))
+		*options = *options | FLAG_SIMPLE;
+	else if (!ft_strcmp(arg, "medium"))
+		*options = *options | FLAG_MEDIUM;
+	else if (!ft_strcmp(arg, "complex"))
+		*options = *options | FLAG_COMPLEX;
+	else if (!ft_strcmp(arg, "adaptive"))
+		*options = *options | FLAG_ADAPTIVE;
+	else if (!ft_strcmp(arg, "bench"))
+		*options = *options | FLAG_BENCH;
+	else
+		*options = -1;
+}
+
+int	parse_options(int ac, char **av)
+{
+	int	options;
+	int	modes;
+	int	i;
+
+	options = 0;
+	i = 1;
+	while (i < ac)
+	{
+		if (!ft_strncmp("--", av[i], 2))
+		{
+				update_options(av[i], &options);
+				if (options == -1)
+					return (-1);
+		}
+		i++;
+	}
+	modes = options & MASK_MODE;
+	if (!modes)
+		options |= FLAG_ADAPTIVE;
+	if ((modes) & ((modes) - 1))
+		options = -1;
+	return (options);
 }
 
 static void	*free_parsing(t_stack *a, char **tab)
@@ -32,7 +69,8 @@ static void	*free_parsing(t_stack *a, char **tab)
 	free_stack(a);
 	return (NULL);
 }
-t_stack	*parse_stack(char *stack)
+
+t_stack	*update_stack(char *stack)
 {
 	t_stack	*a;
 	ssize_t	i;
@@ -57,16 +95,67 @@ t_stack	*parse_stack(char *stack)
 	return (a);
 }
 
-// To do
-// Écrire les tests unitaires
-// Sécuriser la fonction push pour retourner -1 et stopper le programme si c'est le cas
-
-void	parsing(char *stack, char *args, t_stack **a, int *options)
+t_stack	*parse_stack(int ac, char **av)
 {
-	if (!stack || !args)
-		return ;
-	*a = parse_stack(stack);
-	*options = parse_options(args);
+	int		flag;
+	int		i;
+	t_stack	*a;
+	
+	flag = 0;
+	i = 1;
+	a = NULL;
+	while (i < ac)
+	{
+		if (ft_strncmp("--", av[i], 2) && !flag)
+		{
+			if (!flag)
+			{
+				a = update_stack(av[i]);
+				if (!a)
+					return (NULL);
+				flag = 1;
+			}
+			else
+				return (NULL);
+		}
+		i++;
+	}
+	return (a);
+}
+
+int	parser(int ac, char **av, t_stack **a, int *options)
+{
+	*options = parse_options(ac, av);
+	*a = parse_stack(ac, av);
+	if (!(*a) || *options == -1)
+		return (-1);
+	return (0);
+}
+
+#include <stdio.h>
+#include <unistd.h>
+void display_active_flags(int options)
+{
+    printf("\n--- État des Flags ---\n");
+    if (options == -1)
+    {
+        printf("RÉSULTAT : Erreur détectée (options = -1)\n");
+        return;
+    }
+
+    printf("Valeur brute (int) : %d\n", options);
+    
+    printf("Modes actifs : ");
+    if (options & FLAG_SIMPLE)   printf("[SIMPLE] ");
+    if (options & FLAG_MEDIUM)   printf("[MEDIUM] ");
+    if (options & FLAG_COMPLEX)  printf("[COMPLEX] ");
+    if (options & FLAG_ADAPTIVE) printf("[ADAPTIVE] ");
+    
+    printf("\nOptions bonus : ");
+    if (options & FLAG_BENCH)    printf("[BENCH]");
+    else                         printf("[AUCUNE]");
+    
+    printf("\n----------------------\n\n");
 }
 
 int main(int ac, char **av)
@@ -79,17 +168,30 @@ int main(int ac, char **av)
 	b = NULL;
 	if (ac == 1)
 		return (1);
-	if (ac > 3)
+	if (ac < 2 || parser(ac, av, &a, &options) == -1)
 	{
 		write(2, "Error\n", 6);
 		return (1);
-    }	
-	parsing(av[1], av[2], &a, &options);
-	if (!a || options == -1)
-	{
-		write(2, "Error\n", 6);
-		return (1);
-	}
+    }
 	print_list(a->top);
+	display_active_flags(options);
 	return (0);
 }
+
+
+
+// int main(int ac, char **av)
+// {
+//     int options;
+
+//     if (ac < 2)
+//     {
+//         printf("Usage: %s [--flags]\n", av[0]);
+//         return (0);
+//     }
+
+//     options = parse_options(ac, av);
+//     display_active_flags(options);
+
+//     return (0);
+// }
