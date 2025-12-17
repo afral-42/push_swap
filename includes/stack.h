@@ -26,10 +26,7 @@ void	*free_stack(t_stack *stack);
 void	push(t_stack *stack, int data);
 double	compute_disorder(t_stack *stack);
 void	swap(t_stack *stack);
-void	swap_both(t_stack *a, t_stack *b);
 void	rotate(t_stack *stack);
-void	rotate_both(t_stack *a, t_stack *b);
 void	reverse_rotate(t_stack *stack);
-void	reverse_rotate_both(t_stack *a, t_stack *b);
 
 #endif

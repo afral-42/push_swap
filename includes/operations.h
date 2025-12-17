@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   insertion.c                                        :+:      :+:    :+:   */
+/*   operations.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 07:56:21 by arebilla          #+#    #+#             */
-/*   Updated: 2025/12/17 09:33:37 by arebilla         ###   ########.fr       */
+/*   Created: 2025/12/17 09:23:01 by arebilla          #+#    #+#             */
+/*   Updated: 2025/12/17 09:24:40 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#ifndef OPERATIONS_H
+# define OPERATIONS_H
 
-void	insertion_sort(t_stack *a)
-{
-	int		rotations_count;
+# include "stack.h"
 
-	rotations_count = 0;
-	while (a->size)
-	{
-		while (rotations_count < b->size && b->top->data > a->top->data)
-		{
-			rotate_b(b);
-			rotations_count++;
-		}
-		push_b(b, a);
-		while (rotations_count)
-		{
-			reverse_rotate_b(b);
-			rotations_count--;
-		}
-	}
-	while (b->size)
-		push_a(a, b);
-}
+void	push_a(t_stack *a, t_stack *b);
+void	push_b(t_stack *a, t_stack *b);
+void	rotate_a(t_stack *a);
+void	rotate_b(t_stack *b);
+void	rotate_both(t_stack *a, t_stack *b);
+void	swap_a(t_stack *a);
+void	swap_b(t_stack *b);
+void	swap_both(t_stack *a, t_stack *b);
+
+#endif
