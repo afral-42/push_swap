@@ -2,7 +2,10 @@ NAME = push_swap
 FILES = \
 	data_structures/stack.c \
 	data_structures/list.c \
-	data_structures/operations.c
+	data_structures/operations.c \
+	data_structures/operations_rotate.c \
+	data_structures/operations_reverse_rotate.c \
+	data_structures/operations_swap.c
 SRCS_DIRECTORY = srcs
 BUILD_DIRECTORY = build
 SRCS = $(addprefix $(SRCS_DIRECTORY)/, $(FILES))
@@ -53,7 +56,7 @@ $(LIBFTPRINTF):
 check:
 	echo $(OBJS)
 
-$(BUILD_DIRECTORY)/%.o: srcs/%.c
+$(BUILD_DIRECTORY)/%.o: $(SRCS_DIRECTORY)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) -c $^ -o $@
 

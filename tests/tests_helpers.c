@@ -36,3 +36,17 @@ t_stack	*generate_stack(size_t size)
 		push(stack, size--);
 	return (stack);
 }
+
+int	stack_is_sorted(t_stack *stack)
+{
+	t_list	*node;
+
+	node = stack->top;
+	while (node && node->next)
+	{
+		if (node->data > node->next->data)
+			return (0);
+		node = node->next;
+	}
+	return (1);
+}

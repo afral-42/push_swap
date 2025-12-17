@@ -30,12 +30,6 @@ void swap(t_stack *stack)
 	stack->top = second;
 }
 
-void	swap_both(t_stack *a, t_stack *b)
-{
-	swap(a);
-	swap(b);
-}
-
 void	rotate(t_stack *stack)
 {
 	t_list	*last;
@@ -54,12 +48,6 @@ void	rotate(t_stack *stack)
 	stack->top = second;
 }
 
-void	rotate_both(t_stack *a, t_stack *b)
-{
-	rotate(a);
-	rotate(b);
-}
-
 void	reverse_rotate(t_stack *stack)
 {
 	t_list	*last;
@@ -74,10 +62,4 @@ void	reverse_rotate(t_stack *stack)
 	last->prev = NULL;
 	last->next = stack->top;
 	stack->top = last;
-}
-
-void	reverse_rotate_both(t_stack *a, t_stack *b)
-{
-	reverse_rotate(a);
-	reverse_rotate(b);
 }
