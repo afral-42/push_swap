@@ -7,7 +7,7 @@ FILES = \
 	data_structures/operations_rotate.c \
 	data_structures/operations_reverse_rotate.c \
 	data_structures/operations_swap.c \
-	algorithms/insertion.c
+	algorithms/insertion_sort.c
 SRCS_DIRECTORY = srcs
 BUILD_DIRECTORY = build
 SRCS = $(addprefix $(SRCS_DIRECTORY)/, $(FILES))
