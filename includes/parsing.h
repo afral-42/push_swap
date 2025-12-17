@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:39:48 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/17 11:28:05 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 17:46:25 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ typedef enum e_flags
     BENCH = 1 << 4
 }	t_flags;
 
-void    *free_split(char **tab);
 int		ft_atoi_secured(const char *nptr, int *error);
 void	print_list(t_list *lst);

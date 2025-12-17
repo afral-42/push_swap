@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:25:15 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/17 13:11:54 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 17:50:32 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,28 @@ int	parse_options(char *args)
 	return (0);
 }
 
+static void	*free_parsing(t_stack *a, char **tab)
+{
+    size_t	i;
+
+	i = 0;
+    while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	free_stack(a);
+	return (NULL);
+}
 t_stack	*parse_stack(char *stack)
 {
 	t_stack	*a;
-	char	**numbers_tab;
+	ssize_t	i;
 	int		error;
 	int		nb;
-	ssize_t	i;
-
+	char	**numbers_tab;
+	
 	a = init_stack();
 	if (!a)
 		return (NULL);
@@ -37,12 +51,8 @@ t_stack	*parse_stack(char *stack)
 	while (--i >= 0)
 	{
 		nb = ft_atoi_secured((const char *)numbers_tab[i], &error);
-		if (error == -1)
-		{
-			free_stack(a);
-			return ((t_stack *)free_split(numbers_tab));
-		}
-		push(a, nb); // Peut échouer -> checker la valeur de retour
+		if (error == -1 || push(a, nb) == -1)
+			return (free_parsing(a, numbers_tab));
 	}
 	return (a);
 }
