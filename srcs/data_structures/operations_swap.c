@@ -6,7 +6,7 @@
 /*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 09:08:04 by arebilla          #+#    #+#             */
-/*   Updated: 2025/12/17 09:18:31 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/17 09:55:18 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	swap_a(t_stack *a)
 {
-	swap_a(a);
+	swap(a);
 	ft_printf("sa\n");
 }
 
