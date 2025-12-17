@@ -29,7 +29,7 @@ void	test_push(void)
 	free_stack(stack);
 }
 
-/*
+
 void	test_pop(void)
 {
 	int		data;
@@ -52,11 +52,11 @@ void	test_pop(void)
 	assert(stack->top == NULL);
 	free_stack(stack);
 }
-*/
+
 
 int	main(void)
 {
 	test_init_stack();
 	test_push();
-	//test_pop();
+	test_pop();
 }

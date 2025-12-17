@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:29:44 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/16 17:32:56 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 10:06:05 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,23 @@ void	reverse_rotate(t_stack *stack)
 	last->prev = NULL;
 	last->next = stack->top;
 	stack->top = last;
+}
+
+int	pop(t_stack *stack)
+{
+	int		data;
+	t_list	*top;
+
+	top = stack->top;
+	data = top->data;
+	if (stack->top->next)
+	{
+		top->next->prev = NULL;
+		stack->top = top->next;
+	}
+	else
+		stack->top = NULL;
+	free(top);
+	stack->size--;
+	return (data);
 }
