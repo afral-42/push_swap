@@ -13,7 +13,8 @@ OBJS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.o, $(FILES))
 DEPS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.d, $(FILES))
 HEADERS = \
 		stack.h \
-		list.h
+		list.h \
+		operations.h
 
 LIBFTPRINTF_DIR = libftprintf
 LIBFTPRINTF_FILE = libftprintf.a
