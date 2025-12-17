@@ -41,7 +41,7 @@ void	rotate(t_stack *stack)
 	t_list	*last;
 	t_list	*second;
 
-	if (!stack || !(stack->top->next))
+	if (!stack || !(stack->top) || !(stack->top->next))
 		return ;
 	second = stack->top->next;
 	last = second;
@@ -64,7 +64,7 @@ void	reverse_rotate(t_stack *stack)
 {
 	t_list	*last;
 
-	if (!stack || !(stack->top->next))
+	if (!stack || !(stack->top) || !(stack->top->next))
 		return ;
 	last = stack->top;
 	while (last->next)

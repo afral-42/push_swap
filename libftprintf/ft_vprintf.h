@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.h                                             :+:      :+:    :+:   */
+/*   ft_vfprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 17:25:49 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/16 17:35:11 by abounoua         ###   ########lyon.fr   */
+/*   Created: 2025/11/24 09:01:10 by arebilla          #+#    #+#             */
+/*   Updated: 2025/11/25 10:50:23 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIST_H
-# define LIST_H
+#ifndef FT_VPRINTF_H
+# define FT_VPRINTF_H
 
-# include <stdlib.h>
+# include <stdarg.h>
 
-typedef	struct s_list
-{
-	struct s_list	*next;
-	struct s_list	*prev;
-	int				data;
-}	t_list;
+# define ERROR -1
 
-t_list	*lstnew(int data);
-void	lstadd_front(t_list **lst, t_list *node);
-void	*free_lst(t_list *lst);
+int	ft_vprintf(const char *s, va_list vargs);
 
 #endif

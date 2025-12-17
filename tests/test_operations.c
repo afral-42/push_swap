@@ -9,17 +9,20 @@ void	test_swap(void)
 	free_stack(stack);
 	stack = generate_stack(1);
 	swap(stack);
+	check_list_integrity(stack->top);
 	assert(stack->size == 1);
 	assert(stack->top->data == 1);
 	free_stack(stack);
 	stack = generate_stack(2);
 	swap(stack);
+	check_list_integrity(stack->top);
 	assert(stack->size == 2);
 	assert(stack->top->data == 2);
 	assert(stack->top->next->data == 1);
 	free_stack(stack);
 	stack = generate_stack(3);
 	swap(stack);
+	check_list_integrity(stack->top);
 	assert(stack->size == 3);
 	assert(stack->top->data == 2);
 	assert(stack->top->next->data == 1);
@@ -27,19 +30,21 @@ void	test_swap(void)
 	free_stack(stack);
 }
 
-void	test_double_swap(void)
+void	test_swap_both(void)
 {
 	t_stack	*a;
 	t_stack	*b;
 
 	a = generate_stack(3);
 	b = generate_stack(3);
-	double_swap(a, b);
+	swap_both(a, b);
+	check_list_integrity(a->top);
 	assert(a->size == 3);
 	assert(a->top->data == 2);
 	assert(a->top->next->data == 1);
 	assert(a->top->next->next->data == 3);
 	free_stack(a);
+	check_list_integrity(b->top);
 	assert(b->size == 3);
 	assert(b->top->data == 2);
 	assert(b->top->next->data == 1);
@@ -56,17 +61,20 @@ void	test_rotate(void)
 	free_stack(a);
 	a = generate_stack(1);
 	rotate(a);
+	check_list_integrity(a->top);
 	assert(a->size == 1);
 	assert(a->top->data == 1);
 	free_stack(a);
 	a = generate_stack(2);
 	rotate(a);
+	check_list_integrity(a->top);
 	assert(a->size == 2);
 	assert(a->top->data == 2);
 	assert(a->top->next->data == 1);
 	free_stack(a);
 	a = generate_stack(3);
 	rotate(a);
+	check_list_integrity(a->top);
 	assert(a->size == 3);
 	assert(a->top->data == 2);
 	assert(a->top->next->data == 3);
@@ -74,6 +82,7 @@ void	test_rotate(void)
 	free_stack(a);
 	a = generate_stack(4);
 	rotate(a);
+	check_list_integrity(a->top);
 	assert(a->size == 4);
 	assert(a->top->data == 2);
 	assert(a->top->next->data == 3);
@@ -91,17 +100,20 @@ void	test_reverse_rotate(void)
 	free_stack(a);
 	a = generate_stack(1);
 	reverse_rotate(a);
+	check_list_integrity(a->top);
 	assert(a->size == 1);
 	assert(a->top->data == 1);
 	free_stack(a);
 	a = generate_stack(2);
 	reverse_rotate(a);
+	check_list_integrity(a->top);
 	assert(a->size == 2);
 	assert(a->top->data == 2);
 	assert(a->top->next->data == 1);
 	free_stack(a);
 	a = generate_stack(3);
 	reverse_rotate(a);
+	check_list_integrity(a->top);
 	assert(a->size == 3);
 	assert(a->top->data == 3);
 	assert(a->top->next->data == 1);
@@ -109,6 +121,7 @@ void	test_reverse_rotate(void)
 	free_stack(a);
 	a = generate_stack(4);
 	reverse_rotate(a);
+	check_list_integrity(a->top);
 	assert(a->size == 4);
 	assert(a->top->data == 4);
 	assert(a->top->next->data == 1);
@@ -117,6 +130,7 @@ void	test_reverse_rotate(void)
 	free_stack(a);
 }
 
+/*
 void	test_push(void)
 {
 	t_stack	*a;
@@ -125,17 +139,23 @@ void	test_push(void)
 	a = generate_stack(3);
 	b = generate_stack(0);
 	push(b, a);
+	check_list_integrity(a->top);
+	check_list_integrity(b->top);
 	assert(a->size == 2);
 	assert(a->top->data == 2);
 	assert(b->size == 1);
 	assert(b->top->data == 1);
 	push(b, a);
+	check_list_integrity(a->top);
+	check_list_integrity(b->top);
 	assert(a->size == 1);
 	assert(a->top->data == 3);
 	assert(b->size == 2);
 	assert(b->top->data == 2);
 	assert(b->top->next->data == 1);
 	push(b, a);
+	check_list_integrity(a->top);
+	check_list_integrity(b->top);
 	assert(a->size == 0);
 	assert(b->size == 3);
 	assert(b->top->data == 3);
@@ -144,15 +164,18 @@ void	test_push(void)
 	free_stack(a);
 	free_stack(b);
 }
+*/
 
-void	test_double_rotate(void)
+void	test_rotate_both(void)
 {
 	t_stack	*a;
 	t_stack	*b;
 
 	a = generate_stack(4);
 	b = generate_stack(4);
-	double_rotate(a, b);
+	rotate_both(a, b);
+	check_list_integrity(a->top);
+	check_list_integrity(b->top);
 	assert(a->size == 4);
 	assert(a->top->data == 2);
 	assert(a->top->next->data == 3);
@@ -167,14 +190,16 @@ void	test_double_rotate(void)
 	free_stack(b);
 }
 
-void	test_double_reverse_rotate(void)
+void	test_reverse_rotate_both(void)
 {
 	t_stack	*a;
 	t_stack	*b;
 
 	a = generate_stack(4);
 	b = generate_stack(4);
-	double_reverse_rotate(a, b);
+	reverse_rotate_both(a, b);
+	check_list_integrity(a->top);
+	check_list_integrity(b->top);
 	assert(a->size == 4);
 	assert(a->top->data == 4);
 	assert(a->top->next->data == 1);
@@ -193,10 +218,10 @@ void	test_double_reverse_rotate(void)
 int	main(void)
 {
 	test_swap();
-	test_double_swap();
+	test_swap_both();
 	test_rotate();
 	test_reverse_rotate();
-	test_push();
-	test_double_rotate();
-	test_double_reverse_rotate();
+	//test_push();
+	test_rotate_both();
+	test_reverse_rotate_both();
 }

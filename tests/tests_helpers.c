@@ -33,6 +33,6 @@ t_stack	*generate_stack(size_t size)
 
 	stack = init_stack();
 	while (size)
-		push_st(stack, size--);
+		push(stack, size--);
 	return (stack);
 }
