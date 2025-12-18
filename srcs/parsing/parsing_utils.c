@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:35 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 13:33:25 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 14:39:12 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,20 @@ int	ft_atoi_secured(const char *nptr, int *error)
 	n = 0;
 	while (ft_isdigit(*nptr) && n < 2147483647 && n > -2147483648)
 		n = 10 * n + *nptr++ - '0';
-    if ((*nptr && !ft_isdigit(*nptr)) || (n > 2147483647 || n < -2147483648))
-    {
+	if ((*nptr && !ft_isdigit(*nptr)) || (n > 2147483647 || n < -2147483648))
+	{
 		*error = -1;
 		return (0);
 	}
 	return ((int)(n * sign));
 }
 
-void    *free_split(char **tab)
+void	*free_split(char **tab)
 {
-    size_t	i;
+	size_t	i;
 
 	i = 0;
-    while (tab[i] != NULL)
+	while (tab[i] != NULL)
 	{
 		free(tab[i]);
 		i++;
@@ -68,13 +68,12 @@ int	ft_strcmp(char *s1, char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-
 void	*free_parsing(t_stack *a, char **tab)
 {
-    size_t	i;
+	size_t	i;
 
 	i = 0;
-    while (tab[i] != NULL)
+	while (tab[i] != NULL)
 	{
 		free(tab[i]);
 		i++;
