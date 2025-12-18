@@ -6,13 +6,13 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:25:15 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 14:43:24 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 15:46:24 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	update_options(char *arg, int *options)
+static void	update_options(char *arg, int *options)
 {
 	arg += 2;
 	if (!ft_strcmp(arg, "simple"))
@@ -29,7 +29,7 @@ void	update_options(char *arg, int *options)
 		*options = -1;
 }
 
-int	parse_options(int ac, char **av)
+static int	parse_options(int ac, char **av)
 {
 	int	options;
 	int	modes;
@@ -55,7 +55,7 @@ int	parse_options(int ac, char **av)
 	return (options);
 }
 
-t_stack	*update_stack(char *stack)
+static t_stack	*update_stack(char *stack)
 {
 	t_stack	*a;
 	ssize_t	i;
@@ -83,7 +83,7 @@ t_stack	*update_stack(char *stack)
 	return (a);
 }
 
-t_stack	*parse_stack(int ac, char **av)
+static t_stack	*parse_stack(int ac, char **av)
 {
 	int		flag;
 	int		i;
@@ -94,7 +94,7 @@ t_stack	*parse_stack(int ac, char **av)
 	a = NULL;
 	while (i < ac)
 	{
-		if (ft_strncmp("--", av[i], 2) && !flag)
+		if (ft_strncmp("--", av[i], 2))
 		{
 			if (!flag)
 			{
@@ -148,29 +148,4 @@ void display_active_flags(int options)
     else                         printf("[AUCUNE]");
     
     printf("\n----------------------\n\n");
-}
-
-int main(int ac, char **av)
-{
-    t_stack		*a;
-	t_stack		*b;
-	int			options;
-	int			value;
-
-	a = NULL;
-	b = NULL;
-	options = 0;
-	if (ac == 1)
-		return (1);
-	value = parser(ac, av, &a, &options);
-	if (value == -1 || value == 1)
-	{
-		if (value == 1)
-			return (0);
-		write(2, "Error\n", 6);
-		return (1);
-    }
-	print_list(a->top);
-	display_active_flags(options);
-	return (0);
 }

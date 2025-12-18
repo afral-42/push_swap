@@ -8,7 +8,10 @@ FILES = \
 	data_structures/operations_reverse_rotate.c \
 	data_structures/operations_swap.c \
 	algorithms/insertion_sort.c \
-	algorithms/algo_utils.c
+	algorithms/algo_utils.c \
+	parsing/parsing_utils.c \
+	parsing/parsing.c \
+	push_swap.c
 SRCS_DIRECTORY = srcs
 BUILD_DIRECTORY = build
 SRCS = $(addprefix $(SRCS_DIRECTORY)/, $(FILES))
@@ -42,19 +45,23 @@ TESTS_HELPERS_SRCS := $(addprefix $(TESTS_DIRECTORY)/, $(TESTS_HELPERS_FILES))
 TESTS_HELPERS_OBJS := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(patsubst %.c, %.o, $(TESTS_HELPERS_FILES)))
 TESTS_HELPERS_DEPS := $(patsubst %.o, %.d, $(TESTS_HELPER_OBJS))
 
-INCLUDES = -Iincludes -I$(LIBFTPRINTF_DIR) -I$(LIBFTPRINTF_DIR)/libft
+INCLUDES = -Iincludes
 
 CFLAGS += -Wall -Wextra -Werror $(INCLUDES)
 CPPFLAGS += -MMD -MP
 CC += $(CFLAGS) $(CPPFLAGS)
 
-.PHONY: all clean fclean re test memtest test_% memtest_%
+.PHONY: all clean fclean re test memtest test_% memtest_% debug
 .NOTINTERMEDIATE: $(TESTS_BIN) $(TESTS_OBJS) $(TESTS_HELPERS_OBJS) $(OBJS)
 
 all: $(NAME)
 
-$(NAME): $(LIBFTPRINTF) $(OBJS)
-	@echo "To be implemented"
+# Règle Debug
+debug: CFLAGS += -g -O0 -DDEBUG
+debug: fclean $(NAME)
+
+$(NAME): $(OBJS) $(LIBFTPRINTF)
+	$(CC) $^ -o $@ 
 
 $(LIBFTPRINTF):
 	$(MAKE) -C $(LIBFTPRINTF_DIR)

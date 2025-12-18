@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:39:48 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 13:33:50 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 15:14:27 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,5 @@ void	print_list(t_list *lst);
 int	    ft_strcmp(char *s1, char *s2);
 void	*free_parsing(t_stack *a, char **tab);
 void    *free_split(char **tab);
+int	    parser(int ac, char **av, t_stack **a, int *options);
+void	display_active_flags(int options);

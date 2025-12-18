@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   insertion.c                                        :+:      :+:    :+:   */
+/*   insertion_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 07:56:21 by arebilla          #+#    #+#             */
-/*   Updated: 2025/12/18 15:02:37 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/18 15:07:32 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	insertion_sort(t_stack *a)
 	int		ops_count;
 	t_stack	*b;
 
-	b = init_stack();
+	b = init_stack(); // A proteger
 	rotations_count = 0;
 	ops_count = 0;
 	while (a->size)
