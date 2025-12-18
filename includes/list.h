@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 
-typedef	struct s_list
+typedef struct s_list
 {
 	struct s_list	*next;
 	struct s_list	*prev;

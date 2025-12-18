@@ -12,11 +12,11 @@
 
 #include "stack.h"
 
-void swap(t_stack *stack)
+void	swap(t_stack *stack)
 {
 	t_list	*first;
 	t_list	*second;
-	
+
 	if (!stack || !(stack->top) || !(stack->top->next))
 		return ;
 	first = stack->top;

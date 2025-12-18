@@ -12,23 +12,18 @@ FILES = \
 	parsing/parsing_utils.c \
 	parsing/parsing.c \
 	push_swap.c
-SRCS_DIRECTORY = srcs
-BUILD_DIRECTORY = build
-SRCS = $(addprefix $(SRCS_DIRECTORY)/, $(FILES))
-OBJS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.o, $(FILES))
-DEPS := $(patsubst %.c, $(BUILD_DIRECTORY)/%.d, $(FILES))
-HEADERS = \
-		stack.h \
-		list.h \
-		operations.h \
-		algorithms.h
+SRCS_DIR = srcs
+BUILD_DIR = build
+SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
+OBJS := $(patsubst %.c, $(BUILD_DIR)/%.o, $(FILES))
+DEPS := $(patsubst %.c, $(BUILD_DIR)/%.d, $(FILES))
 
 LIBFTPRINTF_DIR = libftprintf
 LIBFTPRINTF_FILE = libftprintf.a
 LIBFTPRINTF = $(LIBFTPRINTF_DIR)/$(LIBFTPRINTF_FILE)
 
-TESTS_DIRECTORY = tests
-TESTS_BUILD_DIRECTORY = $(TESTS_DIRECTORY)/build
+TESTS_DIR = tests
+TESTS_BUILD_DIR = $(TESTS_DIR)/build
 TESTS_FILES = \
 			test_stack.c \
 			test_list.c \
@@ -36,18 +31,18 @@ TESTS_FILES = \
 			test_compute_disorder.c \
 			test_insertion.c
 TESTS := $(patsubst %.c, %, $(TESTS_FILES))
-TESTS_SRCS := $(addprefix $(TESTS_DIRECTORY)/, $(TESTS_FILES))
-TESTS_OBJS := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(patsubst %.c, %.o, $(TESTS_FILES)))
+TESTS_SRCS := $(addprefix $(TESTS_DIR)/, $(TESTS_FILES))
+TESTS_OBJS := $(addprefix $(TESTS_BUILD_DIR)/, $(patsubst %.c, %.o, $(TESTS_FILES)))
 TESTS_DEPS := $(patsubst %.o, %.d, $(TESTS_OBJS))
-TESTS_BIN := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(TESTS))
+TESTS_BIN := $(addprefix $(TESTS_BUILD_DIR)/, $(TESTS))
 TESTS_HELPERS_FILES = tests_helpers.c
-TESTS_HELPERS_SRCS := $(addprefix $(TESTS_DIRECTORY)/, $(TESTS_HELPERS_FILES))
-TESTS_HELPERS_OBJS := $(addprefix $(TESTS_BUILD_DIRECTORY)/, $(patsubst %.c, %.o, $(TESTS_HELPERS_FILES)))
+TESTS_HELPERS_SRCS := $(addprefix $(TESTS_DIR)/, $(TESTS_HELPERS_FILES))
+TESTS_HELPERS_OBJS := $(addprefix $(TESTS_BUILD_DIR)/, $(patsubst %.c, %.o, $(TESTS_HELPERS_FILES)))
 TESTS_HELPERS_DEPS := $(patsubst %.o, %.d, $(TESTS_HELPER_OBJS))
 
-INCLUDES = -Iincludes
+INCLUDES_DIR = includes
 
-CFLAGS += -Wall -Wextra -Werror $(INCLUDES)
+CFLAGS += -Wall -Wextra -Werror -I$(INCLUDES_DIR)
 CPPFLAGS += -MMD -MP
 CC += $(CFLAGS) $(CPPFLAGS)
 
@@ -69,7 +64,7 @@ $(LIBFTPRINTF):
 check:
 	echo $(OBJS)
 
-$(BUILD_DIRECTORY)/%.o: $(SRCS_DIRECTORY)/%.c
+$(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) -c $< -o $@
 
@@ -77,30 +72,30 @@ test: $(TESTS)
 
 memtest: $(addprefix mem, $(TESTS))
 
-test_%: $(TESTS_BUILD_DIRECTORY)/test_%
+test_%: $(TESTS_BUILD_DIR)/test_%
 	@echo ⏳ Running $@...
 	@./$< > /dev/null
 	@echo ✅ $@ passed!
 
-memtest_%: $(TESTS_BUILD_DIRECTORY)/test_%
+memtest_%: $(TESTS_BUILD_DIR)/test_%
 	@echo ⏳ Running $@...
 	@valgrind -q --leak-check=full --error-exitcode=1 ./$< > /dev/null
 	@echo ✅ $@ passed!
 
-$(TESTS_BUILD_DIRECTORY)/test_%: $(TESTS_BUILD_DIRECTORY)/test_%.o $(TESTS_HELPERS_OBJS) $(filter-out $(BUILD_DIRECTORY)/push_swap.o, $(OBJS)) $(LIBFTPRINTF)
+$(TESTS_BUILD_DIR)/test_%: $(TESTS_BUILD_DIR)/test_%.o $(TESTS_HELPERS_OBJS) $(filter-out $(BUILD_DIR)/push_swap.o, $(OBJS)) $(LIBFTPRINTF)
 	$(CC) -g $^ -o $@
 
-$(TESTS_BUILD_DIRECTORY)/%.o: $(TESTS_DIRECTORY)/%.c
-	@mkdir -p $(TESTS_BUILD_DIRECTORY)
+$(TESTS_BUILD_DIR)/%.o: $(TESTS_DIR)/%.c
+	@mkdir -p $(TESTS_BUILD_DIR)
 	$(CC) -g -c $< -o $@
 
 norm: $(SRCS)
 	@echo ⏳ Running norminette...
-	@norminette -R CheckForbiddenHeader $(SRCS) $(addprefix includes/, $(HEADERS))
+	@norminette -R CheckForbiddenHeader $(SRCS_DIR) $(INCLUDES_DIR)
 	@echo ✅ Norminette passed!
 
 clean:
-	rm -rfv $(BUILD_DIRECTORY) $(TESTS_BUILD_DIRECTORY)
+	rm -rfv $(BUILD_DIR) $(TESTS_BUILD_DIR)
 	$(MAKE) -C $(LIBFTPRINTF_DIR) clean
 
 fclean: clean

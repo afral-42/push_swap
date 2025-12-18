@@ -76,23 +76,28 @@ void	test_sorting_with_already_sorted_stack(int (*sort)(t_stack *))
 	t_stack	*stack;
 
 	stack = generate_stack(0);
+	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	sort(stack);
+	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 	stack = generate_stack(1);
 	assert(stack_is_sorted(stack));
 	sort(stack);
+	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 	stack = generate_stack(2);
 	assert(stack_is_sorted(stack));
 	sort(stack);
+	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 	stack = generate_stack(10);
 	assert(stack_is_sorted(stack));
 	sort(stack);
+	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 }
@@ -104,16 +109,19 @@ void	test_sorting_with_maximum_disorder_stack(int (*sort)(t_stack *))
 	stack = generate_max_disorder_stack(2);
 	assert(compute_disorder(stack) == 1.0);
 	sort(stack);
+	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 	stack = generate_max_disorder_stack(3);
 	assert(compute_disorder(stack) == 1.0);
 	sort(stack);
+	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 	stack = generate_max_disorder_stack(10);
 	assert(compute_disorder(stack) == 1.0);
 	sort(stack);
+	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 }
@@ -126,6 +134,7 @@ void	test_sorting_with_average_disorder_stack(int (*sort)(t_stack *))
 	stack = generate_custom_stack(numbers, 10);
 	assert(compute_disorder(stack) < 1.0 && compute_disorder(stack) > 0);
 	sort(stack);
+	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 }

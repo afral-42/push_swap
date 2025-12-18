@@ -130,42 +130,6 @@ void	test_reverse_rotate(void)
 	free_stack(a);
 }
 
-/*
-void	test_push(void)
-{
-	t_stack	*a;
-	t_stack	*b;
-
-	a = generate_stack(3);
-	b = generate_stack(0);
-	push(b, a);
-	check_list_integrity(a->top);
-	check_list_integrity(b->top);
-	assert(a->size == 2);
-	assert(a->top->data == 2);
-	assert(b->size == 1);
-	assert(b->top->data == 1);
-	push(b, a);
-	check_list_integrity(a->top);
-	check_list_integrity(b->top);
-	assert(a->size == 1);
-	assert(a->top->data == 3);
-	assert(b->size == 2);
-	assert(b->top->data == 2);
-	assert(b->top->next->data == 1);
-	push(b, a);
-	check_list_integrity(a->top);
-	check_list_integrity(b->top);
-	assert(a->size == 0);
-	assert(b->size == 3);
-	assert(b->top->data == 3);
-	assert(b->top->next->data == 2);
-	assert(b->top->next->next->data == 1);
-	free_stack(a);
-	free_stack(b);
-}
-*/
-
 void	test_rotate_both(void)
 {
 	t_stack	*a;
@@ -221,7 +185,6 @@ int	main(void)
 	test_swap_both();
 	test_rotate();
 	test_reverse_rotate();
-	//test_push();
 	test_rotate_both();
 	test_reverse_rotate_both();
 }

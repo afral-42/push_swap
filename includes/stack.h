@@ -15,7 +15,7 @@
 
 # include "list.h"
 
-typedef struct	s_stack
+typedef struct s_stack
 {
 	t_list	*top;
 	size_t	size;

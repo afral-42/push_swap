@@ -36,7 +36,7 @@ int	push(t_stack *stack, int data)
 	t_list	*node;
 
 	if (!stack)
-		return -1;
+		return (-1);
 	node = lstnew(data);
 	if (!node)
 		return (-1);
@@ -51,7 +51,7 @@ double	compute_disorder(t_stack *stack)
 	int		total_pairs;
 	t_list	*first;
 	t_list	*second;
-	
+
 	if (!(stack->top) || !(stack->top->next))
 		return (0);
 	mistakes = 0;

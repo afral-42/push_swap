@@ -61,7 +61,7 @@ void	*free_lst(t_list *lst)
 {
 	t_list	*node;
 	t_list	*temp;
-	
+
 	node = lst;
 	while (node)
 	{
