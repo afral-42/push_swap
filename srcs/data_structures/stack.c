@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:51:01 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/16 17:34:46 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 17:51:43 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,18 @@ void	*free_stack(t_stack *stack)
 	return (NULL);
 }
 
-void	push(t_stack *stack, int data)
+int	push(t_stack *stack, int data)
 {
 	t_list	*node;
 
 	if (!stack)
-		return ;
+		return -1;
 	node = lstnew(data);
 	if (!node)
-		return ;
+		return (-1);
 	lstadd_front(&(stack->top), node);
 	stack->size++;
+	return (0);
 }
 
 double	compute_disorder(t_stack *stack)
