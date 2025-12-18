@@ -6,21 +6,27 @@
 /*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 09:02:01 by arebilla          #+#    #+#             */
-/*   Updated: 2025/12/17 09:18:57 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/18 15:01:48 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 #include "ft_printf.h"
 
-void	push_a(t_stack *a, t_stack *b)
+int	push_a(t_stack *a, t_stack *b)
 {
-	push(a, pop(b));
-	ft_printf("pa\n");
+	if (push(a, pop(b) < 0))
+		return (-1);
+	if (ft_printf("pa\n") < 0)
+		return (-1);
+	return (1);
 }
 
-void	push_b(t_stack *b, t_stack *a)
+int	push_b(t_stack *b, t_stack *a)
 {
-	push(b, pop(a));
-	ft_printf("pb\n");
+	if (push(b, pop(a) < 0))
+		return (-1);
+	if (ft_printf("pb\n") < 0)
+		return (-1);
+	return (1);
 }
