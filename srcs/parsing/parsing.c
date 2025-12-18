@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:25:15 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/17 19:17:52 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 13:57:25 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,6 @@ int	parse_options(int ac, char **av)
 	return (options);
 }
 
-static void	*free_parsing(t_stack *a, char **tab)
-{
-    size_t	i;
-
-	i = 0;
-    while (tab[i] != NULL)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	free_stack(a);
-	return (NULL);
-}
-
 t_stack	*update_stack(char *stack)
 {
 	t_stack	*a;
@@ -84,6 +69,8 @@ t_stack	*update_stack(char *stack)
 	error = 0;
 	i = 0;
 	numbers_tab = ft_split(stack, ' ');
+	if (!numbers_tab)
+		return (free_stack(a));
 	while (numbers_tab[i])
 		i++;
 	while (--i >= 0)
@@ -92,6 +79,7 @@ t_stack	*update_stack(char *stack)
 		if (error == -1 || push(a, nb) == -1)
 			return (free_parsing(a, numbers_tab));
 	}
+	free_split(numbers_tab);
 	return (a);
 }
 
@@ -116,7 +104,7 @@ t_stack	*parse_stack(int ac, char **av)
 				flag = 1;
 			}
 			else
-				return (NULL);
+				return (free_stack(a));
 		}
 		i++;
 	}
@@ -126,9 +114,12 @@ t_stack	*parse_stack(int ac, char **av)
 int	parser(int ac, char **av, t_stack **a, int *options)
 {
 	*options = parse_options(ac, av);
-	*a = parse_stack(ac, av);
-	if (!(*a) || *options == -1)
+	if (*options == -1)
 		return (-1);
+	*a = parse_stack(ac, av);
+	if (!(*a))
+		return (-1);
+	// TODO check doublon et compute disorder == 0 et return -1 si besoin 
 	return (0);
 }
 
@@ -166,9 +157,10 @@ int main(int ac, char **av)
 
 	a = NULL;
 	b = NULL;
+	options = 0;
 	if (ac == 1)
 		return (1);
-	if (ac < 2 || parser(ac, av, &a, &options) == -1)
+	if (parser(ac, av, &a, &options) == -1)
 	{
 		write(2, "Error\n", 6);
 		return (1);
