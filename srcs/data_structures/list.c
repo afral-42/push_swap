@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:28:26 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/17 17:49:47 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 14:27:06 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,28 @@ void	lstadd_front(t_list **lst, t_list *node)
 		(*lst)->prev = node;
 	}
 	*lst = node;
+}
+
+int	lstcheck_duplicate(t_list *lst)
+{
+	t_list	*i;
+	t_list	*j;
+
+	if (!lst)
+		return (0);
+	i = lst;
+	while (i->next)
+	{
+		j = i->next;
+		while (j)
+		{
+			if (i->data == j->data)
+				return (1);
+			j = j->next;
+		}
+		i = i->next;
+	}
+	return (0);
 }
 
 void	*free_lst(t_list *lst)

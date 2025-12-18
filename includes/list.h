@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:25:49 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/16 17:35:11 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 14:25:08 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ typedef	struct s_list
 t_list	*lstnew(int data);
 void	lstadd_front(t_list **lst, t_list *node);
 void	*free_lst(t_list *lst);
+int		lstcheck_duplicate(t_list *lst);
 
 #endif

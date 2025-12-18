@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:25:15 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 13:57:25 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 14:43:24 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	parse_options(int ac, char **av)
 	{
 		if (!ft_strncmp("--", av[i], 2))
 		{
-				update_options(av[i], &options);
-				if (options == -1)
-					return (-1);
+			update_options(av[i], &options);
+			if (options == -1)
+				return (-1);
 		}
 		i++;
 	}
@@ -62,7 +62,7 @@ t_stack	*update_stack(char *stack)
 	int		error;
 	int		nb;
 	char	**numbers_tab;
-	
+
 	a = init_stack();
 	if (!a)
 		return (NULL);
@@ -88,7 +88,7 @@ t_stack	*parse_stack(int ac, char **av)
 	int		flag;
 	int		i;
 	t_stack	*a;
-	
+
 	flag = 0;
 	i = 1;
 	a = NULL;
@@ -117,9 +117,10 @@ int	parser(int ac, char **av, t_stack **a, int *options)
 	if (*options == -1)
 		return (-1);
 	*a = parse_stack(ac, av);
-	if (!(*a))
+	if (!(*a) || lstcheck_duplicate((*a)->top))
 		return (-1);
-	// TODO check doublon et compute disorder == 0 et return -1 si besoin 
+	if (!compute_disorder(*a))
+		return (1);
 	return (0);
 }
 
@@ -154,14 +155,18 @@ int main(int ac, char **av)
     t_stack		*a;
 	t_stack		*b;
 	int			options;
+	int			value;
 
 	a = NULL;
 	b = NULL;
 	options = 0;
 	if (ac == 1)
 		return (1);
-	if (parser(ac, av, &a, &options) == -1)
+	value = parser(ac, av, &a, &options);
+	if (value == -1 || value == 1)
 	{
+		if (value == 1)
+			return (0);
 		write(2, "Error\n", 6);
 		return (1);
     }
@@ -169,21 +174,3 @@ int main(int ac, char **av)
 	display_active_flags(options);
 	return (0);
 }
-
-
-
-// int main(int ac, char **av)
-// {
-//     int options;
-
-//     if (ac < 2)
-//     {
-//         printf("Usage: %s [--flags]\n", av[0]);
-//         return (0);
-//     }
-
-//     options = parse_options(ac, av);
-//     display_active_flags(options);
-
-//     return (0);
-// }
