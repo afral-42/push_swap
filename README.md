@@ -1,7 +1,7 @@
 #### Insertion sort
 
-```math
-\begin{array}{r l}
+
+$$\begin{array}{r l}
 1. & \textbf{while } A.\text{size} > 0 \\
 2. & \quad rotation\_count \gets 0 \\
 3. & \quad \textbf{while } A.\text{top} > B.\text{top} \\
@@ -19,6 +19,5 @@
 14. & \quad \text{push}(A) \\
 15. & \textbf{end while}
 \end{array}
-```
 
 End.
