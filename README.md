@@ -18,6 +18,6 @@ $$\begin{array}{r l}
 13. & \textbf{while } B.\text{size} > 0 \\
 14. & \quad \text{push}(A) \\
 15. & \textbf{end while}
-\end{array}
+\end{array}$$
 
 End.
