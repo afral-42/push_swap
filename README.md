@@ -1,23 +1,21 @@
+#### Insertion sort
 $$
-\begin{array}{r|l|l}
-\textbf{\#} & \textbf{Code} & \textbf{Complexité} \\ \hline
-1 & \textbf{Algorithme} \text{ RechercheBinaire}(A, n, x): & - \\
-2 & \quad \textbf{Entrée: } \text{Un tableau trié } A, \dots & - \\
-3 & \quad \textbf{Sortie: } \text{Indice de } x \text{ ou } -1 & - \\
-4 & & \\
-5 & \quad bas \leftarrow 0 & \mathcal{O}(1) \\
-6 & \quad haut \leftarrow n - 1 & \mathcal{O}(1) \\
-7 & & \\
-8 & \quad \textbf{Tant que } bas \le haut \textbf{ faire}: & \mathcal{O}(\log n) \\
-9 & \quad \quad milieu \leftarrow \lfloor (bas + haut) / 2 \rfloor & \mathcal{O}(1) \\
-10 & & \\
-11 & \quad \quad \textbf{Si } A[milieu] = x \textbf{ alors}: & \mathcal{O}(1) \\
-12 & \quad \quad \quad \textbf{Retourner } milieu & \mathcal{O}(1) \\
-13 & \quad \quad \textbf{Sinon si } A[milieu] < x \textbf{ alors}: & \mathcal{O}(1) \\
-14 & \quad \quad \quad bas \leftarrow milieu + 1 & \mathcal{O}(1) \\
-15 & \quad \quad \textbf{Sinon}: & \\
-16 & \quad \quad \quad haut \leftarrow milieu - 1 & \mathcal{O}(1) \\
-17 & & \\
-18 & \quad \textbf{Retourner } -1 & \mathcal{O}(1)
+\begin{array}{r l}
+1. & \textbf{while } A.\text{size} > 0 \\
+2. & \quad rotation\_count \gets 0 \\
+3. & \quad \textbf{while } A.\text{top} > B.\text{top} \\
+4. & \quad\quad \text{rotate}(B) \\
+5. & \quad\quad rotation\_count \gets rotation\_count + 1 \\
+6. & \quad \textbf{end while} \\
+7. & \quad \text{push}(A) \\
+8. & \quad \textbf{while } rotation\_count > 0 \\
+9. & \quad\quad \text{rotate}(B) \\
+10. & \quad\quad rotation\_count \gets rotation\_count - 1 \\
+11. & \quad \textbf{end while} \\
+12. & \textbf{end while} \\
+   & \\
+13. & \textbf{while } B.\text{size} > 0 \\
+14. & \quad \text{push}(A) \\
+15. & \textbf{end while}
 \end{array}
 $$
