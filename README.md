@@ -1,4 +1,5 @@
 #### Insertion sort
+
 $$
 \begin{array}{r l}
 1. & \textbf{while } A.\text{size} > 0 \\
@@ -19,3 +20,5 @@ $$
 15. & \textbf{end while}
 \end{array}
 $$
+
+End.
