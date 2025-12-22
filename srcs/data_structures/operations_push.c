@@ -15,8 +15,9 @@
 
 int	push_a(t_stack *a, t_stack *b)
 {
-	if (push(a, pop(b)) < 0)
-		return (-1);
+	lst_move_head(&(a->top), &(b->top));
+	a->size++;
+	b->size--;
 	if (ft_printf("pa\n") < 0)
 		return (-1);
 	return (1);
@@ -24,8 +25,9 @@ int	push_a(t_stack *a, t_stack *b)
 
 int	push_b(t_stack *b, t_stack *a)
 {
-	if (push(b, pop(a)) < 0)
-		return (-1);
+	lst_move_head(&(b->top), &(a->top));
+	a->size--;
+	b->size++;
 	if (ft_printf("pb\n") < 0)
 		return (-1);
 	return (1);

@@ -26,5 +26,6 @@ t_list	*lstnew(int data);
 void	lstadd_front(t_list **lst, t_list *node);
 void	*free_lst(t_list *lst);
 int		lstcheck_duplicate(t_list *lst);
+void	lst_move_head(t_list **dest, t_list **src);
 
 #endif

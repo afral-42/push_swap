@@ -71,3 +71,19 @@ void	*free_lst(t_list *lst)
 	}
 	return (NULL);
 }
+
+void	lst_move_head(t_list **dest, t_list **src)
+{
+	t_list	*tmp_node;
+
+	tmp_node = *src;
+	*src = (*src)->next;
+	if (*src)
+		(*src)->prev = NULL;
+	tmp_node->next = *dest;
+	tmp_node->prev = NULL;
+	if (*dest)
+		(*dest)->prev = tmp_node;
+	*dest = tmp_node;
+}
+
