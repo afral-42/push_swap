@@ -6,7 +6,7 @@
 /*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:20 by arebilla          #+#    #+#             */
-/*   Updated: 2025/12/18 17:39:23 by arebilla         ###   ########.fr       */
+/*   Updated: 2025/12/30 16:19:35 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int		merge_sort(t_stack *a);
 void	swap_nodes(t_stack *a, t_stack *b, size_t n, size_t m, int *ops_count);
 int		heap_sort(t_stack *a);
 int		quick_sort(t_stack *a);
+int		radix_sort(t_stack *a);
 
 #endif

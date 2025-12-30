@@ -12,6 +12,7 @@ FILES = \
 	algorithms/merge_sort.c \
 	algorithms/heap_sort.c \
 	algorithms/quick_sort.c \
+	algorithms/radix_sort.c \
 	algorithms/algo_utils.c \
 	parsing/parsing_utils.c \
 	parsing/parsing.c \
