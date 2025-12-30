@@ -13,26 +13,29 @@
 #include "stack.h"
 #include "ft_printf.h"
 
-int	rotate_a(t_stack *a)
+int	rotate_a(t_stack *a, int *counter)
 {
 	rotate(a);
+	(*counter)++;
 	if (ft_printf("ra\n") < 0)
 		return (-1);
 	return (1);
 }
 
-int	rotate_b(t_stack *b)
+int	rotate_b(t_stack *b, int *counter)
 {
 	rotate(b);
+	(*counter)++;
 	if (ft_printf("rb\n") < 0)
 		return (-1);
 	return (1);
 }
 
-int	rotate_both(t_stack *a, t_stack *b)
+int	rotate_both(t_stack *a, t_stack *b, int *counter)
 {
 	rotate(a);
 	rotate(b);
+	(*counter)++;
 	if (ft_printf("rr\n") < 0)
 		return (-1);
 	return (1);

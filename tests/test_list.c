@@ -133,6 +133,27 @@ void	test_lstmove_head()
 	assert(lst_dest->data == 3);
 	assert(lst_dest->next->data == 2);
 	assert(lst_dest->next->next->data == 1);
+	free_lst(lst_dest);
+}
+
+void	test_lstget()
+{
+	t_list	*lst_a;
+	t_list	*lst_b;
+	t_list	*lst_c;
+
+	lst_a = lstnew(3);
+	assert(lstget(lst_a, 0) == 3);
+	lst_b = lstnew(2);
+	lstadd_front(&lst_a, lst_b);
+	assert(lstget(lst_a, 0) == 2);
+	assert(lstget(lst_a, 1) == 3);
+	lst_c = lstnew(1);
+	lstadd_front(&lst_a, lst_c);
+	assert(lstget(lst_a, 0) == 1);
+	assert(lstget(lst_a, 1) == 2);
+	assert(lstget(lst_a, 2) == 3);
+	free_lst(lst_a);
 }
 
 int	main(void)
@@ -141,4 +162,5 @@ int	main(void)
 	test_lstadd_front();
 	test_lstcheck_duplicate();
 	test_lstmove_head();
+	test_lstget();
 }

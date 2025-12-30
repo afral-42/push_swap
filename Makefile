@@ -7,7 +7,11 @@ FILES = \
 	data_structures/operations_rotate.c \
 	data_structures/operations_reverse_rotate.c \
 	data_structures/operations_swap.c \
+	data_structures/operations_move.c \
 	algorithms/insertion_sort.c \
+	algorithms/merge_sort.c \
+	algorithms/heap_sort.c \
+	algorithms/quick_sort.c \
 	algorithms/algo_utils.c \
 	parsing/parsing_utils.c \
 	parsing/parsing.c \
@@ -29,7 +33,10 @@ TESTS_FILES = \
 			test_list.c \
 			test_operations.c \
 			test_compute_disorder.c \
-			test_insertion.c
+			test_insertion.c \
+			test_algo_utils.c \
+			test_merge_sort.c \
+			test_heap_sort.c
 TESTS := $(patsubst %.c, %, $(TESTS_FILES))
 TESTS_SRCS := $(addprefix $(TESTS_DIR)/, $(TESTS_FILES))
 TESTS_OBJS := $(addprefix $(TESTS_BUILD_DIR)/, $(patsubst %.c, %.o, $(TESTS_FILES)))
@@ -51,7 +58,7 @@ CC += $(CFLAGS) $(CPPFLAGS)
 
 all: $(NAME)
 
-# Règle Debug
+# Debug Rule
 debug: CFLAGS += -g -O0 -DDEBUG
 debug: fclean $(NAME)
 
@@ -66,7 +73,7 @@ check:
 
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) -c $< -o $@
+	$(CC) -c -g $< -o $@
 
 test: $(TESTS)
 

@@ -87,3 +87,15 @@ void	lst_move_head(t_list **dest, t_list **src)
 	*dest = tmp_node;
 }
 
+int	lstget(t_list *lst, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (lst->data);
+}

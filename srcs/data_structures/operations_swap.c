@@ -13,26 +13,29 @@
 #include "stack.h"
 #include "ft_printf.h"
 
-int	swap_a(t_stack *a)
+int	swap_a(t_stack *a, int *counter)
 {
 	swap(a);
+	(*counter)++;
 	if (ft_printf("sa\n") < 0)
 		return (-1);
 	return (1);
 }
 
-int	swap_b(t_stack *b)
+int	swap_b(t_stack *b, int *counter)
 {
 	swap(b);
+	(*counter)++;
 	if (ft_printf("sb\n") < 0)
 		return (-1);
 	return (1);
 }
 
-int	swap_both(t_stack *a, t_stack *b)
+int	swap_both(t_stack *a, t_stack *b, int *counter)
 {
 	swap(a);
 	swap(b);
+	(*counter)++;
 	if (ft_printf("ss\n") < 0)
 		return (-1);
 	return (1);
