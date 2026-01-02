@@ -18,39 +18,38 @@
 size_t	partition_a(t_stack *a, t_stack *b, size_t r, int *ops_count)
 {
 	int		pivot_data;
-	size_t	left_partition_size;
-	size_t	j;
+	size_t	pivot_index;
+	size_t	i;
 
 	pivot_data = lstget(a->top, r - 1);
-	j = 0;
-	while (j++ < r)
+	i = 0;
+	while (i++ < r)
 	{
 		if (a->top->data <= pivot_data)
 			push_b(b, a, ops_count);
 		else
 			rotate_a(a, ops_count);
 	}
-	j = 0;
-	while (j++ < r - b->size)
+	i = 0;
+	while (i++ < r - b->size)
 		reverse_rotate_a(a, ops_count);
-	j = 0;
-	left_partition_size = b->size - 1;
-	while (j++ < left_partition_size + 1)
+	i = 0;
+	pivot_index = b->size;
+	while (i++ < pivot_index)
 		push_a(a, b, ops_count);
-	return (left_partition_size + 1);
+	return (pivot_index);
 }
 
 void	quick_sort_procedure(t_stack *a, t_stack *b, size_t r, int *ops_count)
 {
-	size_t	q;
+	size_t	pivot_index;
 
-	if (r > 0)
-	{
-		q = partition_a(a, b, r, ops_count);
-		quick_sort_procedure(a, b, q - 1, ops_count);
-		rotate_a(a, ops_count);
-		quick_sort_procedure(a, b, r - q, ops_count);
-	}
+	if (!r)
+		return ;
+	pivot_index = partition_a(a, b, r, ops_count);
+	quick_sort_procedure(a, b, pivot_index - 1, ops_count);
+	rotate_a(a, ops_count);
+	quick_sort_procedure(a, b, r - pivot_index, ops_count);
 }
 
 int	quick_sort(t_stack *a)
