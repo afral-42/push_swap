@@ -15,41 +15,55 @@
 #include "list.h"
 #include "operations.h"
 
-size_t	partition_a(t_stack *a, t_stack *b, size_t r, int *ops_count)
+int	skip_if_no_right_partion(t_stack *a, int pivot_data, size_t size)
+{
+	t_list	*node;
+
+	node = a->top;
+	while (size--)
+	{
+		if (node->data > pivot_data)
+			return (0);
+		node = node->next;
+	}
+	return (1);
+}
+
+size_t	partition_a(t_stack *a, t_stack *b, size_t size, int *ops_count)
 {
 	int		pivot_data;
-	size_t	pivot_index;
+	size_t	left_partition_size;
 	size_t	i;
 
-	pivot_data = lstget(a->top, r - 1);
+	pivot_data = lstget(a->top, size - 1);
+	if (skip_if_no_right_partion(a, pivot_data, size))
+		return (size - 1);
 	i = 0;
-	while (i++ < r)
+	while (i++ < size)
 	{
 		if (a->top->data <= pivot_data)
 			push_b(b, a, ops_count);
 		else
 			rotate_a(a, ops_count);
 	}
-	i = 0;
-	while (i++ < r - b->size)
+	left_partition_size = b->size - 1;
+	while (size-- > b->size)
 		reverse_rotate_a(a, ops_count);
-	i = 0;
-	pivot_index = b->size;
-	while (i++ < pivot_index)
+	while (b->size)
 		push_a(a, b, ops_count);
-	return (pivot_index);
+	return (left_partition_size);
 }
 
-void	quick_sort_procedure(t_stack *a, t_stack *b, size_t r, int *ops_count)
+void	quick_sort_procedure(t_stack *a, t_stack *b, size_t size, int *ops_count)
 {
-	size_t	pivot_index;
+	size_t	left_partition_size;
 
-	if (!r)
+	if (!size)
 		return ;
-	pivot_index = partition_a(a, b, r, ops_count);
-	quick_sort_procedure(a, b, pivot_index - 1, ops_count);
+	left_partition_size = partition_a(a, b, size, ops_count);
+	quick_sort_procedure(a, b, left_partition_size, ops_count);
 	rotate_a(a, ops_count);
-	quick_sort_procedure(a, b, r - pivot_index, ops_count);
+	quick_sort_procedure(a, b, size - left_partition_size - 1, ops_count);
 }
 
 int	quick_sort(t_stack *a)
