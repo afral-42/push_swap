@@ -1,101 +1,77 @@
-#include "operations.h"
-#include "stack.h"
 #include "algorithms.h"
+#include "stack.h"
+#include "list.h"
+#include "operations.h"
+#include "parsing.h"
 
-void	merge_b_in_a(t_stack *a, t_stack *b, size_t size, int *ops_count)
+void	trivial_merge(t_stack *a, size_t size, int *ops_count)
 {
-	size_t	i;
-	size_t	rotations_count;
-	
-	if (b->size < size)
-		size = b->size;
-	transfer_b_to_a_sorted(b, a, size, ops_count);
-	i = 0;
-	rotations_count = 0;
-	while (i < size)
-	{
-		while (rotations_count < size && b->size && b->top->data > a->top->data)
-		{
-			rotate_a(a, ops_count);
-			rotations_count++;
-		}
-		if (b->size)
-		{
-			push_a(a, b, ops_count);
-			rotate_a(a, ops_count);
-		}
-		i++;
-	}
-	while (rotations_count++ < size)
+	if (size == 1)
 		rotate_a(a, ops_count);
+	else if (size == 2)
+	{
+		if (a->top->data > a->top->next->data)
+			swap_a(a, ops_count);
+		rotate_a(a, ops_count);
+		rotate_a(a, ops_count);
+	}
 }
-void	merge_a_in_b(t_stack *b, t_stack *a, size_t size, int *ops_count)
+
+void	merge(t_stack *a, t_stack *b, size_t size, int *ops_count)
 {
 	size_t	i;
-	size_t	rotations_count;
-	
-	if (a->size < size)
-		size = a->size;
-	transfer_a_to_b_sorted(a, b, size, ops_count);
+	size_t	rotation_count;
+
 	i = 0;
-	rotations_count = 0;
-	while (i < size)
+	while(i < size - size / 2)
 	{
-		while (rotations_count < size && a->size && a->top->data > b->top->data)
-		{
-			rotate_b(b, ops_count);
-			rotations_count++;
-		}
-		if (a->size)
-		{
-			push_b(b, a, ops_count);
-			rotate_b(b, ops_count);
-		}
+		reverse_rotate_a(a, ops_count);
+		push_b(b, a, ops_count);
 		i++;
 	}
-	while (rotations_count++ < size)
-		rotate_b(b, ops_count);
+	rotation_count = 0;
+	while (i < size && b->top->data < lstget(a->top, a->size - 1))
+	{
+		rotation_count++;
+		reverse_rotate_a(a, ops_count);
+		i++;
+	}
+	while (i--)
+	{
+		if ((b->size && a->top->data > b->top->data) || rotation_count == 0)
+			push_a(a, b, ops_count);
+		else 
+			rotation_count--;
+		rotate_a(a, ops_count);
+	}
+}
+
+void	merge_sort_procedure(t_stack *a, t_stack *b, size_t size, int *ops_count)
+{
+	size_t	mid;
+	
+	if (size > 2)
+	{
+		mid = size / 2;
+		merge_sort_procedure(a, b, mid, ops_count);
+		merge_sort_procedure(a, b, size - mid, ops_count);
+		merge(a, b, size, ops_count);
+	}
+	else
+		trivial_merge(a, size, ops_count);
 }
 
 int	merge_sort(t_stack *a)
 {
-	t_stack	*b;
-	size_t	size;
-	size_t	ops;
 	int		ops_count;
-	int		counter;
-	size_t	max_size;
+	t_stack	*b;
 
-	max_size = a->size;
-	counter = 0;
-	b = init_stack();
 	ops_count = 0;
-	size = 1;
-	while (size < max_size)
-	{
-		ops = max_size / (2 * size);
-		if(max_size % (2 * size) != 0)
-			ops++;
-		if (counter % 2 == 0)
-		{
-			while(ops > 0)
-			{
-				merge_a_in_b(b, a, size, &ops_count);
-				ops--;
-			}
-		}
-		else
-		{
-			while (ops > 0)
-			{
-				merge_b_in_a(a, b, size, &ops_count);
-				ops--;
-			}
-		}
-		size *= 2;
-		counter++;
-	}
-	if (counter % 2 != 0)
-		transfer_b_to_a_sorted(b, a, b->size, &ops_count);
+	b = init_stack();
+	if (!b)
+		return (0);
+	merge_sort_procedure(a, b, a->size, &ops_count);
+	free_stack(b);
 	return (ops_count);
 }
+

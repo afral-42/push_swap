@@ -8,3 +8,4 @@ push_swap
 compile_commands.json
 .cache
 .cache/
+input.txt

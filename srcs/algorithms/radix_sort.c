@@ -30,7 +30,6 @@ int	skip_digit(t_stack *a, int mask)
 	return (zero_count == 1 || zero_count == a->size);
 }
 
-
 void	radix_sort_procedure(t_stack *a, t_stack *b, int *ops_count)
 {
 	size_t	i;

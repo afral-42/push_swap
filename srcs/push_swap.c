@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:15:08 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/30 17:34:22 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/02 16:37:43 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "algorithms.h"
 #include "ft_printf.h"
 
+#include <stdio.h>
 int main(int ac, char **av)
 {
     t_stack		*a;
@@ -35,7 +36,8 @@ int main(int ac, char **av)
     }
 	print_list(a->top);
 	display_active_flags(options);
-	ft_printf("\n\nCompte d'opérations : %d\n\n", radix_sort(a));
+	ft_printf("\n\nCompte d'opérations : %d\n\n", merge_sort(a));
+	printf("disorder: %f\n", compute_disorder(a));
 	print_list(a->top);
 	free_stack(a);
 	return (0);
