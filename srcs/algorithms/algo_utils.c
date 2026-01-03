@@ -6,7 +6,7 @@
 /*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 14:50:55 by arebilla          #+#    #+#             */
-/*   Updated: 2025/12/18 17:39:58 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/03 10:53:36 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,14 @@ int	transfer_b_to_a_sorted(t_stack *b, t_stack *a, size_t size, int *ops_count)
 	push_a(a, b, ops_count);
 	return (3 * (size - 1) + 1);
 }
+
+size_t	ft_sqrt(size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i * i <= n)
+		i++;
+	return (i - 1);
+}
+
