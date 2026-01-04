@@ -8,6 +8,7 @@ FILES = \
 	data_structures/operations_reverse_rotate.c \
 	data_structures/operations_swap.c \
 	algorithms/insertion_sort.c \
+	algorithms/selection_sort.c \
 	algorithms/algo_utils.c \
 	parsing/parsing_utils.c \
 	parsing/parsing.c \
@@ -100,6 +101,7 @@ clean:
 
 fclean: clean
 	rm -fv $(TESTS_BIN)
+	rm -f $(NAME)
 	$(MAKE) -C $(LIBFTPRINTF_DIR) fclean
 
 re: fclean all
