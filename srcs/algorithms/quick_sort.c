@@ -29,7 +29,7 @@ int	skip_if_no_right_partion(t_stack *a, int pivot_data, size_t size)
 	return (1);
 }
 
-size_t	partition_a(t_stack *a, t_stack *b, size_t size, int *ops_count)
+size_t	partition_a(t_stack *a, t_stack *b, size_t size, t_ops_counter *ops_count)
 {
 	int		pivot_data;
 	size_t	left_partition_size;
@@ -54,7 +54,7 @@ size_t	partition_a(t_stack *a, t_stack *b, size_t size, int *ops_count)
 	return (left_partition_size);
 }
 
-void	quick_sort_procedure(t_stack *a, t_stack *b, size_t size, int *ops_count)
+void	quick_sort_procedure(t_stack *a, t_stack *b, size_t size, t_ops_counter *ops_count)
 {
 	size_t	left_partition_size;
 
@@ -66,16 +66,18 @@ void	quick_sort_procedure(t_stack *a, t_stack *b, size_t size, int *ops_count)
 	quick_sort_procedure(a, b, size - left_partition_size - 1, ops_count);
 }
 
-int	quick_sort(t_stack *a)
+t_ops_counter	*quick_sort(t_stack *a)
 {
-	int		ops_count;
-	t_stack	*b;
+	t_ops_counter	*ops_count;
+	t_stack			*b;
 
-	ops_count = 0;
+	ops_count = new_ops_counter();
+	if (!ops_count)
+		return (NULL);
 	b = init_stack();
 	if (!b)
-		return (0);
-	quick_sort_procedure(a, b, a->size, &ops_count);
+		return (NULL);
+	quick_sort_procedure(a, b, a->size, ops_count);
 	free_stack(b);
 	return (ops_count);
 }

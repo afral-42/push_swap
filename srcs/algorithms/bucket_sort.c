@@ -15,7 +15,7 @@
 #include "operations.h"
 
 
-void	fill_bucket(t_stack *a, t_stack *b, int limit, int *ops_count)
+void	fill_bucket(t_stack *a, t_stack *b, int limit, t_ops_counter *ops_count)
 {
 	size_t	size;
 	size_t	rotations_count;
@@ -41,7 +41,7 @@ void	fill_bucket(t_stack *a, t_stack *b, int limit, int *ops_count)
 	}
 }
 
-void	bucket_sort_procedure(t_stack *a, t_stack *b, int *ops_counter)
+void	bucket_sort_procedure(t_stack *a, t_stack *b, t_ops_counter *ops_counter)
 {
 	int	buckets_qty;
 	int	limit;
@@ -61,15 +61,18 @@ void	bucket_sort_procedure(t_stack *a, t_stack *b, int *ops_counter)
 		push_a(a, b, ops_counter);
 }
 
-int	bucket_sort(t_stack *a)
+t_ops_counter	*bucket_sort(t_stack *a)
 {
-	t_stack *b;
-	int		ops_counter;
+	t_stack			*b;
+	t_ops_counter	*ops_counter;
 
+	ops_counter = new_ops_counter();
+	if (!ops_counter)
+		return (NULL);
 	b = init_stack();
 	if (!b)
-		return (0);
-	bucket_sort_procedure(a, b, &ops_counter);
+		return (NULL);
+	bucket_sort_procedure(a, b, ops_counter);
 	free_stack(b);
 	return (ops_counter);
 }

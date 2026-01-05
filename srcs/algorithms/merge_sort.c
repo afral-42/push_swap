@@ -4,7 +4,7 @@
 #include "operations.h"
 #include "parsing.h"
 
-void	trivial_merge(t_stack *a, size_t size, int *ops_count)
+void	trivial_merge(t_stack *a, size_t size, t_ops_counter *ops_count)
 {
 	if (size == 1)
 		rotate_a(a, ops_count);
@@ -17,7 +17,7 @@ void	trivial_merge(t_stack *a, size_t size, int *ops_count)
 	}
 }
 
-void	merge(t_stack *a, t_stack *b, size_t size, int *ops_count)
+void	merge(t_stack *a, t_stack *b, size_t size, t_ops_counter *ops_count)
 {
 	size_t	i;
 	size_t	rotation_count;
@@ -46,7 +46,7 @@ void	merge(t_stack *a, t_stack *b, size_t size, int *ops_count)
 	}
 }
 
-void	merge_sort_procedure(t_stack *a, t_stack *b, size_t size, int *ops_count)
+void	merge_sort_procedure(t_stack *a, t_stack *b, size_t size, t_ops_counter *ops_count)
 {
 	size_t	mid;
 	
@@ -61,16 +61,18 @@ void	merge_sort_procedure(t_stack *a, t_stack *b, size_t size, int *ops_count)
 		trivial_merge(a, size, ops_count);
 }
 
-int	merge_sort(t_stack *a)
+t_ops_counter	*merge_sort(t_stack *a)
 {
-	int		ops_count;
-	t_stack	*b;
+	t_ops_counter	*ops_count;
+	t_stack			*b;
 
-	ops_count = 0;
+	ops_count = new_ops_counter();
+	if (!ops_count)
+		return (NULL);
 	b = init_stack();
 	if (!b)
 		return (0);
-	merge_sort_procedure(a, b, a->size, &ops_count);
+	merge_sort_procedure(a, b, a->size, ops_count);
 	free_stack(b);
 	return (ops_count);
 }

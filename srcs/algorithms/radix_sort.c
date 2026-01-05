@@ -30,7 +30,7 @@ int	skip_digit(t_stack *a, int mask)
 	return (zero_count == 1 || zero_count == a->size);
 }
 
-void	radix_sort_procedure(t_stack *a, t_stack *b, int *ops_count)
+void	radix_sort_procedure(t_stack *a, t_stack *b, t_ops_counter *ops_count)
 {
 	size_t	i;
 	size_t	j;
@@ -57,16 +57,18 @@ void	radix_sort_procedure(t_stack *a, t_stack *b, int *ops_count)
 	}
 }
 
-int	radix_sort(t_stack *a)
+t_ops_counter	*radix_sort(t_stack *a)
 {
-	t_stack	*b;
-	int		ops_count;
+	t_stack			*b;
+	t_ops_counter	*ops_count;
 
+	ops_count = new_ops_counter();
+	if (!ops_count)
+		return (NULL);
 	b = init_stack();
 	if (!b)
-		return (0);
-	ops_count = 0;
-	radix_sort_procedure(a, b, &ops_count);
+		return (NULL);
+	radix_sort_procedure(a, b, ops_count);
 	free_stack(b);
 	return (ops_count);
 }
