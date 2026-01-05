@@ -184,35 +184,6 @@ void	test_reverse_rotate_both(void)
 	free_stack(b);
 }
 
-void	test_move_a()
-{
-	t_stack	*a;
-	int		ops_counter;
-
-	ops_counter = 0;
-	a = generate_stack(5);
-	move_a(a, 1, &ops_counter); 
-	assert(a->position == 1);
-	assert(a->top->data == 2);
-	assert(ops_counter = 1);
-	move_a(a, 4, &ops_counter);
-	assert(a->position == 4);
-	assert(a->top->data == 5);
-	assert(ops_counter = 3);
-	move_a(a, 2, &ops_counter);
-	assert(a->position == 2);
-	assert(a->top->data == 3);
-	assert(ops_counter = 5);
-	move_a(a, 3, &ops_counter);
-	assert(a->position == 3);
-	assert(a->top->data == 4);
-	assert(ops_counter = 6);
-	move_a(a, 0, &ops_counter);
-	assert(a->position == 0);
-	assert(a->top->data == 1);
-	assert(ops_counter = 8);
-}
-
 int	main(void)
 {
 	test_swap();
@@ -221,5 +192,4 @@ int	main(void)
 	test_reverse_rotate();
 	test_rotate_both();
 	test_reverse_rotate_both();
-	test_move_a();
 }

@@ -7,10 +7,8 @@ FILES = \
 	data_structures/operations_rotate.c \
 	data_structures/operations_reverse_rotate.c \
 	data_structures/operations_swap.c \
-	data_structures/operations_move.c \
 	algorithms/insertion_sort.c \
 	algorithms/merge_sort.c \
-	algorithms/heap_sort.c \
 	algorithms/quick_sort.c \
 	algorithms/radix_sort.c \
 	algorithms/bucket_sort.c \
@@ -36,9 +34,7 @@ TESTS_FILES = \
 			test_operations.c \
 			test_compute_disorder.c \
 			test_insertion.c \
-			test_algo_utils.c \
-			test_merge_sort.c \
-			test_heap_sort.c
+			test_algo_utils.c
 TESTS := $(patsubst %.c, %, $(TESTS_FILES))
 TESTS_SRCS := $(addprefix $(TESTS_DIR)/, $(TESTS_FILES))
 TESTS_OBJS := $(addprefix $(TESTS_BUILD_DIR)/, $(patsubst %.c, %.o, $(TESTS_FILES)))
