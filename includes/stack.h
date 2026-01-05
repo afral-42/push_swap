@@ -20,7 +20,6 @@ typedef struct s_stack
 {
 	t_list	*top;
 	size_t	size;
-	ssize_t	position;
 }	t_stack;
 
 t_stack	*init_stack(void);
