@@ -13,26 +13,29 @@
 #include "stack.h"
 #include "ft_printf.h"
 
-int	reverse_rotate_a(t_stack *a)
+int	reverse_rotate_a(t_stack *a, int *counter)
 {
 	reverse_rotate(a);
+	(*counter)++;
 	if (ft_printf("rra\n") < 0)
 		return (-1);
 	return (1);
 }
 
-int	reverse_rotate_b(t_stack *b)
+int	reverse_rotate_b(t_stack *b, int *counter)
 {
 	reverse_rotate(b);
+	(*counter)++;
 	if (ft_printf("rrb\n") < 0)
 		return (-1);
 	return (1);
 }
 
-int	reverse_rotate_both(t_stack *a, t_stack *b)
+int	reverse_rotate_both(t_stack *a, t_stack *b, int *counter)
 {
 	reverse_rotate(a);
 	reverse_rotate(b);
+	(*counter)++;
 	if (ft_printf("rrr\n") < 0)
 		return (-1);
 	return (1);
