@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:25:49 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 14:25:08 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/05 13:02:28 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ t_list	*lstnew(int data);
 void	lstadd_front(t_list **lst, t_list *node);
 void	*free_lst(t_list *lst);
 int		lstcheck_duplicate(t_list *lst);
+int		lstget_max(t_list *lst);
+int		lstget_min(t_list *lst);
 
 #endif

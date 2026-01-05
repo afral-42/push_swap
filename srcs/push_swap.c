@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:15:08 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 17:49:02 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/05 14:44:01 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(int ac, char **av)
     }
 	print_list(a->top);
 	display_active_flags(options);
-	ft_printf("\n\nCompte d'opérations : %d\n\n", insertion_sort(a));
+	ft_printf("\n\nCompte d'opérations : %d\n\n", bucket_sort(a));
 	print_list(a->top);
 	free_stack(a);
 	return (0);

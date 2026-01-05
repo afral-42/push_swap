@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:28:26 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 14:27:06 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/05 13:01:39 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,34 @@ void	*free_lst(t_list *lst)
 		node = temp;
 	}
 	return (NULL);
+}
+
+int	lstget_max(t_list *lst)
+{
+	int	max;
+
+	max = lst->data;
+	lst = lst->next;
+	while (lst)
+	{
+		if (lst->data > max)
+			max = lst->data;
+		lst = lst->next;
+	}
+	return (max);
+}
+
+int	lstget_min(t_list *lst)
+{
+	int	min;
+
+	min = lst->data;
+	lst = lst->next;
+	while (lst)
+	{
+		if (lst->data < min)
+			min = lst->data;
+		lst = lst->next;
+	}
+	return (min);
 }
