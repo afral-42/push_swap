@@ -46,7 +46,6 @@ void	rotate(t_stack *stack)
 	last->next = stack->top;
 	second->prev = NULL;
 	stack->top = second;
-	stack->position = (stack->position + 1) % stack->size;
 }
 
 void	reverse_rotate(t_stack *stack)
@@ -63,7 +62,6 @@ void	reverse_rotate(t_stack *stack)
 	last->prev = NULL;
 	last->next = stack->top;
 	stack->top = last;
-	stack->position = ((stack->position - 1) % (ssize_t)stack->size + (ssize_t)stack->size) % (ssize_t)stack->size;
 }
 
 int	pop(t_stack *stack)

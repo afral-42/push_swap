@@ -19,8 +19,6 @@ int	push_a(t_stack *a, t_stack *b, int *counter)
 	(*counter)++;
 	a->size++;
 	b->size--;
-	if (b->position)
-		b->position--;
 	if (ft_printf("pa\n") < 0)
 		return (-1);
 	return (1);
@@ -32,8 +30,6 @@ int	push_b(t_stack *b, t_stack *a, int *counter)
 	(*counter)++;
 	a->size--;
 	b->size++;
-	if (a->position)
-		a->position--;
 	if (ft_printf("pb\n") < 0)
 		return (-1);
 	return (1);
