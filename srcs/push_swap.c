@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:15:08 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/05 12:47:07 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/05 12:58:47 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ int main(int ac, char **av)
 		write(2, "Error\n", 6);
 		return (1);
     }
-	ops_count = new_ops_counter();
-	if (!ops_count)
-		return (1);
 	print_list(a->top);
 	display_active_flags(options);
 	ops_count = insertion_sort(a);
