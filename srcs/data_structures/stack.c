@@ -21,7 +21,6 @@ t_stack	*init_stack(void)
 		return (NULL);
 	stack->size = 0;
 	stack->top = NULL;
-	stack->position = 0;
 	return (stack);
 }
 
