@@ -18,6 +18,6 @@
 int		abort_sort_function(t_stack *b);
 int		insertion_sort(t_stack *a);
 int		transfer_stack(t_stack *dest, t_stack *src,
-			int (*push_fct)(t_stack *, t_stack *));
+			int (*push_fct)(t_stack *, t_stack *, int *));
 
 #endif

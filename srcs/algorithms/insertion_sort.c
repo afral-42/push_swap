@@ -13,33 +13,6 @@
 #include "operations.h"
 #include "algorithms.h"
 
-static int	rotate_b_and_insert_a(t_stack *a, t_stack *b)
-{
-	size_t	rotations_count;
-
-	rotations_count = 0;
-	while (rotations_count < b->size && b->top->data > a->top->data)
-	{
-		if (rotate_b(b) < 0)
-			return (-1);
-		rotations_count++;
-	}
-	if (push_b(b, a) < 0)
-		return (-1);
-	return (rotations_count);
-}
-
-static int	reorder_b(t_stack *b, size_t rotations_count)
-{
-	while (rotations_count)
-	{
-		if (reverse_rotate_b(b) < 0)
-			return (-1);
-		rotations_count--;
-	}
-	return (0);
-}
-
 int	insertion_sort(t_stack *a)
 {
 	size_t	rotations_count;
@@ -53,16 +26,19 @@ int	insertion_sort(t_stack *a)
 	ops_count = 0;
 	while (a->size)
 	{
-		rotations_count = rotate_b_and_insert_a(a, b);
-		if (rotations_count < 0)
-			return (abort_sort_function(b));
-		if (reorder_b(b, rotations_count) < 0)
-			return (abort_sort_function(b));
-		ops_count += (2 * rotations_count + 1);
+		while (rotations_count < b->size && b->top->data > a->top->data)
+		{
+			rotate_b(b, &ops_count);
+			rotations_count++;
+		}
+		push_b(b, a, &ops_count);
+		while (rotations_count)
+		{
+			reverse_rotate_b(b, &ops_count);
+			rotations_count--;
+		}
 	}
-	if (transfer_stack(a, b, &push_a) < 0)
-		return (abort_sort_function(b));
-	ops_count += a->size;
+	transfer_stack(a, b, &ops_count, &push_a);
 	free_stack(b);
 	return (ops_count);
 }

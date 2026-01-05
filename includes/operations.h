@@ -26,6 +26,5 @@ int		reverse_rotate_both(t_stack *a, t_stack *b, int *counter);
 int		swap_a(t_stack *a, int *counter);
 int		swap_b(t_stack *b, int *counter);
 int		swap_both(t_stack *a, t_stack *b, int *counter);
-void	move_a(t_stack *a, size_t end, int *ops_counter);
 
 #endif
