@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 07:56:21 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/05 12:47:35 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/05 16:59:55 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ t_ops_counter	*insertion_sort(t_stack *a)
 		return (NULL);
 	ops_count = new_ops_counter();
 	if (!ops_count)
+	{
+		free_stack(b);
 		return (NULL);
+	}
 	rotations_count = 0;
 	while (a->size)
 	{

@@ -27,7 +27,7 @@ int	skip_digit(t_stack *a, int mask)
 			zero_count++;
 		node = node->next;
 	}
-	return (zero_count == 1 || zero_count == a->size);
+	return (zero_count == 0 || zero_count == a->size);
 }
 
 void	radix_sort_procedure(t_stack *a, t_stack *b, t_ops_counter *ops_count)

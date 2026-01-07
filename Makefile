@@ -13,6 +13,7 @@ FILES = \
 	algorithms/quick_sort.c \
 	algorithms/radix_sort.c \
 	algorithms/bucket_sort.c \
+	algorithms/chunk_based_sorting.c \
 	algorithms/algo_utils.c \
 	parsing/parsing_utils.c \
 	parsing/parsing.c \

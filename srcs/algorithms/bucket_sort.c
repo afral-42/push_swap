@@ -48,6 +48,8 @@ void	bucket_sort_procedure(t_stack *a, t_stack *b, t_ops_counter *ops_counter)
 	int	min;
 	int	max;
 
+	if (a->size < 2)
+		return ;
 	max = lstget_max(a->top);
 	min = lstget_min(a->top);
 	buckets_qty = ft_sqrt(max - min);
