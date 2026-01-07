@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:33:36 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/07 14:36:32 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/07 15:03:01 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	split_by_bit(t_stack *a, t_stack *b, unsigned short bit, t_ops_counter *ops
 		}
 		else
 		{
-			if (((a->top->data >> bit) & 1) == 0) 
+			if (((a->top->data >> bit) & 1) == 0)
 				rotate_a(a, ops);
 			else
 				push_b(b, a, ops);
