@@ -14,6 +14,7 @@
 # define STACK_H
 
 # include "list.h"
+# include <sys/types.h>
 
 typedef struct s_stack
 {

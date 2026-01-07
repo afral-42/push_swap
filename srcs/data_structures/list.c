@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:28:26 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/05 13:01:39 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/07 11:25:46 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,34 @@ void	*free_lst(t_list *lst)
 		node = temp;
 	}
 	return (NULL);
+}
+
+void	lst_move_head(t_list **dest, t_list **src)
+{
+	t_list	*tmp_node;
+
+	tmp_node = *src;
+	*src = (*src)->next;
+	if (*src)
+		(*src)->prev = NULL;
+	tmp_node->next = *dest;
+	tmp_node->prev = NULL;
+	if (*dest)
+		(*dest)->prev = tmp_node;
+	*dest = tmp_node;
+}
+
+int	lstget(t_list *lst, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (lst->data);
 }
 
 int	lstget_max(t_list *lst)

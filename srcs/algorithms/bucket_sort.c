@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 11:50:11 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/05 16:30:58 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/07 11:17:01 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	fill_buckets(t_stack *a, t_stack *b, size_t buckets_number,
 		stack_size = a->size;
 		while (rotations_count < stack_size)
 		{
-			if (a->top->data <= (int)(min + (bucket_index + 1)* bucket_size))
+			if (a->top->data <= (int)(min + (bucket_index + 1) * bucket_size))
 				count += push_b(b, a);
 			else
 				count += rotate_a(a);	

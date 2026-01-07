@@ -7,6 +7,7 @@ FILES = \
 	data_structures/operations_rotate.c \
 	data_structures/operations_reverse_rotate.c \
 	data_structures/operations_swap.c \
+	data_structures/ops_counter.c \
 	algorithms/insertion_sort.c \
 	algorithms/selection_sort.c \
 	algorithms/bucket_sort.c \
