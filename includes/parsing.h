@@ -6,16 +6,20 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:39:48 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 15:14:27 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/07 14:20:22 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
-#include "libft.h"
-#include "ft_printf.h"
-#include "list.h"
-#include "stack.h"
-#include <unistd.h>
+#ifndef PARSING_H
+# define PARSING_H
+
+# include "list.h"
+# include "libft.h"
+# include "ft_printf.h"
+# include "list.h"
+# include "stack.h"
+# include "operations.h"
+# include <unistd.h>
 
 typedef enum e_flags
 {
@@ -34,3 +38,6 @@ void	*free_parsing(t_stack *a, char **tab);
 void    *free_split(char **tab);
 int	    parser(int ac, char **av, t_stack **a, int *options);
 void	display_active_flags(int options);
+void	print_bench_info(double disorder, int options, t_ops_counter *ops_counter);
+
+#endif
