@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:15:08 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/07 11:26:02 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/07 13:47:08 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(int ac, char **av)
     }
 	print_list(a->top);
 	display_active_flags(options);
-	ops_count = insertion_sort(a);
+	ops_count = radix_sort(a);
 	if (!ops_count)
 		return (1);
 	ft_printf("\n\nCompte d'opérations : %d\n\n", get_total_operations(ops_count));

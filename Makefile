@@ -9,12 +9,14 @@ FILES = \
 	data_structures/operations_swap.c \
 	data_structures/ops_counter.c \
 	algorithms/insertion_sort.c \
-	algorithms/selection_sort.c \
-	algorithms/bucket_sort.c \
 	algorithms/algo_utils.c \
+	algorithms/radix_sort.c \
 	parsing/parsing_utils.c \
 	parsing/parsing.c \
 	push_swap.c
+#	algorithms/selection_sort.c 
+#	algorithms/bucket_sort.c 
+
 SRCS_DIR = srcs
 BUILD_DIR = build
 SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
