@@ -40,7 +40,7 @@ int main(int ac, char **av)
 	disorder = compute_disorder(a);
 	print_list(a->top);
 	display_active_flags(options);
-	ops_count = chunk_based_sort(a);
+	ops_count = insertion_sort(a);
 	if (!ops_count)
 		return (1);
 	ft_printf("\n\nCompte d'opérations : %d\n\n", get_total_operations(ops_count));
