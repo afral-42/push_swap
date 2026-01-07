@@ -56,7 +56,7 @@ size_t	get_insertion_index(t_stack *stack, int value)
 		{
 			i++;
 			if (!node->next || node->next->data < node->data)
-				break;
+				break ;
 			node = node->next;
 		}
 		return (i % stack->size);
@@ -67,7 +67,7 @@ size_t	get_insertion_index(t_stack *stack, int value)
 	{
 		i--;
 		if (!node->prev || node->prev->data > node->data)
-			break;
+			break ;
 		node = node->prev;
 	}
 	return (i % stack->size);
@@ -103,6 +103,8 @@ t_ops_counter	*insertion_sort(t_stack *a)
 		free_stack(b);
 		return (NULL);
 	}
+	if (!a->top)
+		return (ops_count);
 	transfer_stack(b, a, ops_count, &push_b);
 	push_a(a, b, ops_count);
 	while (b->size)
