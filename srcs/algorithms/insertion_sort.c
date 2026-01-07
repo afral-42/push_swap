@@ -12,6 +12,7 @@
 
 #include "operations.h"
 #include "algorithms.h"
+#include "stack.h"
 
 t_list	*lstlast(t_list *lst)
 {
@@ -43,24 +44,28 @@ size_t	get_min_index(t_list *lst)
 	return (min_index);
 }
 
-size_t	get_insertion_index(t_stack *stack, int value)
+size_t	get_insertion_index_from_top(t_stack *stack, int value)
 {
-	size_t	i;
 	t_list	*node;
+	size_t	i;
 
-	if (value > stack->top->data)
+	node = stack->top;
+	i = 0;
+	while (value > node->data)
 	{
-		node = stack->top;
-		i = 0;
-		while (value > node->data)
-		{
-			i++;
-			if (!node->next || node->next->data < node->data)
-				break ;
-			node = node->next;
-		}
-		return (i % stack->size);
+		i++;
+		if (!node->next || node->next->data < node->data)
+			break ;
+		node = node->next;
 	}
+	return (i % stack->size);
+}
+
+size_t	get_insertion_index_from_bottom(t_stack *stack, int value)
+{
+	t_list	*node;
+	size_t	i;
+
 	node = lstlast(stack->top);
 	i = stack->size;
 	while (value < node->data)
@@ -73,26 +78,51 @@ size_t	get_insertion_index(t_stack *stack, int value)
 	return (i % stack->size);
 }
 
-void	put_value_on_top_of_a(t_stack *a, size_t index, t_ops_counter *ops_count)
+size_t	get_insertion_index(t_stack *stack, int value)
 {
-		if (index < a->size / 2 + 1)
-		{
-			while (index--)
-				rotate_a(a, ops_count);
-		}
-		else 
-		{
-			while (index++ < a->size)
-				reverse_rotate_a(a, ops_count);
-		}
+	if (value > stack->top->data)
+		return (get_insertion_index_from_top(stack, value));
+	else
+		return (get_insertion_index_from_bottom(stack, value));
+}
+
+void	put_value_on_top_of_a(t_stack *a, size_t index,
+								t_ops_counter *ops_count)
+{
+	if (index < a->size / 2 + 1)
+	{
+		while (index--)
+			rotate_a(a, ops_count);
+	}
+	else
+	{
+		while (index++ < a->size)
+			reverse_rotate_a(a, ops_count);
+	}
+}
+
+void	insertion_sort_procedure(t_stack *a, t_stack *b,
+											t_ops_counter *ops_count)
+{
+	size_t			insertion_index;
+	size_t			min_index;
+
+	transfer_stack(b, a, ops_count, &push_b);
+	push_a(a, b, ops_count);
+	while (b->size)
+	{
+		insertion_index = get_insertion_index(a, b->top->data);
+		put_value_on_top_of_a(a, insertion_index, ops_count);
+		push_a(a, b, ops_count);
+	}
+	min_index = get_min_index(a->top);
+	put_value_on_top_of_a(a, min_index, ops_count);
 }
 
 t_ops_counter	*insertion_sort(t_stack *a)
 {
 	t_stack			*b;
 	t_ops_counter	*ops_count;
-	size_t			insertion_index;
-	size_t			min_index;
 
 	b = init_stack();
 	if (!b)
@@ -105,16 +135,7 @@ t_ops_counter	*insertion_sort(t_stack *a)
 	}
 	if (!a->top)
 		return (ops_count);
-	transfer_stack(b, a, ops_count, &push_b);
-	push_a(a, b, ops_count);
-	while (b->size)
-	{
-		insertion_index = get_insertion_index(a, b->top->data);
-		put_value_on_top_of_a(a, insertion_index, ops_count);
-		push_a(a, b, ops_count);
-	}
-	min_index = get_min_index(a->top);
-	put_value_on_top_of_a(a, min_index, ops_count);
+	insertion_sort_procedure(a, b, ops_count);
 	free_stack(b);
 	return (ops_count);
 }
