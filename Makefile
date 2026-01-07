@@ -12,6 +12,8 @@ FILES = \
 	algorithms/algo_utils.c \
 	parsing/parsing_utils.c \
 	parsing/parsing.c \
+	parsing/ft_putdouble_fd.c \
+	parsing/bench_display.c \
 	push_swap.c
 SRCS_DIR = srcs
 BUILD_DIR = build
