@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:20 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/07 13:48:10 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/07 16:40:21 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ t_ops_counter	*insertion_sort(t_stack *a);
 int				transfer_stack(t_stack *dest, t_stack *src, t_ops_counter *ops_count,
 					int (*push_fct)(t_stack *, t_stack *, t_ops_counter *));
 t_ops_counter	*radix_sort(t_stack *a);
+t_ops_counter	*quick_sort(t_stack *a);
 
 #endif

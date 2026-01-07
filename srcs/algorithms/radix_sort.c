@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:33:36 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/07 15:03:01 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/07 16:32:49 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ t_ops_counter	*radix_sort(t_stack *a)
 		return (NULL);
 	}
 	operate_radix_sort(a, b, ops);
+	free_stack(b);
 	return (ops);
 }

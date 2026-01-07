@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 09:23:01 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/07 11:26:38 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/07 15:15:26 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ typedef struct s_ops_counter
 	int	ss;
 }	t_ops_counter;
 
-int		push_a(t_stack *a, t_stack *b, t_ops_counter *counter);
-int		push_b(t_stack *b, t_stack *a, t_ops_counter *counter);
-int		rotate_a(t_stack *a, t_ops_counter *counter);
-int		rotate_b(t_stack *b, t_ops_counter *counter);
-int		rotate_both(t_stack *a, t_stack *b, t_ops_counter *counter);
-int		reverse_rotate_a(t_stack *a, t_ops_counter *counter);
-int		reverse_rotate_b(t_stack *b, t_ops_counter *counter);
-int		reverse_rotate_both(t_stack *a, t_stack *b, t_ops_counter *counter);
-int		swap_a(t_stack *a, t_ops_counter *counter);
-int		swap_b(t_stack *b, t_ops_counter *counter);
-int		swap_both(t_stack *a, t_stack *b, t_ops_counter *counter);
-t_ops_counter *new_ops_counter(void);
-int	get_total_operations(t_ops_counter *ops_count);
+int				push_a(t_stack *a, t_stack *b, t_ops_counter *counter);
+int				push_b(t_stack *b, t_stack *a, t_ops_counter *counter);
+int				rotate_a(t_stack *a, t_ops_counter *counter);
+int				rotate_b(t_stack *b, t_ops_counter *counter);
+int				rotate_both(t_stack *a, t_stack *b, t_ops_counter *counter);
+int				reverse_rotate_a(t_stack *a, t_ops_counter *counter);
+int				reverse_rotate_b(t_stack *b, t_ops_counter *counter);
+int				reverse_rotate_both(t_stack *a, t_stack *b, t_ops_counter *counter);
+int				swap_a(t_stack *a, t_ops_counter *counter);
+int				swap_b(t_stack *b, t_ops_counter *counter);
+int				swap_both(t_stack *a, t_stack *b, t_ops_counter *counter);
+t_ops_counter	*new_ops_counter(void);
+int				get_total_operations(t_ops_counter *ops_count);
 
 #endif
