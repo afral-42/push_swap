@@ -71,7 +71,7 @@ int	stack_is_sorted(t_stack *stack)
 	return (compute_disorder(stack) == 0);
 }
 
-void	test_sorting_with_already_sorted_stack(int (*sort)(t_stack *))
+void	test_sorting_with_already_sorted_stack(t_ops_counter *(*sort)(t_stack *))
 {
 	t_stack	*stack;
 
@@ -102,7 +102,7 @@ void	test_sorting_with_already_sorted_stack(int (*sort)(t_stack *))
 	free_stack(stack);
 }
 
-void	test_sorting_with_maximum_disorder_stack(int (*sort)(t_stack *))
+void	test_sorting_with_maximum_disorder_stack(t_ops_counter *(*sort)(t_stack *))
 {
 	t_stack	*stack;
 
@@ -126,7 +126,7 @@ void	test_sorting_with_maximum_disorder_stack(int (*sort)(t_stack *))
 	free_stack(stack);
 }
 
-void	test_sorting_with_average_disorder_stack(int (*sort)(t_stack *))
+void	test_sorting_with_average_disorder_stack(t_ops_counter *(*sort)(t_stack *))
 {
 	int		numbers[10] = {2, 11, 10, 16, 7, 6, 12, 3, 5, 1};
 	t_stack	*stack;
