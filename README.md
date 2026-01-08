@@ -8,7 +8,7 @@
 
 The system operates with two stacks:
 * **Stack A**: Initially contains a set of unsorted, unique integers.
-* **Stack B**: A secondary workspace, initially empty.
+* **Stack B**: A secondary stack, initially empty.
 
 The goal is to sort all integers in Stack A in ascending order by applying a sequence of predefined operations:
 * **Swap** (`sa`, `sb`, `ss`): Exchanges the first two elements at the top of the stack.
@@ -93,7 +93,6 @@ ROTATE Stack A (ra or rra) to bring min_index to top
 | **2.2** | Push top of $B$ onto $A$ | $n - 1$ (`pa`) | $n - 1$ (`pa`) | $n - 1$ (`pa`) |
 | **3** | Finalize: Move smallest node to top of $A$ | $0$ | $\frac{n}{4}$ (`ra` or `rra`) | $\frac{n}{2}$ (`ra` or `rra`) |
 
----
 #### Cost Analysis
 
 ##### Position Insertion (Step 2.1)
