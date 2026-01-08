@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 07:56:21 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/05 16:59:55 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/08 08:46:44 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ void	insertion_sort_procedure(t_stack *a, t_stack *b,
 	size_t			insertion_index;
 	size_t			min_index;
 
-	transfer_stack(b, a, ops_count, &push_b);
-	push_a(a, b, ops_count);
+	while (a->top->next)
+		push_b(b, a, ops_count);
 	while (b->size)
 	{
 		insertion_index = get_insertion_index(a, b->top->data);
