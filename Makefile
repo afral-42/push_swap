@@ -21,8 +21,6 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJS := $(patsubst %.c, $(BUILD_DIR)/%.o, $(FILES))
 DEPS := $(patsubst %.c, $(BUILD_DIR)/%.d, $(FILES))
 
-MAKEFLAGS +=-j $$(nproc)
-
 LIBFTPRINTF_DIR = libftprintf
 LIBFTPRINTF_FILE = libftprintf.a
 LIBFTPRINTF = $(LIBFTPRINTF_DIR)/$(LIBFTPRINTF_FILE)
