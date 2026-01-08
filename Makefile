@@ -33,6 +33,7 @@ TESTS_FILES = \
 			test_list.c \
 			test_operations.c \
 			test_compute_disorder.c \
+			test_get_insertion_index.c \
 			test_insertion.c
 TESTS := $(patsubst %.c, %, $(TESTS_FILES))
 TESTS_SRCS := $(addprefix $(TESTS_DIR)/, $(TESTS_FILES))

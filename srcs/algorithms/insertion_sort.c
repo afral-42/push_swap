@@ -1,4 +1,3 @@
-/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   insertion_sort.c                                   :+:      :+:    :+:   */
@@ -62,7 +61,10 @@ t_ops_counter	*insertion_sort(t_stack *a)
 		return (NULL);
 	}
 	if (!a->top)
+	{
+		free_stack(b);
 		return (ops_count);
+	}
 	insertion_sort_procedure(a, b, ops_count);
 	free_stack(b);
 	return (ops_count);
