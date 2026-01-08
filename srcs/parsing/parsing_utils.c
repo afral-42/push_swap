@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:35 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/08 15:58:39 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/08 16:07:52 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ void	print_list(t_list *lst)
 {
 	while (lst)
 	{
-		ft_printf("%d\n", lst->data);
+		ft_printf("%d -> ", lst->data);
 		lst = lst->next;
 	}
+	ft_printf("NULL");
 }
 
 int	ft_atoi_secured(const char *nptr, int *error)
@@ -29,6 +30,11 @@ int	ft_atoi_secured(const char *nptr, int *error)
 	sign = 1;
 	if (*nptr == '+' || *nptr == '-')
 	{
+		if (*nptr == '-' && *(nptr + 1) == '\0')
+		{
+			*error = -1;
+			return (0);
+		}
 		if (*nptr == '-')
 			sign = -1;
 		nptr++;

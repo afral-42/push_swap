@@ -6,17 +6,17 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:29:44 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/17 10:06:05 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2025/12/27 10:57:33 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
-void swap(t_stack *stack)
+void	swap(t_stack *stack)
 {
 	t_list	*first;
 	t_list	*second;
-	
+
 	if (!stack || !(stack->top) || !(stack->top->next))
 		return ;
 	first = stack->top;

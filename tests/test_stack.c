@@ -29,30 +29,32 @@ void	test_push(void)
 	free_stack(stack);
 }
 
-
 void	test_pop(void)
 {
 	int		data;
 	t_stack	*stack;
 
 	stack = generate_stack(3);
+	check_list_integrity(stack->top);
 	assert(stack->size == 3);
 	assert(stack->top->data == 1);
 	data = pop(stack);
+	check_list_integrity(stack->top);
 	assert(data == 1);
 	assert(stack->size == 2);
 	assert(stack->top->data == 2);
 	data = pop(stack);
+	check_list_integrity(stack->top);
 	assert(data == 2);
 	assert(stack->size == 1);
 	assert(stack->top->data == 3);
 	data = pop(stack);
+	check_list_integrity(stack->top);
 	assert(data == 3);
 	assert(stack->size == 0);
 	assert(stack->top == NULL);
 	free_stack(stack);
 }
-
 
 int	main(void)
 {

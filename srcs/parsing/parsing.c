@@ -6,13 +6,13 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:25:15 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/08 16:05:26 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/08 16:10:42 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	update_options(char *arg, int *options)
+static void	update_options(char *arg, int *options)
 {
 	arg += 2;
 	if (!ft_strcmp(arg, "simple"))
@@ -29,7 +29,7 @@ void	update_options(char *arg, int *options)
 		*options = -1;
 }
 
-int	parse_options(int ac, char **av)
+static int	parse_options(int ac, char **av)
 {
 	int	options;
 	int	modes;
@@ -79,7 +79,7 @@ int	update_stack(char *stack, t_stack *a)
 	return (0);
 }
 
-t_stack	*parse_stack(int ac, char **av)
+static t_stack	*parse_stack(int ac, char **av)
 {
 	int		i;
 	t_stack	*a;
@@ -92,7 +92,7 @@ t_stack	*parse_stack(int ac, char **av)
 	{
 		if (ft_strncmp("--", av[i], 2))
 		{
-			if (update_stack(av[i], a) == -1);
+			if (update_stack(av[i], a) == -1)
 				return (free_stack(a));
 		}
 		i++;
@@ -137,29 +137,4 @@ void display_active_flags(int options)
     else                         printf("[AUCUNE]");
     
     printf("\n----------------------\n\n");
-}
-
-int main(int ac, char **av)
-{
-    t_stack		*a;
-	t_stack		*b;
-	int			options;
-	int			value;
-
-	a = NULL;
-	b = NULL;
-	options = 0;
-	if (ac == 1)
-		return (1);
-	value = parser(ac, av, &a, &options);
-	if (value == -1 || value == 1)
-	{
-		if (value == 1)
-			return (0);
-		write(2, "Error\n", 6);
-		return (1);
-    }
-	print_list(a->top);
-	display_active_flags(options);
-	return (0);
 }
