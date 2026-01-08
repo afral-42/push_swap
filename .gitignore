@@ -5,3 +5,8 @@ test.c
 build/
 tests/build/
 push_swap
+compile_commands.json
+.cache
+.cache/
+input.txt
+args.txt

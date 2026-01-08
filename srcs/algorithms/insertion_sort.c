@@ -6,16 +6,49 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 07:56:21 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/05 12:47:35 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/08 11:32:13 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "algorithms.h"
+#include "stack.h"
+
+void	put_value_on_top_of_a(t_stack *a, size_t index,
+								t_ops_counter *ops_count)
+{
+	if (index < a->size / 2 + 1)
+	{
+		while (index--)
+			rotate_a(a, ops_count);
+	}
+	else
+	{
+		while (index++ < a->size)
+			reverse_rotate_a(a, ops_count);
+	}
+}
+
+void	insertion_sort_procedure(t_stack *a, t_stack *b,
+											t_ops_counter *ops_count)
+{
+	size_t			insertion_index;
+	size_t			min_index;
+
+	while (a->top->next)
+		push_b(b, a, ops_count);
+	while (b->size)
+	{
+		insertion_index = get_insertion_index(a, b->top->data);
+		put_value_on_top_of_a(a, insertion_index, ops_count);
+		push_a(a, b, ops_count);
+	}
+	min_index = get_min_index(a->top);
+	put_value_on_top_of_a(a, min_index, ops_count);
+}
 
 t_ops_counter	*insertion_sort(t_stack *a)
 {
-	size_t			rotations_count;
 	t_stack			*b;
 	t_ops_counter	*ops_count;
 
@@ -24,23 +57,13 @@ t_ops_counter	*insertion_sort(t_stack *a)
 		return (NULL);
 	ops_count = new_ops_counter();
 	if (!ops_count)
-		return (NULL);
-	rotations_count = 0;
-	while (a->size)
 	{
-		while (rotations_count < b->size && b->top->data > a->top->data)
-		{
-			rotate_b(b, ops_count);
-			rotations_count++;
-		}
-		push_b(b, a, ops_count);
-		while (rotations_count)
-		{
-			reverse_rotate_b(b, ops_count);
-			rotations_count--;
-		}
+		free_stack(b);
+		return (NULL);
 	}
-	transfer_stack(a, b, ops_count, &push_a);
+	if (!a->top)
+		return (ops_count);
+	insertion_sort_procedure(a, b, ops_count);
 	free_stack(b);
 	return (ops_count);
 }

@@ -9,6 +9,7 @@ FILES = \
 	data_structures/operations_swap.c \
 	data_structures/ops_counter.c \
 	algorithms/insertion_sort.c \
+	algorithms/insertion_sort_utils.c \
 	algorithms/algo_utils.c \
 	parsing/parsing_utils.c \
 	parsing/parsing.c \
