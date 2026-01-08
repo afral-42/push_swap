@@ -1,14 +1,59 @@
-<!-- *********************************************************************** -->
-<!--                                                                         -->
-<!--                                                      :::      ::::::::  -->
-<!-- README.md                                          :+:      :+:    :+:  -->
-<!--                                                  +:+ +:+         +:+    -->
-<!-- By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+       -->
-<!--                                              +#+#+#+#+#+   +#+          -->
-<!-- Created: 2026/01/08 08:39:10 by arebilla          #+#    #+#            -->
-<!-- Updated: 2026/01/08 10:10:40 by arebilla         ###   ########.fr      -->
-<!--                                                                         -->
-<!-- *********************************************************************** -->
+*This project has been created as part of the 42 curriculum by [ abounoua, arebilla ].*
+
+# Push_swap
+
+## Description
+
+**push_swap** is a performance-oriented algorithmic project that requires sorting a stack of integers under strict constraints. The primary challenge lies in achieving a sorted state using a restricted instruction set while minimizing the total number of operations.
+
+The system operates with two stacks:
+* **Stack A**: Initially contains a set of unsorted, unique integers.
+* **Stack B**: A secondary workspace, initially empty.
+
+The goal is to sort all integers in Stack A in ascending order by applying a sequence of predefined operations:
+* **Swap** (`sa`, `sb`, `ss`): Exchanges the first two elements at the top of the stack.
+* **Push** (`pa`, `pb`): Transfers the top element from one stack to the top of the other.
+* **Rotate** (`ra`, `rb`, `rr`): Shifts all elements upward; the top element moves to the bottom.
+* **Reverse Rotate** (`rra`, `rrb`, `rrr`): Shifts all elements downward; the bottom element moves to the top.
+
+The success of the project is measured by the efficiency of the sorting algorithm, aiming for the lowest number of instructions to pass the evaluation thresholds.
+
+## Technical Stack
+* **Language:** C
+* **Compiler:** `clang`
+* **Build System:** Makefile
+
+## Instructions
+
+### Compilation
+The project uses a standard **Makefile**. To build the executable, run:
+
+```bash
+make
+```
+Available rules: `all`, `clean`, `fclean`, `re`, `test`.
+
+### Usage
+```
+./push_swap [stack_a] [STRATEGY] [OPTIONS]
+
+Strategies:
+  --simple      Force O(n²) algorithm.
+  --medium      Force O(n√n) algorithm.
+  --complex     Force O(n log n) algorithm.
+  --adaptive    (Default) Automatically selects strategy based on disorder.
+
+Options:
+  --bench       Benchmark mode: display stats to stderr after sorting.
+                (Disorder %, strategy name, complexity, and operation counts).
+
+Examples:
+  ./push_swap "3 1 2"
+  ./push_swap "100 5 42 0" --complex --bench
+  ARG="4 67 3"; ./push_swap "$ARG"
+```
+
+## Algorithms analysis
 
 ### Insertion sort Analysis
 #### Introduction
@@ -111,3 +156,7 @@ Despite its $O(n^2)$ complexity, this algorithm is optimal or highly suitable in
 
 1.  **Small Data Sets:** Due to its low constant factors, it outperforms complex algorithms that require recursive calls or heavy partitioning logic when $n$ is very small.
 2.  **Nearly Sorted Data:** If the input is already partially ordered, the number of rotations in the insertion step decreases significantly, moving the performance closer to the $O(n)$ best-case scenario.
+
+## Resources
+### Books
+- Introduction to algorithms / Thomas H. Cormen, Charles E. Lierson, Ronald L. Rivest, Clifford Stein
