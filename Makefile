@@ -11,7 +11,6 @@ FILES = \
 	algorithms/insertion_sort.c \
 	algorithms/algo_utils.c \
 	algorithms/radix_sort.c \
-	algorithms/quick_sort.c \
 	parsing/parsing_utils.c \
 	parsing/parsing.c \
 	parsing/ft_putdouble_fd.c \
@@ -19,6 +18,7 @@ FILES = \
 	push_swap.c
 #	algorithms/selection_sort.c 
 #	algorithms/bucket_sort.c 
+#	algorithms/quick_sort.c
 
 SRCS_DIR = srcs
 BUILD_DIR = build
