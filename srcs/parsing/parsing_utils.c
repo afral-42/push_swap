@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:35 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 14:39:12 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/08 15:58:39 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-void	*free_parsing(t_stack *a, char **tab)
+int	free_parsing(t_stack *a, char **tab)
 {
 	size_t	i;
 
@@ -80,5 +80,5 @@ void	*free_parsing(t_stack *a, char **tab)
 	}
 	free(tab);
 	free_stack(a);
-	return (NULL);
+	return (-1);
 }
