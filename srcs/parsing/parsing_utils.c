@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:35 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 15:26:10 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/08 15:20:13 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ int	ft_atoi_secured(const char *nptr, int *error)
 	sign = 1;
 	if (*nptr == '+' || *nptr == '-')
 	{
+		if (*nptr == '-' && *(nptr + 1) == '\0')
+		{
+			*error = -1;
+			return (0);
+		}
 		if (*nptr == '-')
 			sign = -1;
 		nptr++;
