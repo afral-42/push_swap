@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:39:48 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/08 16:10:31 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/08 18:03:26 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void    *free_split(char **tab);
 int	    parser(int ac, char **av, t_stack **a, int *options);
 void	display_active_flags(int options);
 void	print_bench_info(double disorder, int options, t_ops_counter *ops_counter);
+char	**split_args(char const *s, char *charset);
 
 #endif
