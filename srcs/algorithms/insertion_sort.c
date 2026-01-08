@@ -6,85 +6,13 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 07:56:21 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/08 08:46:44 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/08 11:32:13 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "algorithms.h"
 #include "stack.h"
-
-t_list	*lstlast(t_list *lst)
-{
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-size_t	get_min_index(t_list *lst)
-{
-	int		min;
-	size_t	i;
-	size_t	min_index;
-
-	min = lst->data;
-	min_index = 0;
-	i = 1;
-	lst = lst->next;
-	while (lst)
-	{
-		if (lst->data < min)
-		{
-			min = lst->data;
-			min_index = i;
-		}
-		lst = lst->next;
-		i++;
-	}
-	return (min_index);
-}
-
-size_t	get_insertion_index_from_top(t_stack *stack, int value)
-{
-	t_list	*node;
-	size_t	i;
-
-	node = stack->top;
-	i = 0;
-	while (value > node->data)
-	{
-		i++;
-		if (!node->next || node->next->data < node->data)
-			break ;
-		node = node->next;
-	}
-	return (i % stack->size);
-}
-
-size_t	get_insertion_index_from_bottom(t_stack *stack, int value)
-{
-	t_list	*node;
-	size_t	i;
-
-	node = lstlast(stack->top);
-	i = stack->size;
-	while (value < node->data)
-	{
-		i--;
-		if (!node->prev || node->prev->data > node->data)
-			break ;
-		node = node->prev;
-	}
-	return (i % stack->size);
-}
-
-size_t	get_insertion_index(t_stack *stack, int value)
-{
-	if (value > stack->top->data)
-		return (get_insertion_index_from_top(stack, value));
-	else
-		return (get_insertion_index_from_bottom(stack, value));
-}
 
 void	put_value_on_top_of_a(t_stack *a, size_t index,
 								t_ops_counter *ops_count)

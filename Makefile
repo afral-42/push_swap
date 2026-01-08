@@ -9,6 +9,7 @@ FILES = \
 	data_structures/operations_swap.c \
 	data_structures/ops_counter.c \
 	algorithms/insertion_sort.c \
+	algorithms/insertion_sort_utils.c \
 	algorithms/merge_sort.c \
 	algorithms/quick_sort.c \
 	algorithms/radix_sort.c \

@@ -55,7 +55,7 @@ Examples:
 
 ## Algorithms analysis
 
-### Insertion sort Analysis
+### Simple strategy: insertion sort adaptation
 #### Introduction
 The insertion sort algorithm adapted for two stacks (**Stack A** and **Stack B**) operates by isolating elements and reinserting them in their correct relative order. The logic follows a three-phase execution:
 
@@ -70,7 +70,7 @@ The insertion sort algorithm adapted for two stacks (**Stack A** and **Stack B**
 WHILE (size(Stack A) > 1):
     PUSH top of A to B (pb)
 
-# Phase 2: Sorted Re-insertion
+# Phase 2: Sorted insertion
 WHILE (Stack B is NOT empty):
     # Determine the shortest path (rotations) 
     # to reach the correct insertion position in A
