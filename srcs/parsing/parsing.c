@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:25:15 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 15:46:24 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/08 16:10:42 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,20 @@ static int	parse_options(int ac, char **av)
 	if ((modes) & ((modes) - 1))
 		options = -1;
 	return (options);
-}
+} 
 
-static t_stack	*update_stack(char *stack)
+int	update_stack(char *stack, t_stack *a)
 {
-	t_stack	*a;
 	ssize_t	i;
 	int		error;
 	int		nb;
 	char	**numbers_tab;
 
-	a = init_stack();
-	if (!a)
-		return (NULL);
 	error = 0;
 	i = 0;
 	numbers_tab = ft_split(stack, ' ');
 	if (!numbers_tab)
-		return (free_stack(a));
+		return (-1);
 	while (numbers_tab[i])
 		i++;
 	while (--i >= 0)
@@ -80,30 +76,23 @@ static t_stack	*update_stack(char *stack)
 			return (free_parsing(a, numbers_tab));
 	}
 	free_split(numbers_tab);
-	return (a);
+	return (0);
 }
 
 static t_stack	*parse_stack(int ac, char **av)
 {
-	int		flag;
 	int		i;
 	t_stack	*a;
 
-	flag = 0;
 	i = 1;
-	a = NULL;
+	a = init_stack();
+	if (!a)
+		return (NULL);
 	while (i < ac)
 	{
 		if (ft_strncmp("--", av[i], 2))
 		{
-			if (!flag)
-			{
-				a = update_stack(av[i]);
-				if (!a)
-					return (NULL);
-				flag = 1;
-			}
-			else
+			if (update_stack(av[i], a) == -1)
 				return (free_stack(a));
 		}
 		i++;

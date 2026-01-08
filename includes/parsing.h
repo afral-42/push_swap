@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:39:48 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/07 14:20:22 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/08 16:10:31 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum e_flags
 int		ft_atoi_secured(const char *nptr, int *error);
 void	print_list(t_list *lst);
 int	    ft_strcmp(char *s1, char *s2);
-void	*free_parsing(t_stack *a, char **tab);
+int		free_parsing(t_stack *a, char **tab);
 void    *free_split(char **tab);
 int	    parser(int ac, char **av, t_stack **a, int *options);
 void	display_active_flags(int options);

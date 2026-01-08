@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:35 by abounoua          #+#    #+#             */
-/*   Updated: 2025/12/18 15:26:10 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/08 16:07:52 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ int	ft_atoi_secured(const char *nptr, int *error)
 	sign = 1;
 	if (*nptr == '+' || *nptr == '-')
 	{
+		if (*nptr == '-' && *(nptr + 1) == '\0')
+		{
+			*error = -1;
+			return (0);
+		}
 		if (*nptr == '-')
 			sign = -1;
 		nptr++;
@@ -69,7 +74,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-void	*free_parsing(t_stack *a, char **tab)
+int	free_parsing(t_stack *a, char **tab)
 {
 	size_t	i;
 
@@ -81,5 +86,5 @@ void	*free_parsing(t_stack *a, char **tab)
 	}
 	free(tab);
 	free_stack(a);
-	return (NULL);
+	return (-1);
 }
