@@ -156,6 +156,12 @@ Despite its $O(n^2)$ complexity, this algorithm is optimal or highly suitable in
 1.  **Small Data Sets:** Due to its low constant factors, it outperforms complex algorithms that require recursive calls or heavy partitioning logic when $n$ is very small.
 2.  **Nearly Sorted Data:** If the input is already partially ordered, the number of rotations in the insertion step decreases significantly, moving the performance closer to the $O(n)$ best-case scenario.
 
+### Medium strategy: XXXXXXX
+
+### Complex strategy: XXXXXXX
+
+### Adaptative strategy: XXXXXX
+
 ## Resources
 ### Books
 - Introduction to algorithms / Thomas H. Cormen, Charles E. Lierson, Ronald L. Rivest, Clifford Stein
