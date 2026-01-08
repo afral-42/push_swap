@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:15:08 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/07 14:25:47 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/08 19:48:37 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,57 @@
 #include "ft_printf.h"
 #include "operations.h"
 
-int main(int ac, char **av)
+static void	print_debug_initial_list(t_stack *a, int options)
 {
-    t_stack			*a;
-	int				options;
-	int				value;
+	print_list(a->top);
+	display_active_flags(options);
+}
+
+static void	print_debug(t_stack *a, t_ops_counter *ops_count)
+{
+	ft_printf("\n\nCompte d'opérations : %d\n\n",
+		get_total_operations(ops_count));
+	print_list(a->top);
+	ft_printf("\n");
+}
+
+static t_ops_counter *(*select_sort_function(int options))(t_stack *)
+{
+	if (options & FLAG_SIMPLE)
+		return (&insertion_sort);
+	else if (options & FLAG_SIMPLE)
+		return (&insertion_sort);
+	else if (options & FLAG_SIMPLE)
+		return (&insertion_sort);
+	else
+		return (&insertion_sort);
+}
+
+int	run_sort_operations(t_stack *a, int options)
+{
 	t_ops_counter	*ops_count;
 	double			disorder;
+
+	disorder = compute_disorder(a);
+	if (options & FLAG_DEBUG)
+		print_debug_initial_list(a, options);
+	ops_count = select_sort_function(options)(a);
+	if (!ops_count)
+		return (1);
+	if (options & FLAG_BENCH)
+		print_bench_info(disorder, options, ops_count);
+	if (options & FLAG_DEBUG)
+		print_debug(a, ops_count);
+	free(ops_count);
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	t_stack	*a;
+	int		options;
+	int		value;
+	int		out_code;
 
 	a = NULL;
 	options = 0;
@@ -35,19 +79,8 @@ int main(int ac, char **av)
 			return (0);
 		write(2, "Error\n", 6);
 		return (1);
-    }
-	disorder = compute_disorder(a);
-	print_list(a->top);
-	display_active_flags(options);
-	ops_count = insertion_sort(a);
-	if (!ops_count)
-		return (1);
-	ft_printf("\n\nCompte d'opérations : %d\n\n", get_total_operations(ops_count));
-	print_list(a->top);
-	ft_printf("\n");
-	if (options & FLAG_BENCH)
-		print_bench_info(disorder, options, ops_count);
+	}
+	out_code = run_sort_operations(a, options);
 	free_stack(a);
-	free(ops_count);
-	return (0);
+	return (out_code);
 }
