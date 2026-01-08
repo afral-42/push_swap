@@ -2,6 +2,7 @@ NAME = push_swap
 FILES = \
 	data_structures/stack.c \
 	data_structures/list.c \
+	data_structures/list_utils.c \
 	data_structures/operations.c \
 	data_structures/operations_push.c \
 	data_structures/operations_rotate.c \

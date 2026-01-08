@@ -6,7 +6,7 @@
 /*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 14:50:55 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/05 12:37:06 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/08 19:07:27 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	transfer_stack(t_stack *dest, t_stack *src, t_ops_counter *ops_count,
 	return (dest->size);
 }
 
-int	transfer_a_to_b_sorted(t_stack *a, t_stack *b, size_t size, t_ops_counter *ops_count)
+int	transfer_a_to_b_sorted(t_stack *a, t_stack *b, size_t size,
+	t_ops_counter *ops_count)
 {
 	size_t	i;
 
@@ -51,7 +52,8 @@ int	transfer_a_to_b_sorted(t_stack *a, t_stack *b, size_t size, t_ops_counter *o
 	return (3 * (size - 1) + 1);
 }
 
-int	transfer_b_to_a_sorted(t_stack *b, t_stack *a, size_t size, t_ops_counter *ops_count)
+int	transfer_b_to_a_sorted(t_stack *b, t_stack *a, size_t size,
+	t_ops_counter *ops_count)
 {
 	size_t	i;
 
@@ -81,4 +83,3 @@ size_t	ft_sqrt(size_t n)
 		i++;
 	return (i - 1);
 }
-

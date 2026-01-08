@@ -16,7 +16,7 @@
 
 void	print_strategy_info(int options, double disorder)
 {
-    if (options & FLAG_SIMPLE)
+	if (options & FLAG_SIMPLE)
 		ft_putstr_fd("simple / ", 2);
 	else if (options & FLAG_MEDIUM)
 		ft_putstr_fd("medium / ", 2);
@@ -26,11 +26,11 @@ void	print_strategy_info(int options, double disorder)
 		ft_putstr_fd("adaptative / ", 2);
 	if (options & FLAG_SIMPLE || (options & FLAG_ADAPTIVE && disorder < 0.2))
 		ft_putstr_fd("𝑛²", 2);
-	else if (options & FLAG_MEDIUM || (options & FLAG_ADAPTIVE && disorder < 0.5))
+	else if (options & FLAG_MEDIUM
+		|| (options & FLAG_ADAPTIVE && disorder < 0.5))
 		ft_putstr_fd("𝑛 √𝑛", 2);
 	else
 		ft_putstr_fd("𝑛 log 𝑛", 2);
-	
 }
 
 void	print_operations_info(t_ops_counter *ops_counter)
@@ -60,7 +60,8 @@ void	print_operations_info(t_ops_counter *ops_counter)
 	ft_putnbr_fd(ops_counter->rrr, 2);
 }
 
-void	print_bench_info(double disorder, int options, t_ops_counter *ops_counter)
+void	print_bench_info(double disorder, int options,
+		t_ops_counter *ops_counter)
 {
 	ft_putstr_fd("[bench] disorder: ", 2);
 	ft_putdouble_fd(disorder * 100, 2, 2);
