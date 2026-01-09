@@ -66,7 +66,7 @@ int	main(int ac, char **av)
 	t_stack	*a;
 	int		options;
 	int		value;
-	int		out_code;
+	int		return_code;
 
 	a = NULL;
 	options = 0;
@@ -80,7 +80,7 @@ int	main(int ac, char **av)
 		write(2, "Error\n", 6);
 		return (1);
 	}
-	out_code = run_sort_operations(a, options);
+	return_code = run_sort_operations(a, options);
 	free_stack(a);
-	return (out_code);
+	return (return_code);
 }
