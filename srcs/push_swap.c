@@ -16,13 +16,13 @@
 #include "ft_printf.h"
 #include "operations.h"
 
-static void	print_input_info(t_stack *a, int options)
+static void	print_input_debug_info(t_stack *a, int options)
 {
 	print_list(a->top);
 	display_active_flags(options);
 }
 
-static void	print_output_info(t_stack *a, t_ops_counter *ops_count)
+static void	print_output_debug_info(t_stack *a, t_ops_counter *ops_count)
 {
 	ft_printf("\n\nCompte d'opérations : %d\n\n",
 		get_total_operations(ops_count));
@@ -49,14 +49,14 @@ int	run_sort_operations(t_stack *a, int options)
 
 	disorder = compute_disorder(a);
 	if (options & FLAG_DEBUG)
-		print_input_info(a, options);
+		print_input_debug_info(a, options);
 	ops_count = select_sort(a, options);
 	if (!ops_count)
 		return (1);
 	if (options & FLAG_BENCH)
 		print_bench_info(disorder, options, ops_count);
 	if (options & FLAG_DEBUG)
-		print_output_info(a, ops_count);
+		print_output_debug_info(a, ops_count);
 	free(ops_count);
 	return (0);
 }
