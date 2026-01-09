@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:25:15 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/08 18:06:23 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 14:14:41 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static t_stack	*parse_stack(int ac, char **av)
 		if (ft_strncmp("--", av[i], 2))
 		{
 			if (update_stack(av[i], a) == -1)
-				return (free_stack(a));
+				return (NULL);
 		}
 		i--;
 	}
@@ -114,30 +114,4 @@ int	parser(int ac, char **av, t_stack **a, int *options)
 	if (!compute_disorder(*a))
 		return (1);
 	return (0);
-}
-
-#include <stdio.h>
-#include <unistd.h>
-void display_active_flags(int options)
-{
-    printf("\n--- État des Flags ---\n");
-    if (options == -1)
-    {
-        printf("RÉSULTAT : Erreur détectée (options = -1)\n");
-        return;
-    }
-
-    printf("Valeur brute (int) : %d\n", options);
-    
-    printf("Modes actifs : ");
-    if (options & FLAG_SIMPLE)   printf("[SIMPLE] ");
-    if (options & FLAG_MEDIUM)   printf("[MEDIUM] ");
-    if (options & FLAG_COMPLEX)  printf("[COMPLEX] ");
-    if (options & FLAG_ADAPTIVE) printf("[ADAPTIVE] ");
-    
-    printf("\nOptions bonus : ");
-    if (options & FLAG_BENCH)    printf("[BENCH]");
-    else                         printf("[AUCUNE]");
-    
-    printf("\n----------------------\n\n");
 }

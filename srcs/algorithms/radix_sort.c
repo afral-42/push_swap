@@ -6,14 +6,13 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:33:36 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/09 13:18:03 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 13:48:47 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "algorithms.h"
 #include "list.h"
-
 
 typedef struct	s_linearised_tab
 {

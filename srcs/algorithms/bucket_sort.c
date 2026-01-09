@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 11:50:11 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/07 13:45:57 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 14:00:44 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,16 @@ size_t	find_max_index(t_stack *b, int *maximum)
 }
 
 int	fill_buckets(t_stack *a, t_stack *b, size_t buckets_number,
-	size_t	bucket_size, int min)
+	size_t	bucket_size, t_ops_counter *ops)
 {
 	size_t	rotations_count;
 	size_t	stack_size;
 	size_t	bucket_index;
+	int		min;
 	int		count;
 
 	count = 0;
+	min = lstget_min(a->top);
 	bucket_index = 0;
 	while (bucket_index < buckets_number)
 	{
@@ -56,9 +58,9 @@ int	fill_buckets(t_stack *a, t_stack *b, size_t buckets_number,
 		while (rotations_count < stack_size)
 		{
 			if (a->top->data <= (int)(min + (bucket_index + 1) * bucket_size))
-				count += push_b(b, a);
+				count += push_b(b, a, ops);
 			else
-				count += rotate_a(a);	
+				count += rotate_a(a, ops);	
 			rotations_count++;
 		}
 		bucket_index++;
@@ -66,11 +68,11 @@ int	fill_buckets(t_stack *a, t_stack *b, size_t buckets_number,
 	return (count);
 }
 
-int	empty_buckets(t_stack *a, t_stack *b)
+int	empty_buckets(t_stack *a, t_stack *b, t_ops_counter *ops)
 {
 	size_t	max_index;
 	int		max;
-	int		(*action[2])(t_stack *);
+	int		(*action[2])(t_stack *, t_ops_counter *);
 	int		count;
 	
 	count = 0;
@@ -80,31 +82,36 @@ int	empty_buckets(t_stack *a, t_stack *b)
 	{
 		max_index = find_max_index(b, &max);
 		while (b->top->data != max)
-			count += action[max_index <= b->size / 2](b);
-		count += push_a(a, b);
+			action[max_index <= b->size / 2](b, ops);
+		push_a(a, b, ops);
 	}
 	return (count);
 }
 
-int	bucket_sort(t_stack *a)
+t_ops_counter *bucket_sort(t_stack *a)
 {
-	t_stack	*b;
-	size_t	buckets_number;
-	size_t	bucket_size;
-	int		min;
-	int		count;
+	t_stack			*b;
+	size_t			buckets_number;
+	size_t			bucket_size;
+	t_ops_counter	*ops;	
+	int				count;
 
+	ops = new_ops_counter();
+	if (!ops)
+		return (NULL);
 	b = init_stack();
 	if (!b)
-		return (-1);
-	min = lstget_min(a->top);
+	{
+		free(ops);
+		return (NULL);
+	}	
 	buckets_number = ft_sqrt(a->size);
-	bucket_size = (lstget_max(a->top) - min + 1) / buckets_number + 1;
+	bucket_size = (lstget_max(a->top) - lstget_min(a->top) + 1) / buckets_number + 1;
 	count = 0;
-	count += fill_buckets(a, b, buckets_number, bucket_size, min);
-	count += empty_buckets(a, b);
+	count += fill_buckets(a, b, buckets_number, bucket_size, ops);
+	count += empty_buckets(a, b, ops);
 	free_stack(b);
-	return (count);
+	return (ops);
 }
 
 // On calcule racine de n pour avoir le nombre de seaux

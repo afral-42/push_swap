@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 14:50:55 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/09 13:13:32 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 13:42:57 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,46 +39,4 @@ size_t	ft_sqrt(size_t nb)
 	while (sqrt * sqrt <= nb)
 		sqrt++;
 	return (sqrt - 1);
-}
-int	transfer_a_to_b_sorted(t_stack *a, t_stack *b, size_t size, t_ops_counter *ops_count)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		rotate_a(a, ops_count);
-		i++;
-	}
-	i = 0;
-	while (i < size - 1)
-	{
-		push_b(b, a, ops_count);
-		reverse_rotate_a(a, ops_count);
-		i++;
-	}
-	push_b(b, a, ops_count);
-	return (3 * (size - 1) + 1);
-}
-
-int	transfer_b_to_a_sorted(t_stack *b, t_stack *a, size_t size,
-	t_ops_counter *ops_count)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		rotate_b(b, ops_count);
-		i++;
-	}
-	i = 0;
-	while (i < size - 1)
-	{
-		push_a(a, b, ops_count);
-		reverse_rotate_b(b, ops_count);
-		i++;
-	}
-	push_a(a, b, ops_count);
-	return (3 * (size - 1) + 1);
 }

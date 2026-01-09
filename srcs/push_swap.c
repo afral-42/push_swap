@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:15:08 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/09 13:22:12 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 14:09:25 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 #include "ft_printf.h"
 #include "operations.h"
 
-static void	print_input_debug_info(t_stack *a, int options)
+static void	print_input_debug_info(t_stack *a)
 {
 	print_list(a->top);
-	display_active_flags(options);
 }
 
 static void	print_output_debug_info(t_stack *a, t_ops_counter *ops_count)
@@ -35,9 +34,9 @@ static t_ops_counter	*select_sort(t_stack *a, int options, double disorder)
 	if (options & FLAG_SIMPLE || (options & FLAG_ADAPTIVE && disorder < 0.2))
 		return (insertion_sort(a));
 	else if (options & FLAG_MEDIUM || (options & FLAG_ADAPTIVE && disorder < 0.5))
-		return (insertion_sort(a));
+		return (bucket_sort(a));
 	else if (options & FLAG_COMPLEX || (options & FLAG_ADAPTIVE && disorder >= 0.5))
-		return (insertion_sort(a));
+		return (quick_sort(a));
 	else
 		return (NULL);
 }
@@ -49,7 +48,7 @@ static int	run_sort_operations(t_stack *a, int options)
 
 	disorder = compute_disorder(a);
 	if (options & FLAG_DEBUG)
-		print_input_debug_info(a, options);
+		print_input_debug_info(a);
 	ops_count = select_sort(a, options, disorder);
 	if (!ops_count)
 		return (1);
