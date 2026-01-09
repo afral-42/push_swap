@@ -31,6 +31,8 @@ static void	print_output_debug_info(t_stack *a, t_ops_counter *ops_count)
 
 static t_ops_counter	*select_sort(t_stack *a, int options, double disorder)
 {
+	if (!disorder)
+		return (new_ops_counter());
 	if (options & FLAG_SIMPLE || (options & FLAG_ADAPTIVE && disorder < 0.2))
 		return (insertion_sort(a));
 	else if (options & FLAG_MEDIUM || (options & FLAG_ADAPTIVE && disorder < 0.5))
@@ -72,10 +74,8 @@ int	main(int ac, char **av)
 	if (ac == 1)
 		return (1);
 	value = parser(ac, av, &a, &options);
-	if (value == -1 || value == 1)
+	if (value == -1)
 	{
-		if (value == 1)
-			return (0);
 		write(2, "Error\n", 6);
 		return (1);
 	}
