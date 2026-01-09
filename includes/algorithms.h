@@ -20,8 +20,9 @@ t_ops_counter	*insertion_sort(t_stack *a);
 int				transfer_stack(t_stack *dest, t_stack *src,
 					t_ops_counter *ops_count,
 					int (*push_fct)(t_stack *, t_stack *, t_ops_counter *));
-size_t			get_insertion_index(t_stack *stack, int value);
-size_t			get_insertion_index_from_bottom(t_stack *stack, int value);
-size_t			get_insertion_index_from_top(t_stack *stack, int value);
+size_t			get_insertion_index(t_stack *stack, int value,
+					size_t lower_limit, size_t upper_limit);
+void			insertion_sort_procedure(t_stack *a, t_stack *b,
+											t_ops_counter *ops_count);
 
 #endif

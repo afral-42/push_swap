@@ -14,44 +14,34 @@
 #include "stack.h"
 #include "list.h"
 
-size_t	get_insertion_index_from_top(t_stack *stack, int value)
+size_t	get_insertion_index(t_stack *stack, int value, size_t lower_limit, size_t upper_limit)
 {
 	t_list	*node;
 	size_t	i;
+	size_t	size;
 
 	node = stack->top;
+	size = lower_limit + stack->size - (upper_limit % stack->size);
 	i = 0;
-	while (value > node->data)
-	{
-		i++;
-		if (!node->next || node->next->data < node->data)
-			break ;
+	while (i++ < lower_limit)
 		node = node->next;
-	}
-	return (i % stack->size);
-}
 
-size_t	get_insertion_index_from_bottom(t_stack *stack, int value)
-{
-	t_list	*node;
-	size_t	i;
-
-	node = lstlast(stack->top);
-	i = stack->size;
-	while (value < node->data)
+	i = lower_limit;
+	while (size && node && value > node->data)
 	{
-		i--;
-		if (!node->prev || node->prev->data > node->data)
-			break ;
-		node = node->prev;
+		node = node->next;
+		i++;
+		size--;
 	}
-	return (i % stack->size);
-}
-
-size_t	get_insertion_index(t_stack *stack, int value)
-{
-	if (value > stack->top->data)
-		return (get_insertion_index_from_top(stack, value));
-	else
-		return (get_insertion_index_from_bottom(stack, value));
+	if (node)
+		return (i);
+	i = 0;
+	node = stack->top;
+	while (size && i < upper_limit && value > node->data)
+	{
+		node = node->next;
+		i++;
+		size--;
+	}
+	return (i);
 }

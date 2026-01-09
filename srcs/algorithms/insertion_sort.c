@@ -29,17 +29,18 @@ static void	put_value_on_top_of_a(t_stack *a, size_t index,
 	}
 }
 
-static void	insertion_sort_procedure(t_stack *a, t_stack *b,
+void	insertion_sort_procedure(t_stack *a, t_stack *b,
 											t_ops_counter *ops_count)
 {
-	size_t			insertion_index;
-	size_t			min_index;
+	size_t	insertion_index;
+	size_t	min_index;
 
 	while (a->top->next)
 		push_b(b, a, ops_count);
 	while (b->size)
 	{
-		insertion_index = get_insertion_index(a, b->top->data);
+		min_index = get_min_index(a->top);
+		insertion_index = get_insertion_index(a, b->top->data, min_index, min_index);
 		put_value_on_top_of_a(a, insertion_index, ops_count);
 		push_a(a, b, ops_count);
 	}

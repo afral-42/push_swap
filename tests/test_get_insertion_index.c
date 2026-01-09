@@ -10,17 +10,18 @@ int	main(void)
 	t_stack	*s;
 
 	s = generate_custom_stack(numbers, 4);
-	assert(get_insertion_index(s, 5) == 0);
-	assert(get_insertion_index(s, 7) == 1);
-	assert(get_insertion_index(s, 9) == 2);
-	assert(get_insertion_index(s, 1) == 2);
-	assert(get_insertion_index(s, 3) == 3);
+	assert(get_insertion_index(s, 5, 2, 2) == 0);
+	assert(get_insertion_index(s, 7, 2, 2) == 1);
+	assert(get_insertion_index(s, 9, 2, 2) == 2);
+	assert(get_insertion_index(s, 1, 2, 2) == 2);
+	assert(get_insertion_index(s, 3, 2, 2) == 3);
+	assert(get_insertion_index(s, 3, 0, 1) == 0);
 	free_stack(s);
 	s = generate_custom_stack(numbers2, 4);
-	assert(get_insertion_index(s, 1) == 0);
-	assert(get_insertion_index(s, 3) == 1);
-	assert(get_insertion_index(s, 5) == 2);
-	assert(get_insertion_index(s, 7) == 3);
-	assert(get_insertion_index(s, 9) == 0);
+	assert(get_insertion_index(s, 1, 0, 4) == 0);
+	assert(get_insertion_index(s, 3, 0, 4) == 1);
+	assert(get_insertion_index(s, 5, 0, 4) == 2);
+	assert(get_insertion_index(s, 7, 0, 4) == 3);
+	assert(get_insertion_index(s, 9, 0, 4) == 0);
 	free_stack(s);
 }

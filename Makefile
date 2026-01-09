@@ -57,7 +57,6 @@ CC += $(CFLAGS) $(CPPFLAGS)
 
 all: $(NAME)
 
-# Règle Debug
 debug: CFLAGS += -g -O0 -DDEBUG
 debug: fclean $(NAME)
 
