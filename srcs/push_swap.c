@@ -30,16 +30,16 @@ static void	print_output_info(t_stack *a, t_ops_counter *ops_count)
 	ft_printf("\n");
 }
 
-static t_ops_counter	*select_sort(t_stack *a, int options)
+static t_ops_counter	*select_sort(t_stack *a, int options, double disorder)
 {
-	if (options & FLAG_SIMPLE)
+	if (options & FLAG_SIMPLE || (options & FLAG_ADAPTIVE && disorder < 0.2))
 		return (insertion_sort(a));
-	else if (options & FLAG_SIMPLE)
+	else if (options & FLAG_MEDIUM || (options & FLAG_ADAPTIVE && disorder < 0.5))
 		return (insertion_sort(a));
-	else if (options & FLAG_SIMPLE)
+	else if (options & FLAG_COMPLEX || (options & FLAG_ADAPTIVE && disorder >= 0.5))
 		return (insertion_sort(a));
 	else
-		return (insertion_sort(a));
+		return (NULL);
 }
 
 int	run_sort_operations(t_stack *a, int options)
