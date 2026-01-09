@@ -12,10 +12,10 @@
 
 #include "operations.h"
 
-t_ops_counter *new_ops_counter(void)
+t_ops_counter	*new_ops_counter(void)
 {
 	t_ops_counter	*ops_counter;
-	
+
 	ops_counter = malloc(sizeof(t_ops_counter));
 	if (!ops_counter)
 		return (NULL);
@@ -35,7 +35,7 @@ t_ops_counter *new_ops_counter(void)
 
 int	get_total_operations(t_ops_counter *ops_count)
 {
-	return (ops_count->pa + ops_count->pb + ops_count->ra + ops_count->rb + 
-			ops_count->rr + ops_count->rra + ops_count->rrb + ops_count->rrr + 
-			ops_count->sa + ops_count->sb + ops_count->ss);
+	return (ops_count->pa + ops_count->pb + ops_count->ra + ops_count->rb
+		+ ops_count->rr + ops_count->rra + ops_count->rrb + ops_count->rrr
+		+ ops_count->sa + ops_count->sb + ops_count->ss);
 }

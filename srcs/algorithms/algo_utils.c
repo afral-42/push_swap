@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 14:50:55 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/07 11:23:47 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 13:13:32 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int	transfer_a_to_b_sorted(t_stack *a, t_stack *b, size_t size, t_ops_counter *o
 	return (3 * (size - 1) + 1);
 }
 
-int	transfer_b_to_a_sorted(t_stack *b, t_stack *a, size_t size, t_ops_counter *ops_count)
+int	transfer_b_to_a_sorted(t_stack *b, t_stack *a, size_t size,
+	t_ops_counter *ops_count)
 {
 	size_t	i;
 

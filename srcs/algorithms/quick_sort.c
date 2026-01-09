@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:17:39 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/08 18:12:51 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 13:18:10 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	linearise_tab(t_stack *a, t_linearised_tab *linearised_tab, size_t partition
 	return (0);
 }
 
-void	sort_tab(t_linearised_tab *linearised_tab)
+static void	sort_tab(t_linearised_tab *linearised_tab)
 {
 	int		swapped;
 	int		temp;

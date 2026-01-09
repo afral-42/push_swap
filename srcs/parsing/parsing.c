@@ -25,6 +25,8 @@ static void	update_options(char *arg, int *options)
 		*options = *options | FLAG_ADAPTIVE;
 	else if (!ft_strcmp(arg, "bench"))
 		*options = *options | FLAG_BENCH;
+	else if (!ft_strcmp(arg, "debug"))
+		*options = *options | FLAG_DEBUG;
 	else
 		*options = -1;
 }

@@ -28,6 +28,7 @@ typedef enum e_flags
     FLAG_COMPLEX = 1 << 2,
     FLAG_ADAPTIVE = 1 << 3,
     FLAG_BENCH = 1 << 4,
+    FLAG_DEBUG = 1 << 5,
     MASK_MODE = FLAG_SIMPLE | FLAG_MEDIUM | FLAG_COMPLEX | FLAG_ADAPTIVE
 }	t_flags;
 

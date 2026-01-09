@@ -37,7 +37,8 @@ int				rotate_b(t_stack *b, t_ops_counter *counter);
 int				rotate_both(t_stack *a, t_stack *b, t_ops_counter *counter);
 int				reverse_rotate_a(t_stack *a, t_ops_counter *counter);
 int				reverse_rotate_b(t_stack *b, t_ops_counter *counter);
-int				reverse_rotate_both(t_stack *a, t_stack *b, t_ops_counter *counter);
+int				reverse_rotate_both(t_stack *a, t_stack *b,
+					t_ops_counter *counter);
 int				swap_a(t_stack *a, t_ops_counter *counter);
 int				swap_b(t_stack *b, t_ops_counter *counter);
 int				swap_both(t_stack *a, t_stack *b, t_ops_counter *counter);

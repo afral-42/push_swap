@@ -10,3 +10,8 @@ bench.txt
 checker_linux
 push_swap_visualizer/
 push_swap_visualizer/*
+compile_commands.json
+.cache
+.cache/
+input.txt
+args.txt
