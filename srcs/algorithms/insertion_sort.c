@@ -14,7 +14,7 @@
 #include "algorithms.h"
 #include "stack.h"
 
-void	put_value_on_top_of_a(t_stack *a, size_t index,
+static void	put_value_on_top_of_a(t_stack *a, size_t index,
 								t_ops_counter *ops_count)
 {
 	if (index < a->size / 2 + 1)
@@ -29,7 +29,7 @@ void	put_value_on_top_of_a(t_stack *a, size_t index,
 	}
 }
 
-void	insertion_sort_procedure(t_stack *a, t_stack *b,
+static void	insertion_sort_procedure(t_stack *a, t_stack *b,
 											t_ops_counter *ops_count)
 {
 	size_t			insertion_index;

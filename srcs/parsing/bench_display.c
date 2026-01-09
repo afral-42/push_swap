@@ -14,7 +14,7 @@
 #include "parsing.h"
 #include "stack.h"
 
-void	print_strategy_info(int options, double disorder)
+static void	print_strategy_info(int options, double disorder)
 {
 	if (options & FLAG_SIMPLE)
 		ft_putstr_fd("simple / ", 2);
@@ -33,7 +33,7 @@ void	print_strategy_info(int options, double disorder)
 		ft_putstr_fd("𝑛 log 𝑛", 2);
 }
 
-void	print_operations_info(t_ops_counter *ops_counter)
+static void	print_operations_info(t_ops_counter *ops_counter)
 {
 	ft_putstr_fd("[bench] sa: ", 2);
 	ft_putnbr_fd(ops_counter->sa, 2);
