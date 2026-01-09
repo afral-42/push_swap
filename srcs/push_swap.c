@@ -42,7 +42,7 @@ static t_ops_counter	*select_sort(t_stack *a, int options, double disorder)
 		return (NULL);
 }
 
-int	run_sort_operations(t_stack *a, int options)
+static int	run_sort_operations(t_stack *a, int options)
 {
 	t_ops_counter	*ops_count;
 	double			disorder;
@@ -50,7 +50,7 @@ int	run_sort_operations(t_stack *a, int options)
 	disorder = compute_disorder(a);
 	if (options & FLAG_DEBUG)
 		print_input_debug_info(a, options);
-	ops_count = select_sort(a, options);
+	ops_count = select_sort(a, options, disorder);
 	if (!ops_count)
 		return (1);
 	if (options & FLAG_BENCH)
