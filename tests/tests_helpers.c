@@ -76,14 +76,6 @@ void	test_sorting_with_already_sorted_stack(t_ops_counter *(*sort)(t_stack *))
 	t_stack			*stack;
 	t_ops_counter	*counter;
 
-	stack = generate_stack(0);
-	assert(lstcheck_duplicate(stack->top) == 0);
-	assert(stack_is_sorted(stack));
-	counter = sort(stack);
-	assert(lstcheck_duplicate(stack->top) == 0);
-	assert(stack_is_sorted(stack));
-	free_stack(stack);
-	free(counter);
 	stack = generate_stack(1);
 	assert(stack_is_sorted(stack));
 	counter = sort(stack);

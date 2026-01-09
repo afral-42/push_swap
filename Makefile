@@ -43,7 +43,9 @@ TESTS_FILES = \
 			test_operations.c \
 			test_compute_disorder.c \
 			test_get_insertion_index.c \
-			test_insertion.c
+			test_insertion.c \
+			test_bucket.c \
+			test_quick.c
 TESTS := $(patsubst %.c, %, $(TESTS_FILES))
 TESTS_SRCS := $(addprefix $(TESTS_DIR)/, $(TESTS_FILES))
 TESTS_OBJS := $(addprefix $(TESTS_BUILD_DIR)/, $(patsubst %.c, %.o, $(TESTS_FILES)))
