@@ -158,7 +158,19 @@ Despite its $O(n^2)$ complexity, this algorithm is optimal or highly suitable in
 
 ### Medium strategy: XXXXXXX
 
-xxxxx
+// On calcule racine de n pour avoir le nombre de seaux
+
+// On calcule la size d'un seau : trouver le min + trouver le max pour avoir la range (min - max) qu'on divise par racine n pour avoir la taille d'un seau
+
+// On parcourt la stack racine de n fois (une fois par seau) et pour chaque élement on le compare à max - ((numéro de seau + 1) * taille d'un seau) : si il est supérieur on le push dans b sinon on le skip
+// Complexité théorique : O(n√n)
+
+// B est grossièrement triée dans l'ordre décroissant
+
+// On parcourt B seau par seau (racine de n) jusqu'à trouver le max du seau qu'on push dans A 
+// Complexité théorique : O(n√n)
+
+// Complexité théorique finale : O(n√n + n√n) = O(2(n√n)) = O(n√n)
 
 
 ### Complex strategy: XXXXXXX

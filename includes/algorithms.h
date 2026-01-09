@@ -16,9 +16,15 @@
 # include "stack.h"
 # include "operations.h"
 
-int		abort_sort_function(t_stack *b);
-int 	selection_sort(t_stack *a);
-size_t	ft_sqrt(size_t nb);
+typedef struct s_buckets
+{
+	size_t	number;
+	size_t	size;
+} t_buckets;
+
+int				abort_sort_function(t_stack *b);
+int				selection_sort(t_stack *a);
+size_t			ft_sqrt(size_t nb);
 t_ops_counter	*bucket_sort(t_stack *a);
 t_ops_counter	*insertion_sort(t_stack *a);
 int				transfer_stack(t_stack *dest, t_stack *src,

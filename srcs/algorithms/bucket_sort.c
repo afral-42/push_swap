@@ -16,16 +16,16 @@
 
 size_t	find_max_index(t_stack *b, int *maximum)
 {
-    t_list  *node;
+	t_list	*node;
 	size_t	index;
-    size_t  i;
+	size_t	i;
 	int		max;
 
-    node = b->top;
+	node = b->top;
 	max = node->data;
 	i = 0;
 	index = 0;
-    while (node)
+	while (node)
 	{
 		if (node->data > max)
 		{
@@ -39,8 +39,8 @@ size_t	find_max_index(t_stack *b, int *maximum)
 	return (index);
 }
 
-int	fill_buckets(t_stack *a, t_stack *b, size_t buckets_number,
-	size_t	bucket_size, t_ops_counter *ops)
+int	fill_buckets(t_stack *a, t_stack *b, t_buckets buckets,
+				t_ops_counter *ops)
 {
 	size_t	rotations_count;
 	size_t	stack_size;
@@ -51,16 +51,16 @@ int	fill_buckets(t_stack *a, t_stack *b, size_t buckets_number,
 	count = 0;
 	min = lstget_min(a->top);
 	bucket_index = 0;
-	while (bucket_index < buckets_number)
+	while (bucket_index < buckets.number)
 	{
 		rotations_count = 0;
 		stack_size = a->size;
 		while (rotations_count < stack_size)
 		{
-			if (a->top->data <= (int)(min + (bucket_index + 1) * bucket_size))
+			if (a->top->data <= (int)(min + (bucket_index + 1) * buckets.size))
 				count += push_b(b, a, ops);
 			else
-				count += rotate_a(a, ops);	
+				count += rotate_a(a, ops);
 			rotations_count++;
 		}
 		bucket_index++;
@@ -74,7 +74,7 @@ int	empty_buckets(t_stack *a, t_stack *b, t_ops_counter *ops)
 	int		max;
 	int		(*action[2])(t_stack *, t_ops_counter *);
 	int		count;
-	
+
 	count = 0;
 	action[0] = &reverse_rotate_b;
 	action[1] = &rotate_b;
@@ -88,13 +88,11 @@ int	empty_buckets(t_stack *a, t_stack *b, t_ops_counter *ops)
 	return (count);
 }
 
-t_ops_counter *bucket_sort(t_stack *a)
+t_ops_counter	*bucket_sort(t_stack *a)
 {
 	t_stack			*b;
-	size_t			buckets_number;
-	size_t			bucket_size;
+	t_buckets		buckets;
 	t_ops_counter	*ops;	
-	int				count;
 
 	ops = new_ops_counter();
 	if (!ops)
@@ -104,26 +102,12 @@ t_ops_counter *bucket_sort(t_stack *a)
 	{
 		free(ops);
 		return (NULL);
-	}	
-	buckets_number = ft_sqrt(a->size);
-	bucket_size = (lstget_max(a->top) - lstget_min(a->top) + 1) / buckets_number + 1;
-	count = 0;
-	count += fill_buckets(a, b, buckets_number, bucket_size, ops);
-	count += empty_buckets(a, b, ops);
+	}
+	buckets.number = ft_sqrt(a->size);
+	buckets.size = (lstget_max(a->top) - lstget_min(a->top) + 1)
+		/ buckets.number + 1;
+	fill_buckets(a, b, buckets, ops);
+	empty_buckets(a, b, ops);
 	free_stack(b);
 	return (ops);
 }
-
-// On calcule racine de n pour avoir le nombre de seaux
-
-// On calcule la size d'un seau : trouver le min + trouver le max pour avoir la range (min - max) qu'on divise par racine n pour avoir la taille d'un seau
-
-// On parcourt la stack racine de n fois (une fois par seau) et pour chaque élement on le compare à max - ((numéro de seau + 1) * taille d'un seau) : si il est supérieur on le push dans b sinon on le skip
-// Complexité théorique : O(n√n)
-
-// B est grossièrement triée dans l'ordre décroissant
-
-// On parcourt B seau par seau (racine de n) jusqu'à trouver le max du seau qu'on push dans A 
-// Complexité théorique : O(n√n)
-
-// Complexité théorique finale : O(n√n + n√n) = O(2(n√n)) = O(n√n)
