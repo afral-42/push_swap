@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:25:15 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/08 16:10:42 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/08 18:06:23 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	update_stack(char *stack, t_stack *a)
 
 	error = 0;
 	i = 0;
-	numbers_tab = ft_split(stack, ' ');
+	numbers_tab = split_args(stack, " \n\t\v\r\f");
 	if (!numbers_tab)
 		return (-1);
 	while (numbers_tab[i])
@@ -81,21 +81,22 @@ int	update_stack(char *stack, t_stack *a)
 
 static t_stack	*parse_stack(int ac, char **av)
 {
-	int		i;
+	int	i;
 	t_stack	*a;
 
 	i = 1;
 	a = init_stack();
 	if (!a)
 		return (NULL);
-	while (i < ac)
+	i = ac - 1;
+	while (i >= 1)
 	{
 		if (ft_strncmp("--", av[i], 2))
 		{
 			if (update_stack(av[i], a) == -1)
 				return (free_stack(a));
 		}
-		i++;
+		i--;
 	}
 	return (a);
 }

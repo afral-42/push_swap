@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 09:23:01 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/07 13:49:02 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/07 15:15:26 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
