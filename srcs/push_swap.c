@@ -30,16 +30,16 @@ static void	print_debug(t_stack *a, t_ops_counter *ops_count)
 	ft_printf("\n");
 }
 
-static t_ops_counter *(*select_sort_function(int options))(t_stack *)
+static t_ops_counter	*select_sort(t_stack *a, int options)
 {
 	if (options & FLAG_SIMPLE)
-		return (&insertion_sort);
+		return (insertion_sort(a));
 	else if (options & FLAG_SIMPLE)
-		return (&insertion_sort);
+		return (insertion_sort(a));
 	else if (options & FLAG_SIMPLE)
-		return (&insertion_sort);
+		return (insertion_sort(a));
 	else
-		return (&insertion_sort);
+		return (insertion_sort(a));
 }
 
 int	run_sort_operations(t_stack *a, int options)
@@ -50,7 +50,7 @@ int	run_sort_operations(t_stack *a, int options)
 	disorder = compute_disorder(a);
 	if (options & FLAG_DEBUG)
 		print_debug_initial_list(a, options);
-	ops_count = select_sort_function(options)(a);
+	ops_count = select_sort(a, options);
 	if (!ops_count)
 		return (1);
 	if (options & FLAG_BENCH)
