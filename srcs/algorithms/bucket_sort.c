@@ -88,10 +88,20 @@ int	empty_buckets(t_stack *a, t_stack *b, t_ops_counter *ops)
 	return (count);
 }
 
+void	bucket_sort_procedure(t_stack *a, t_stack *b, t_ops_counter *ops)
+{
+	t_buckets		buckets;
+
+	buckets.number = ft_sqrt(a->size);
+	buckets.size = (lstget_max(a->top) - lstget_min(a->top) + 1)
+		/ buckets.number + 1;
+	fill_buckets(a, b, buckets, ops);
+	empty_buckets(a, b, ops);
+}
+
 t_ops_counter	*bucket_sort(t_stack *a)
 {
 	t_stack			*b;
-	t_buckets		buckets;
 	t_ops_counter	*ops;	
 
 	ops = new_ops_counter();
@@ -103,11 +113,13 @@ t_ops_counter	*bucket_sort(t_stack *a)
 		free(ops);
 		return (NULL);
 	}
-	buckets.number = ft_sqrt(a->size);
-	buckets.size = (lstget_max(a->top) - lstget_min(a->top) + 1)
-		/ buckets.number + 1;
-	fill_buckets(a, b, buckets, ops);
-	empty_buckets(a, b, ops);
+	if (compress_stack(a) == -1)
+	{
+		free(ops);
+		free_stack(b);
+		return (NULL);
+	}
+	bucket_sort_procedure(a, b, ops);
 	free_stack(b);
 	return (ops);
 }

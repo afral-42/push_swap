@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:17:39 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/09 13:48:52 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 15:03:49 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 
 
 void    quicksort_b(t_stack *a, t_stack *b, size_t partition, t_ops_counter *ops);
-
-typedef struct	s_linearised_tab
-{
-	int		*tab;
-	size_t	size;
-}	t_linearised_tab;
 
 void	print_tab(t_linearised_tab *linearised_tab)
 {

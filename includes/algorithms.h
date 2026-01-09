@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:20 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/09 14:02:02 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 15:28:42 by arebilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef struct s_buckets
 	size_t	size;
 } t_buckets;
 
+typedef struct	s_linearised_tab
+{
+	int		*tab;
+	size_t	size;
+}	t_linearised_tab;
+
 int				abort_sort_function(t_stack *b);
 int				selection_sort(t_stack *a);
 size_t			ft_sqrt(size_t nb);
@@ -35,5 +41,6 @@ t_ops_counter	*quick_sort(t_stack *a);
 size_t			get_insertion_index(t_stack *stack, int value);
 size_t			get_insertion_index_from_bottom(t_stack *stack, int value);
 size_t			get_insertion_index_from_top(t_stack *stack, int value);
+int				compress_stack(t_stack *a);
 
 #endif
