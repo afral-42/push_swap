@@ -218,7 +218,7 @@ This results in a complexity of $O(n^2/k)$.
 
 For the **average case** we assume that the number of rotations is halved. 
 
-$$ \text{Cost}_{P2} = n + k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2} = \frac{1}{8k} n^2 + \frac{9}{8} n $$
+$$ n + k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2} $$ $$= \frac{1}{8k} n^2 + \frac{9}{8} n $$
 This results in a complexity of $O(n^2/k)$.
 
 
