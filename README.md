@@ -212,7 +212,7 @@ if $k$ is considered as function of n, this phase scales as $O(nk)$.
 ##### Phase2: Final sorting
 For the **worst case** we assume that the number of rotations required to bring the maximum element to the top of the stack is equal to half of the current size of the bucket. The number of push is equal to the current size of stack $B$:
 
-$$\text{Cost}_{P2} = n + k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2}$$
+$$\text{Cost}_{P2} = n + k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2} = \frac{1}{4k} n^2 + \frac{5}{4}n$$
 
 $$
 \text{Cost}_{P2} = n + k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2} = \frac{1}{4k} n^2 + \frac{5}{4} n
