@@ -211,9 +211,11 @@ if $k$ is considered as function of n, this phase scales as $O(nk)$.
 
 ##### Phase2: Final sorting
 For the **worst case** we assume that the number of rotations required to bring the maximum element to the top of the stack is equal to half of the current size of the bucket. The number of push is equal to the current size of stack $B$:
+$$\frac{1}{2}$$
 $$
 \text{Cost}_{P2} = n + k \cdot \sum_{i=1}^{n/k} \frac{i}{2} = \frac{1}{4k} n^2 + \frac{5}{4} n
 $$
+$$\frac{1}{2}$$
 This results in a complexity of $O(n^2/k)$.
 
 
@@ -236,6 +238,7 @@ The total complexity $T(n, k)$ is the sum of both phases. We observe a clear tra
 * **Small Bucket Count ($k \to 1$):** Phase 1 remains near $O(n)$, but Phase 2 complexity surges toward $O(n2)$ as the algorithm reverts to a standard insertion sort behavior on a single stack.
 
 To find the optimal k, we balance the two dominant terms:
+
 $$n \cdot k \approx \frac{n^2}{k} \implies k^2 \approx n \implies k = \sqrt{n}$$
 
 ### Conclusion
