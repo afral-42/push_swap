@@ -96,13 +96,13 @@ ROTATE Stack A (ra or rra) to bring min_index to top
 #### Cost Analysis
 
 ##### Position Insertion (Step 2.1)
-The cost of positioning the insertion node is cumulative as stack $B$ is emptied. In the **worst case**, the complexity follows the arithmetic series:
+The cost of positioning the insertion node is cumulative as stack $B$ is emptied. In the **worst case**, the complexity is an arithmetic series that resolves as follows:
 
-$$\text{Cost}_{2.1} = \sum_{k=2}^{n - 1} \frac{k}{2} = \frac{1}{2} \left( \frac{n(n+1)}{2} \right) - \frac{n}{2} - \frac{1}{2} = \frac{1}{4} (n^2 - n - 2)$$
+$$\text{Cost}_{2.1} = \sum_{k=2}^{n - 1} \frac{k}{2} = \frac{1}{4} (n^2 - n - 2)$$
 
 For the **average case**, we assume the distance to the correct position is halved:
 
-$$\text{Cost}_{2.1} = \sum_{k=2}^{n - 1} \frac{k}{4} = \frac{1}{4} \left( \frac{n(n+1)}{2} \right) - \frac{n}{4} - \frac{1}{4} = \frac{1}{8} (n^2 - n - 2 )$$
+$$\text{Cost}_{2.1} = \sum_{k=2}^{n - 1} \frac{k}{4} = \frac{1}{8} (n^2 - n - 2 )$$
 
 For the **best case**, we assume that the stack $A$ is already correctly positionned therefore there is no need to rotate the stack before proceeding to the insertion. The cost is $0$.
 
@@ -156,22 +156,83 @@ Despite its $O(n^2)$ complexity, this algorithm is optimal or highly suitable in
 1.  **Small Data Sets:** Due to its low constant factors, it outperforms complex algorithms that require recursive calls or heavy partitioning logic when $n$ is very small.
 2.  **Nearly Sorted Data:** If the input is already partially ordered, the number of rotations in the insertion step decreases significantly, moving the performance closer to the $O(n)$ best-case scenario.
 
-### Medium strategy: XXXXXXX
+### Medium strategy: Bucket sort
+#### Introduction
+The bucket sort algorithm adapted for two stacks operates on the following principles:
+- **Normalization (indexing)**: Since Buket Sort performs best with a uniform distribution, the initial stack is analysed without performing any **stack operation**. Each value is replaced by its *rank* (its relative position from $0$ to $n - 1$). This tranforms any input into a perfectly uniform distribution of integers, while preserving their relative order.
+- **Bucket partitioning**: The stack is divided into $k$ virtual buckets. For each bucket $i$ (from $0$ to $k - 1$), we identify elements within the range $\left[ i \times \frac{n}{k}, (i + 1) \times \frac{n}{k} \right)$. These elements are pushed from the primary stack to the secondary stack, effectively pre-sorting the data in descending order.
+- **Final sorting**: Once the elements are partitioned, each bucket is processed individually. A **selection sort** strategy (finding the highest value within the bucket) is applied to move the elements of each bucket back to the primary stack in their final, correct order.
 
-// On calcule racine de n pour avoir le nombre de seaux
+#### Pseudo-code
+```text
 
-// On calcule la size d'un seau : trouver le min + trouver le max pour avoir la range (min - max) qu'on divise par racine n pour avoir la taille d'un seau
+# Phase 0: Indexing
 
-// On parcourt la stack racine de n fois (une fois par seau) et pour chaque élement on le compare à max - ((numéro de seau + 1) * taille d'un seau) : si il est supérieur on le push dans b sinon on le skip
-// Complexité théorique : O(n√n)
+# Phase 1: Distribute elements into k buckets
 
-// B est grossièrement triée dans l'ordre décroissant
+FOR each bucket i from 0 to k - 1
+    FOR each element in Stack A
+        IF top of Stack A is within bucket i limits
+            PUSH top of Stack A to Stack B
+        ELSE
+            ROTATE Stack A
 
-// On parcourt B seau par seau (racine de n) jusqu'à trouver le max du seau qu'on push dans A 
-// Complexité théorique : O(n√n)
+# Stack B now contains elements grouped by bucket in descending order.
+# Elements inside each bucket are unsorted.
 
-// Complexité théorique finale : O(n√n + n√n) = O(2(n√n)) = O(n√n)
+# Phase 2: Rebuild sorted stack
 
+WHILE Stack B is not empty
+    Compute the index of the maximum element in Stack B 
+    # Note: the maximum element is always part of the bucket
+    # currently at the top of the stack.
+
+    ROTATE Stack B using the shortest path (rb or rrb)
+    PUSH top of Stack B to Stack A
+```
+
+#### Cost Breakdown
+| Step | Operation | Best Case | Average Case | Worst Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **1** | **Loop**: For each bucket $i$ from $0$ to $k - 1$ | $k$ | $k$ | $k$ |
+| **1.1** | ROTATE $A$ and PUSH top of $A$ to $B$ if top of $A$ is within bucket $i$ limits $\left[ i \times \frac{n}{k}, (i + 1) \times \frac{n}{k} \right)$ | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) |
+| **2** | **Loop :** While Stack $B$ is not empty | $n$  | $n$  | $n$ |
+| **2.1** | Position max node on top of $B$ | $0$ | $k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{4}$ (`rb` or `rrb`) | $k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2}$ (`rb` or `rrb`) |
+| **2.2** | Push top of $B$ onto $A$ | $n$ (`pa`) | $n$ (`pa`) | $n$ (`pa`) |
+
+#### Cost Analysis
+
+##### Phase1: Bucket partitioning
+The cost of positioning the insertion node is cumulative as stack $B$ is emptied. The cost is the same for all the cases as the algorithm assumes a random distribution of values within the stack and does not include any optimisation for sorted or nearly sorted stacks.
+
+$$\text{Cost}_{P1} = \sum_{i=0}^{k - 1}{n - i \frac{n}{k}} = n \left( \frac{k - 1}{2} \right)$$
+
+if $k$ is considered as function of n, this phase scales as $O(nk)$.
+
+##### Phase2: Final sorting
+For the **worst case** we assume that the number of rotations required to bring the maximum element to the top of the stack is equal to half of the current size of the bucket. The number of push is equal to the current size of stack $B$:
+$$\text{Cost}_{P2} = n + k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2} = \frac{1}{4k}n^2 + \frac{5}{4}n $$
+This results in a complexity of $O(n^2/k)$.
+
+For the **average case** we assume that the number of rotations is halved. 
+$$\text{Cost}_{P2} = n + k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2} = \frac{1}{8k}n^2 + \frac{9}{8}n $$
+This results in a complexity of $O(n^2/k)$.
+
+For the **best case** we assume that the stack is already sorted in descending order, therefore no rotations are performed:
+$$\text{Cost}_{P2} = n = O(n)$$
+
+#### Optimal Sizing of Buckets ($k$)
+
+The total complexity $T(n, k)$ is the sum of both phases. We observe a clear trade-off:
+
+* **Large Bucket ($k \to n$):** Phase 1 complexity increases toward $O(n2)$ as the number of buckets grows, increasing the number of rotations performed in Stack $A$, while Phase 2 decreases toward $O(n)$.
+* **Small Bucket Count ($k \to 1$):** Phase 1 remains near $O(n)$, but Phase 2 complexity surges toward $O(n2)$ as the algorithm reverts to a standard insertion sort behavior on a single stack.
+
+To find the optimal k, we balance the two dominant terms:
+$$n \cdot k \approx \frac{n^2}{k} \implies k^2 \approx n \implies k = \sqrt{n}$$
+
+### Conclusion
+By setting the number of buckets to $\sqrt{n}$, the overall complexity for all cases (worst, average, and best) is optimized to $O(n\sqrt(n))$. While this does not reach the efficiency of $O(n \log n)$ algorithms, it represents a significant optimization over the $O(n2)$ baseline.
 
 ### Complex strategy: XXXXXXX
 
