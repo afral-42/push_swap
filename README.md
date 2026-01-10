@@ -1,3 +1,15 @@
+<!-- *********************************************************************** -->
+<!--                                                                         -->
+<!--                                                      :::      ::::::::  -->
+<!-- README.md                                          :+:      :+:    :+:  -->
+<!--                                                  +:+ +:+         +:+    -->
+<!-- By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+       -->
+<!--                                              +#+#+#+#+#+   +#+          -->
+<!-- Created: 2026/01/10 16:11:12 by arebilla          #+#    #+#            -->
+<!-- Updated: 2026/01/10 16:16:18 by arebilla         ###   ########.fr      -->
+<!--                                                                         -->
+<!-- *********************************************************************** -->
+
 *This project has been created as part of the 42 curriculum by [ abounoua, arebilla ].*
 
 # Push_swap
@@ -171,7 +183,7 @@ The bucket sort algorithm adapted for two stacks operates on the following princ
 # Phase 1: Distribute elements into k buckets
 
 FOR each bucket i from 0 to k - 1
-    FOR each element in Stack A
+    WHILE bucket i is not full
         IF top of Stack A is within bucket i limits
             PUSH top of Stack A to Stack B
         ELSE
@@ -195,7 +207,7 @@ WHILE Stack B is not empty
 | Step | Operation | Best Case | Average Case | Worst Case |
 | :--- | :--- | :--- | :--- | :--- |
 | **1** | **Loop**: For each bucket $i$ from $0$ to $k - 1$ | $k$ | $k$ | $k$ |
-| **1.1** | ROTATE $A$ and PUSH top of $A$ to $B$ if top of $A$ is within bucket $i$ limits $\left[ i \times \frac{n}{k}, (i + 1) \times \frac{n}{k} \right)$ | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) |
+| **1.1** | ROTATE $A$ and PUSH top of $A$ to $B$ if top of $A$ is within bucket $i$ limits $\left[ i \times \frac{n}{k}, (i + 1) \times \frac{n}{k} \right)$ | $n$ | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) |
 | **2** | **Loop :** While Stack $B$ is not empty | $n$  | $n$  | $n$ |
 | **2.1** | Position max node on top of $B$ | $0$ | $k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{4}$ (`rb` or `rrb`) | $k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2}$ (`rb` or `rrb`) |
 | **2.2** | Push top of $B$ onto $A$ | $n$ (`pa`) | $n$ (`pa`) | $n$ (`pa`) |
@@ -203,11 +215,15 @@ WHILE Stack B is not empty
 #### Cost Analysis
 
 ##### Phase1: Bucket partitioning
-The cost of positioning the insertion node is cumulative as stack $B$ is emptied. The cost is the same for all the cases as the algorithm assumes a random distribution of values within the stack and does not include any optimisation for sorted or nearly sorted stacks.
+The cost of positioning the insertion node is cumulative as stack $B$ is emptied. The cost is the same for **average case** and **worst case**:
 
 $$\text{Cost}_{P1} = \sum_{i=0}^{k - 1}{n - i \frac{n}{k}} = n \left( \frac{k - 1}{2} \right)$$
 
 if $k$ is considered as function of n, this phase scales as $O(nk)$.
+
+For the **best case**, when the stack is already sorted, only a single traversal of stack $A$ is required:
+
+$$ \text{Cost}_{P1} = n = O(n) $$
 
 ##### Phase2: Final sorting
 For the **worst case** we assume that the number of rotations required to bring the maximum element to the top of the stack is equal to half of the current size of the bucket. The number of push is equal to the current size of stack $B$:
@@ -237,8 +253,15 @@ To find the optimal k, we balance the two dominant terms:
 
 $$n \cdot k \approx \frac{n^2}{k} \implies k^2 \approx n \implies k = \sqrt{n}$$
 
-### Conclusion
-By setting the number of buckets to $\sqrt{n}$, the overall complexity for all cases (worst, average, and best) is optimized to $O(n\sqrt(n))$. While this does not reach the efficiency of $O(n \log n)$ algorithms, it represents a significant optimization over the $O(n2)$ baseline.
+#### Conclusion on performance
+By setting the number of buckets to $\sqrt{n}$, the overall complexity for is optimized to $O(n\sqrt(n))$. While this does not reach the efficiency of $O(n \log n)$ algorithms, it represents a significant optimization over the $O(n2)$ baseline.
+
+#### Optimal use case
+
+The selection of this $O(n\sqrt{n})$ approach over $O(n^2)$ or $O(n \log n)$ algorithms depends on the interplay between the dataset size ($n$) and the relative disorder of the set:
+
+* **Medium sized Datasets:** In scenarios where $n$ is too large for quadratic $O(n^2)$ algorithms but the overhead of $O(n \log n)$ implementations (such as complex pivot logic) is undesirable, the $O(n\sqrt{n})$ model serves as an efficient middle-ground.
+* **Medium Relative Disorder:** The bucket sort is adaptabive to disorder: it performs better on low disorder sets than on high disorder sets. On low disorder sets, the complexity tends towards $O(n)$. However the phase 1 processing introduces an additional overhead over insertion sort making it less efficient on small and nearly sorted sets than insertion sort.
 
 ### Complex strategy: XXXXXXX
 

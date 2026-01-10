@@ -14,7 +14,7 @@
 #include "algorithms.h"
 #include "parsing.h"
 
-size_t	find_max_index(t_stack *b, int *maximum)
+static size_t	find_max_index(t_stack *b, int *maximum)
 {
 	t_list	*node;
 	size_t	index;
@@ -39,36 +39,37 @@ size_t	find_max_index(t_stack *b, int *maximum)
 	return (index);
 }
 
-int	fill_buckets(t_stack *a, t_stack *b, t_buckets buckets,
+static void	fill_buckets(t_stack *a, t_stack *b, t_buckets buckets,
 				t_ops_counter *ops)
 {
 	size_t	rotations_count;
 	size_t	stack_size;
 	size_t	bucket_index;
 	int		min;
-	int		count;
+	size_t	elts_count;
 
-	count = 0;
 	min = lstget_min(a->top);
 	bucket_index = 0;
 	while (bucket_index < buckets.number)
 	{
 		rotations_count = 0;
 		stack_size = a->size;
-		while (rotations_count < stack_size)
+		elts_count = 0;
+		while (rotations_count++ < stack_size && elts_count < buckets.size)
 		{
 			if (a->top->data <= (int)(min + (bucket_index + 1) * buckets.size))
-				count += push_b(b, a, ops);
+			{
+				elts_count++;
+				push_b(b, a, ops);
+			}
 			else
-				count += rotate_a(a, ops);
-			rotations_count++;
+				rotate_a(a, ops);
 		}
 		bucket_index++;
 	}
-	return (count);
 }
 
-int	empty_buckets(t_stack *a, t_stack *b, t_ops_counter *ops)
+static int	empty_buckets(t_stack *a, t_stack *b, t_ops_counter *ops)
 {
 	size_t	max_index;
 	int		max;
@@ -88,7 +89,7 @@ int	empty_buckets(t_stack *a, t_stack *b, t_ops_counter *ops)
 	return (count);
 }
 
-void	bucket_sort_procedure(t_stack *a, t_stack *b, t_ops_counter *ops)
+static void	bucket_sort_procedure(t_stack *a, t_stack *b, t_ops_counter *ops)
 {
 	t_buckets		buckets;
 
