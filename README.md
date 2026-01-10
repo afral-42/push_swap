@@ -215,7 +215,7 @@ For the **worst case** we assume that the number of rotations required to bring 
 $$\text{Cost}_{P2} = n + k \cdot \sum_{i=1}^{n/k} \frac{i}{2}$$
 
 $$
-\text{Cost}_{P2} = n + k \cdot \sum_{i=1}^{n/k} \frac{i}{2} = \frac{1}{4k} n^2 + \frac{5}{4} n
+\text{Cost}_{P2} = n + k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2} = \frac{1}{4k} n^2 + \frac{5}{4} n
 $$
 $$\frac{1}{2}$$
 This results in a complexity of $O(n^2/k)$.
