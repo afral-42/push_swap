@@ -15,13 +15,10 @@
 #include "operations.h"
 
 int	transfer_stack(t_stack *dest, t_stack *src, t_ops_counter *ops_count,
-				int (*push_fct)(t_stack *, t_stack *, t_ops_counter *))
+				void (*push_fct)(t_stack *, t_stack *, t_ops_counter *))
 {
 	while (src->size)
-	{
-		if (push_fct(dest, src, ops_count) < 0)
-			return (-1);
-	}
+		push_fct(dest, src, ops_count);
 	return (dest->size);
 }
 

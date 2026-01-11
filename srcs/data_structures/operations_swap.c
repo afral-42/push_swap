@@ -14,30 +14,24 @@
 #include "operations.h"
 #include "ft_printf.h"
 
-int	swap_a(t_stack *a, t_ops_counter *counter)
+void	swap_a(t_stack *a, t_ops_counter *counter)
 {
 	swap(a);
 	counter->sa++;
-	if (ft_printf("sa\n") < 0)
-		return (-1);
-	return (1);
+	ft_printf("sa\n");
 }
 
-int	swap_b(t_stack *b, t_ops_counter *counter)
+void	swap_b(t_stack *b, t_ops_counter *counter)
 {
 	swap(b);
 	counter->sb++;
-	if (ft_printf("sb\n") < 0)
-		return (-1);
-	return (1);
+	ft_printf("sb\n");
 }
 
-int	swap_both(t_stack *a, t_stack *b, t_ops_counter *counter)
+void	swap_both(t_stack *a, t_stack *b, t_ops_counter *counter)
 {
 	swap(a);
 	swap(b);
 	counter->ss++;
-	if (ft_printf("ss\n") < 0)
-		return (-1);
-	return (1);
+	ft_printf("ss\n");
 }

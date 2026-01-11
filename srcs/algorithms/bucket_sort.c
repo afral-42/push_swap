@@ -73,7 +73,7 @@ static int	empty_buckets(t_stack *a, t_stack *b, t_ops_counter *ops)
 {
 	size_t	max_index;
 	int		max;
-	int		(*action[2])(t_stack *, t_ops_counter *);
+	void	(*action[2])(t_stack *, t_ops_counter *);
 	int		count;
 
 	count = 0;

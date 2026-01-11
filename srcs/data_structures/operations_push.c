@@ -14,24 +14,20 @@
 #include "stack.h"
 #include "ft_printf.h"
 
-int	push_a(t_stack *a, t_stack *b, t_ops_counter *counter)
+void	push_a(t_stack *a, t_stack *b, t_ops_counter *counter)
 {
 	lst_move_head(&(a->top), &(b->top));
 	counter->pa++;
 	a->size++;
 	b->size--;
-	if (ft_printf("pa\n") < 0)
-		return (-1);
-	return (1);
+	ft_printf("pa\n");
 }
 
-int	push_b(t_stack *b, t_stack *a, t_ops_counter *counter)
+void	push_b(t_stack *b, t_stack *a, t_ops_counter *counter)
 {
 	lst_move_head(&(b->top), &(a->top));
 	counter->pb++;
 	a->size--;
 	b->size++;
-	if (ft_printf("pb\n") < 0)
-		return (-1);
-	return (1);
+	ft_printf("pb\n");
 }

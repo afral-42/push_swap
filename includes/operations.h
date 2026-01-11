@@ -30,18 +30,18 @@ typedef struct s_ops_counter
 	int	ss;
 }	t_ops_counter;
 
-int				push_a(t_stack *a, t_stack *b, t_ops_counter *counter);
-int				push_b(t_stack *b, t_stack *a, t_ops_counter *counter);
-int				rotate_a(t_stack *a, t_ops_counter *counter);
-int				rotate_b(t_stack *b, t_ops_counter *counter);
-int				rotate_both(t_stack *a, t_stack *b, t_ops_counter *counter);
-int				reverse_rotate_a(t_stack *a, t_ops_counter *counter);
-int				reverse_rotate_b(t_stack *b, t_ops_counter *counter);
-int				reverse_rotate_both(t_stack *a, t_stack *b,
+void			push_a(t_stack *a, t_stack *b, t_ops_counter *counter);
+void			push_b(t_stack *b, t_stack *a, t_ops_counter *counter);
+void			rotate_a(t_stack *a, t_ops_counter *counter);
+void			rotate_b(t_stack *b, t_ops_counter *counter);
+void			rotate_both(t_stack *a, t_stack *b, t_ops_counter *counter);
+void			reverse_rotate_a(t_stack *a, t_ops_counter *counter);
+void			reverse_rotate_b(t_stack *b, t_ops_counter *counter);
+void			reverse_rotate_both(t_stack *a, t_stack *b,
 					t_ops_counter *counter);
-int				swap_a(t_stack *a, t_ops_counter *counter);
-int				swap_b(t_stack *b, t_ops_counter *counter);
-int				swap_both(t_stack *a, t_stack *b, t_ops_counter *counter);
+void			swap_a(t_stack *a, t_ops_counter *counter);
+void			swap_b(t_stack *b, t_ops_counter *counter);
+void			swap_both(t_stack *a, t_stack *b, t_ops_counter *counter);
 t_ops_counter	*new_ops_counter(void);
 int				get_total_operations(t_ops_counter *ops_count);
 

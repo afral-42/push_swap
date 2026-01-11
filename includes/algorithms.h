@@ -33,7 +33,7 @@ t_ops_counter	*bucket_sort(t_stack *a);
 t_ops_counter	*insertion_sort(t_stack *a);
 int				transfer_stack(t_stack *dest, t_stack *src,
 					t_ops_counter *ops_count,
-					int (*push_fct)(t_stack *, t_stack *, t_ops_counter *));
+					void (*push_fct)(t_stack *, t_stack *, t_ops_counter *));
 t_ops_counter	*radix_sort(t_stack *a);
 t_ops_counter	*quick_sort(t_stack *a);
 t_ops_counter	*merge_sort(t_stack *a);

@@ -14,30 +14,24 @@
 #include "operations.h"
 #include "ft_printf.h"
 
-int	rotate_a(t_stack *a, t_ops_counter *counter)
+void	rotate_a(t_stack *a, t_ops_counter *counter)
 {
 	rotate(a);
 	counter->ra++;
-	if (ft_printf("ra\n") < 0)
-		return (-1);
-	return (1);
+	ft_printf("ra\n");
 }
 
-int	rotate_b(t_stack *b, t_ops_counter *counter)
+void	rotate_b(t_stack *b, t_ops_counter *counter)
 {
 	rotate(b);
 	counter->rb++;
-	if (ft_printf("rb\n") < 0)
-		return (-1);
-	return (1);
+	ft_printf("rb\n");
 }
 
-int	rotate_both(t_stack *a, t_stack *b, t_ops_counter *counter)
+void	rotate_both(t_stack *a, t_stack *b, t_ops_counter *counter)
 {
 	rotate(a);
 	rotate(b);
 	counter->rr++;
-	if (ft_printf("rr\n") < 0)
-		return (-1);
-	return (1);
+	ft_printf("rr\n");
 }
