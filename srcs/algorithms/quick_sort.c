@@ -234,21 +234,16 @@ void    quicksort_b(t_stack *a, t_stack *b, size_t partition, t_ops_counter *ops
     quicksort_b(a, b, rotated_count, ops);
 }
 
-t_ops_counter	*quick_sort(t_stack *a)
+void	quick_sort(t_stack *a, t_ops_counter *ops)
 {
-	t_stack				*b;
-	t_ops_counter		*ops;
+	t_stack	*b;
 
-	ops = new_ops_counter();
-	if (!ops)
-		return (NULL);
 	b = init_stack();
 	if (!b)
 	{
 		free(ops);
-		return (NULL);
+		return ;
 	}
 	quicksort_a(a, b, a->size, ops);
 	free_stack(b);
-	return (ops);
 }

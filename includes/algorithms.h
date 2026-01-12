@@ -28,18 +28,18 @@ typedef struct	s_linearised_tab
 	size_t	size;
 }	t_linearised_tab;
 
-size_t			ft_sqrt(size_t nb);
-t_ops_counter	*bucket_sort(t_stack *a);
-t_ops_counter	*insertion_sort(t_stack *a);
-int				transfer_stack(t_stack *dest, t_stack *src,
-					t_ops_counter *ops_count,
-					void (*push_fct)(t_stack *, t_stack *, t_ops_counter *));
-t_ops_counter	*radix_sort(t_stack *a);
-t_ops_counter	*quick_sort(t_stack *a);
-t_ops_counter	*merge_sort(t_stack *a);
-size_t			get_insertion_index(t_stack *stack, int value);
-size_t			get_insertion_index_from_bottom(t_stack *stack, int value);
-size_t			get_insertion_index_from_top(t_stack *stack, int value);
-int				compress_stack(t_stack *a);
+size_t	ft_sqrt(size_t nb);
+void	bucket_sort(t_stack *a, t_ops_counter *ops);
+void	insertion_sort(t_stack *a, t_ops_counter *ops);
+void	quick_sort(t_stack *a, t_ops_counter *ops);
+void	merge_sort(t_stack *a, t_ops_counter *ops);
+void	radix_sort(t_stack *a, t_ops_counter *ops);
+int		transfer_stack(t_stack *dest, t_stack *src,
+			t_ops_counter *ops_count,
+			void (*push_fct)(t_stack *, t_stack *, t_ops_counter *));
+size_t	get_insertion_index(t_stack *stack, int value);
+size_t	get_insertion_index_from_bottom(t_stack *stack, int value);
+size_t	get_insertion_index_from_top(t_stack *stack, int value);
+int		compress_stack(t_stack *a);
 
 #endif

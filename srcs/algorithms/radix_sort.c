@@ -47,27 +47,18 @@ void	operate_radix_sort(t_stack *a, t_stack *b, t_ops_counter *ops)
 	}
 }
 
-t_ops_counter	*radix_sort(t_stack *a)
+void	radix_sort(t_stack *a, t_ops_counter *ops)
 {
-	t_ops_counter	*ops;
 	t_stack			*b;
 
-	ops = new_ops_counter();
-	if (!ops)
-		return (NULL);
 	b = init_stack();
 	if (!b)
-	{
-		free(ops);
-		return (NULL);
-	}
+		return ;
 	if (compress_stack(a) == -1)
 	{
-		free(ops);
 		free_stack(b);
-		return (NULL);
+		return ;
 	}
 	operate_radix_sort(a, b, ops);
 	free_stack(b);
-	return (ops);
 }

@@ -31,16 +31,20 @@ static void	print_output_debug_info(t_stack *a, t_ops_counter *ops_count)
 
 static t_ops_counter	*select_sort(t_stack *a, int options, double disorder)
 {
-	if (!disorder)
-		return (new_ops_counter());
-	if (options & FLAG_SIMPLE || (options & FLAG_ADAPTIVE && disorder < 0.2))
-		return (insertion_sort(a));
-	else if (options & FLAG_MEDIUM || (options & FLAG_ADAPTIVE && disorder < 0.5))
-		return (bucket_sort(a));
-	else if (options & FLAG_COMPLEX || (options & FLAG_ADAPTIVE && disorder >= 0.5))
-		return (quick_sort(a));
-	else
+	t_ops_counter *ops;
+
+	ops = new_ops_counter();
+	if (!ops)
 		return (NULL);
+	if (!disorder)
+		return (ops);
+	if (options & FLAG_SIMPLE || (options & FLAG_ADAPTIVE && disorder < 0.2))
+		insertion_sort(a, ops);
+	else if (options & FLAG_MEDIUM || (options & FLAG_ADAPTIVE && disorder < 0.5))
+		bucket_sort(a, ops);
+	else if (options & FLAG_COMPLEX || (options & FLAG_ADAPTIVE && disorder >= 0.5))
+		quick_sort(a, ops);
+	return (ops);
 }
 
 static int	run_sort_operations(t_stack *a, int options)

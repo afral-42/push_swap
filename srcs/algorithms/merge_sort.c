@@ -61,19 +61,13 @@ void	merge_sort_procedure(t_stack *a, t_stack *b, size_t size, t_ops_counter *op
 		trivial_merge(a, size, ops_count);
 }
 
-t_ops_counter	*merge_sort(t_stack *a)
+void	merge_sort(t_stack *a, t_ops_counter *ops_count)
 {
-	t_ops_counter	*ops_count;
-	t_stack			*b;
+	t_stack	*b;
 
-	ops_count = new_ops_counter();
-	if (!ops_count)
-		return (NULL);
 	b = init_stack();
 	if (!b)
-		return (0);
+		return ;
 	merge_sort_procedure(a, b, a->size, ops_count);
 	free_stack(b);
-	return (ops_count);
 }
-

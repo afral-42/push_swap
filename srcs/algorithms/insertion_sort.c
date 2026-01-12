@@ -47,26 +47,18 @@ static void	insertion_sort_procedure(t_stack *a, t_stack *b,
 	put_value_on_top_of_a(a, min_index, ops_count);
 }
 
-t_ops_counter	*insertion_sort(t_stack *a)
+void	insertion_sort(t_stack *a, t_ops_counter *ops_count)
 {
 	t_stack			*b;
-	t_ops_counter	*ops_count;
 
 	b = init_stack();
 	if (!b)
-		return (NULL);
-	ops_count = new_ops_counter();
-	if (!ops_count)
-	{
-		free_stack(b);
-		return (NULL);
-	}
+		return ;
 	if (!a->top)
 	{
 		free_stack(b);
-		return (ops_count);
+		return ;
 	}
 	insertion_sort_procedure(a, b, ops_count);
 	free_stack(b);
-	return (ops_count);
 }

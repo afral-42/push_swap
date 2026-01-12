@@ -100,27 +100,18 @@ static void	bucket_sort_procedure(t_stack *a, t_stack *b, t_ops_counter *ops)
 	empty_buckets(a, b, ops);
 }
 
-t_ops_counter	*bucket_sort(t_stack *a)
+void	bucket_sort(t_stack *a, t_ops_counter *ops)
 {
 	t_stack			*b;
-	t_ops_counter	*ops;	
 
-	ops = new_ops_counter();
-	if (!ops)
-		return (NULL);
 	b = init_stack();
 	if (!b)
-	{
-		free(ops);
-		return (NULL);
-	}
+		return ;
 	if (compress_stack(a) == -1)
 	{
-		free(ops);
 		free_stack(b);
-		return (NULL);
+		return ;
 	}
 	bucket_sort_procedure(a, b, ops);
 	free_stack(b);
-	return (ops);
 }
