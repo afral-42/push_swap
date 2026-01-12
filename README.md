@@ -163,43 +163,115 @@ xxxxx
 
 ### Complex strategy: Quick Sort
 
+#### Introduction
+Quick sort is a powerful sorting algorithm rooted in the **Divide and Conquer** paradigm. This approach focuses on breaking down a complex problem into smaller, more manageable sub-problems until they reach a state that can be solved directly.
+
+In this implementation adapted for stacks (stack A and stack B), the *divide* phase is handled by the `partition_a` and `partition_b` functions.
+- **Divide**: the algorithm calculate the median valie to split the current partition into two equal sub-partitions. Elements are moved betweeen from one stack to another based on their position relative to the median. Upper elements are moved to stack $A$ while lower elements are moved to stack $B$.
+- **Conquer**: When a partition is reduced to a size of 3 or fewer, the `process_base_case_a` or `process_base_case_b` functions are triggered. This hard-coded logic solves the smallest sub-problems by manually handling all possible combinations for a stack of 3 elements.
+
+The process follows a recursive cycle:
+- **Partioning:** The data is split into *upper* and *lower* partitions, according to the mediane value. The "lower" partition is moved at the top of stack $B$, while the *upper* partition is moved at the top of stack $A$.
+- **Recursive calls**: the `quicksort_a` function calls itself to handle the sorting of the upper partition, then calls `quicksort_b` to handle the sorting of the lower partition. `quicksort_b` handle the sorting of the **lower** partition by partitioning it into 2 sub-partitions, and recursively calling `quicksort_a` and `quicksort_b`.
+- **Convergence**: Each recursive call moves the stack $A$ towards a fully sorted state. The recursion unwinds once the base cases are met. On stack $A$, the elements are sorted in ascending order, while on stack $B$ the elements are sorted in descending order, then pushed on stack $A$, hence being reverted in ascending order during the process.
+
+
 #### Pseudo-code
 ```text
 
-QUICKSORT_A(partition_size)
-    mediane = get_mediane
+PROCESS_BASE_CASE(S)
+    # hard coded sorting of the 3 top elements of the stack S
+
+PARTITION_A_AND_PUSH_B(SOURCE, DEST, partition_size)
+    # calculate the median value in order to ensure that the partition is split
+    # in to 2 sub-partitions of equal size
+    mediane = calculate_mediane_value
+
     FOR i = 1 to partition_size
-        IF top of A > mediane
+        # push lower elements on B (lower partition)
+        if (SOURCE == A AND top of SOURCE <  mediane)
             PUSH top of A to B
-        ELSE
-            ROTATE A
-    FOR i = 1 to rotated_count
-        REVERSE_ROTATE A
-    QUICKSORT_A(rotated_count)
-    QUICKSORT_B(pushed_count)
-CALL quicksort_a
 
+        # or push upper elements on A (lower partition)
+        else if (SOURCE == B AND top of SOURCE >= mediane)
+            PUSH top of B to A
 
+        # put lower elements at the back of A (lower partition) 
+        # or upper elements at the back of B (upper partition)
+        else
+            ROTATE SOURCE
 
-# Phase 1: Preparation
-WHILE (size(Stack A) > 1):
-    PUSH top of A to B (pb)
+    # put back upper or lower elements on top of the source stack
+    FOR i = 1 to upper_partition_size
+        REVERSE_ROTATE SOURCE
 
-# Phase 2: Sorted insertion
-WHILE (Stack B is NOT empty):
-    # Determine the shortest path (rotations) 
-    # to reach the correct insertion position in A
-    insertion_index = get_insertion_index(stack A, top of B)
-    
-    ROTATE Stack A (ra or rra) based on insertion_index
-    PUSH top of B to A (pa)
+    return lower_partition_size, upper_partition_size
 
-# Phase 3: Final Adjustment
-min_index = get_min_index(Stack A)
-ROTATE Stack A (ra or rra) to bring min_index to top
+QUICKSORT_A(partition_size)
+    if (partition_size <= 3)
+        # partition A and push lower partition elements to B
+        PROCESS_BASE_CASE(A)
+    else
+        lower_partition_size, upper_partition_size = PARTITION_AND_PUSH(A, B, partition_size)
+        QUICKSORT_A(upper_partition_size)
+        QUICKSORT_B(lower_partition_size)
+
+QUICKSORT_B(partition_size)
+    if (partition_size <= 3)
+        PROCESS_BASE_CASE(B)
+    else
+        # partition B and push upper partition elements to A
+        lower_partition_size, upper_partition_size = PARTITION_AND_PUSH(B, A partition_size)
+        QUICKSORT_A(upper_partition_size)
+        QUICKSORT_B(lower_partition_size)
 ```
-xxxxx
 
+#### Cost Breakdown
+
+##### Base case processing
+The base case handles the sorting of the top 3 elements of the stack in a maximum of 5 operations. For the sorting of the stack $B$, 3 additional pushes are required to move to elements to stack $A$ after sorting. The running time for this function is bounded and independent of the original size of stack $A$, thefore we consider it as constant time
+
+$$ \text{T}_{Base Case} = O(1) $$
+
+##### Partitioning processing
+
+`partition_a` and `partition_b` procedures follow the same process:
+
+| Step | Operation | Best Case | Average Case | Worst Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **1** | **Loop**: FOR $i$ = 1 to *partition_size* | $n$ | $n$ | $n$ |
+| **1.1** | ROTATE or PUSH the top element of the stack | $n$ (`ra` or `rb` or `pa` or `pb` | $n$ (`ra` or `rb` or `pa` or `pb` | $n$ (`ra` or `rb` or `pa` or `pb` |
+| **1.2** | REVERSE ROTATE to bring back the lower or upper partition to the top of the stack | $\frac{n}{2}$ (`rra` or `rrb`) | $\frac{n}{2}$ (`rra` or `rrb`) | $\frac{n}{2}$ (`rra` or `rrb`) |
+
+For all cases, the running time of the partitioning is:
+$$ \text{T}_{Partitioning} = \frac{3}{2}n = O(n)$$
+
+##### Recursive calls processing
+
+The running time of the recursive `quicksort_a` and `quicksort_b` functions can be expressed as follows:
+$$ \text{T}_{quicksortA}(n) = \text{T}_{quicksortA}\left(\frac{n}{2}\right) + \text{T}_{quicksortB}\left(\frac{n}{2}\right)+ \text{T}_{Partitioning} $$
+$$ \text{T}_{quicksortB}(n) = \text{T}_{quicksortA}\left(\frac{n}{2}\right) + \text{T}_{quicksortB}\left(\frac{n}{2}\right) + \text{T}_{Partitioning} $$
+
+The expression can be simplified as follows
+$$ \text{T}_{quicksort}(n) = 2\text{T}_{quicksort}\left(\frac{n}{2}\right) + 2\text{T}_{Partitioning} $$
+
+##### Overall time complexity
+
+The time complexity can be expresses as follows:
+
+For $n <= 3$ :
+$$ T(n) = O(1) $$
+Else:
+$$ \text{T}(n) = 2\text{T}\left(\frac{n}{2}\right) + O(n)$$
+This equation resolves in:
+$$ T(n) = O(n \log n) $$
+
+#### Conclusion on performance
+
+This implementation of Quick Sort Swap offers a significant performance boost over basic algorithms like Selection Sort or Bucket Sort. By achieving an average time complexity of $O(n \log n)$, it drastically reduces the number of operations required for large datasets. 
+
+#### Optimal use cases
+This Quick Sort algorithm is most effective for large sets of numbers (100 to 500+ elements) where the $O(n\log n)$ efficiency outweighs the constant overhead of stack manipulation. However, for small sets or data sets with low disorder, simpler algorithms are often more optimal as they avoid the recursive overhead and the extra rotations required by the partitioning process.
 
 ### Adaptative strategy: XXXXXX
 
