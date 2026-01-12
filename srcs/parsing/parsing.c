@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:25:15 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/09 14:21:35 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/12 10:31:38 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	parse_options(int ac, char **av)
 	if ((modes) & ((modes) - 1))
 		options = -1;
 	return (options);
-} 
+}
 
 int	update_stack(char *stack, t_stack *a)
 {
@@ -83,7 +83,7 @@ int	update_stack(char *stack, t_stack *a)
 
 static t_stack	*parse_stack(int ac, char **av)
 {
-	int	i;
+	int		i;
 	t_stack	*a;
 
 	i = 1;
