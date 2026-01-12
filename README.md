@@ -161,8 +161,43 @@ Despite its $O(n^2)$ complexity, this algorithm is optimal or highly suitable in
 xxxxx
 
 
-### Complex strategy: XXXXXXX
+### Complex strategy: Quick Sort
 
+#### Pseudo-code
+```text
+
+QUICKSORT_A(partition_size)
+    mediane = get_mediane
+    FOR i = 1 to partition_size
+        IF top of A > mediane
+            PUSH top of A to B
+        ELSE
+            ROTATE A
+    FOR i = 1 to rotated_count
+        REVERSE_ROTATE A
+    QUICKSORT_A(rotated_count)
+    QUICKSORT_B(pushed_count)
+CALL quicksort_a
+
+
+
+# Phase 1: Preparation
+WHILE (size(Stack A) > 1):
+    PUSH top of A to B (pb)
+
+# Phase 2: Sorted insertion
+WHILE (Stack B is NOT empty):
+    # Determine the shortest path (rotations) 
+    # to reach the correct insertion position in A
+    insertion_index = get_insertion_index(stack A, top of B)
+    
+    ROTATE Stack A (ra or rra) based on insertion_index
+    PUSH top of B to A (pa)
+
+# Phase 3: Final Adjustment
+min_index = get_min_index(Stack A)
+ROTATE Stack A (ra or rra) to bring min_index to top
+```
 xxxxx
 
 
