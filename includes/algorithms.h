@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:20 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/09 15:28:42 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/12 15:39:51 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ typedef struct	s_linearised_tab
 	size_t	size;
 }	t_linearised_tab;
 
+typedef struct s_partition
+{
+	size_t	partition_size;
+	size_t	lower_partition_size;
+	size_t	upper_partition_size;
+	int		mediane;
+}	t_partition;
+
 size_t	ft_sqrt(size_t nb);
 void	bucket_sort(t_stack *a, t_ops_counter *ops);
 void	insertion_sort(t_stack *a, t_ops_counter *ops);
@@ -41,5 +49,11 @@ size_t	get_insertion_index(t_stack *stack, int value);
 size_t	get_insertion_index_from_bottom(t_stack *stack, int value);
 size_t	get_insertion_index_from_top(t_stack *stack, int value);
 int		compress_stack(t_stack *a);
+
+int		get_mediane(t_stack *a, int *mediane, size_t partition);
+void	process_base_case_a(t_stack *a, t_stack *b, size_t partition,
+	t_ops_counter *ops);
+void	process_base_case_b(t_stack *b, t_stack *a, size_t partition,
+	t_ops_counter *ops);
 
 #endif

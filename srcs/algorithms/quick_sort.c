@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:17:39 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/09 15:03:49 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/12 15:38:12 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,224 +14,103 @@
 #include "operations.h"
 #include "ft_printf.h"
 
+void	quicksort_b_and_push_a(t_stack *a, t_stack *b, size_t partition,
+			t_ops_counter *ops);
 
-void    quicksort_b(t_stack *a, t_stack *b, size_t partition, t_ops_counter *ops);
-
-void	print_tab(t_linearised_tab *linearised_tab)
+void	partition_a(t_stack *a, t_stack *b,
+	t_partition *partition_infos, t_ops_counter *ops)
 {
-	int		*tab;
 	size_t	i;
 
-	tab = linearised_tab->tab;
 	i = 0;
-	while (i < linearised_tab->size)
+	while (i < partition_infos->partition_size)
 	{
-		ft_printf("%d->", tab[i]);
-		i++;
-	}
-	ft_printf(" END");
-}
-
-int	linearise_tab(t_stack *a, t_linearised_tab *linearised_tab, size_t partition)
-{
-	size_t	i;
-	t_list	*node;
-
-	linearised_tab->tab = malloc(sizeof(int) * partition);
-	if (!(linearised_tab->tab))
-		return (-1);
-	node = a->top;
-	i = 0;
-	while (node && i < partition)
-	{
-		(linearised_tab->tab)[i] = node->data;
-		i++;
-		node = node->next;
-	}
-	linearised_tab->size = i;
-	return (0);
-}
-
-static void	sort_tab(t_linearised_tab *linearised_tab)
-{
-	int		swapped;
-	int		temp;
-	int		*tab;
-	size_t	i;
-
-	tab = linearised_tab->tab;
-	swapped = 1;
-	while (swapped)
-	{
-		swapped = 0;
-		i = 0;
-		while (i < linearised_tab->size - 1)
+		if (a->top->data < partition_infos->mediane)
 		{
-			if (tab[i] > tab[i + 1])
-			{
-				temp = tab[i];
-				tab[i] = tab[i + 1];
-				tab[i + 1] = temp;
-				swapped = 1;
-			}
-			i++;
-		}
-	}
-}
-
-int	get_mediane(t_stack *a, int *mediane, size_t partition)
-{
-	t_linearised_tab	linearised_tab;
-	
-	if (linearise_tab(a, &linearised_tab, partition) == -1)
-		return (-1);
-	sort_tab(&linearised_tab);
-	*mediane = (linearised_tab.tab)[linearised_tab.size / 2];
-	free(linearised_tab.tab);
-	return (0);
-}
-
-void	process_base_case_a(t_stack *a, t_stack *b, size_t partition, 
-	t_ops_counter *ops)
-{
-	if (partition == 1)
-		return ;
-	else if (partition == 2)
-	{
-		if (a->top->data > a->top->next->data)
-			swap_a(a, ops);
-	}
-	else
-	{
-		if (a->top->data > a->top->next->data)
-			swap_a(a, ops);
-		if (a->top->next->data > a->top->next->next->data)
-		{	
 			push_b(b, a, ops);
-			swap_a(a, ops);
-			push_a(a, b, ops);
+			partition_infos->lower_partition_size++;
 		}
-		if (a->top->data > a->top->next->data)
-			swap_a(a, ops);
+		else
+		{
+			rotate_a(a, ops);
+			partition_infos->upper_partition_size++;
+		}
+		i++;
 	}
-}
-
-void    process_base_case_b(t_stack *b, t_stack *a, size_t partition, 
-    t_ops_counter *ops)
-{
-    if (partition == 1)
-        return ;
-    else if (partition == 2)
-    {
-        if (b->top->data < b->top->next->data)
-            swap_b(b, ops);
-    }
-    else
-    {
-        if (b->top->data < b->top->next->data)
-            swap_b(b, ops);
-        if (b->top->next->data < b->top->next->next->data)
-        {   
-            push_a(a, b, ops);
-            swap_b(b, ops);
-            push_b(b, a, ops);
-        }
-        if (b->top->data < b->top->next->data)
-            swap_b(b, ops);
-    }
-	while (partition)
+	if (partition_infos->upper_partition_size != a->size)
 	{
-		push_a(a, b, ops);
-		partition--;
+		i = 0;
+		while (i++ < partition_infos->upper_partition_size)
+			reverse_rotate_a(a, ops);
 	}
 }
-void    quicksort_a(t_stack *a, t_stack *b, size_t partition, t_ops_counter *ops)
-{
-    int     mediane;
-    size_t  i;
-    size_t  rotated_count;
-    size_t  pushed_count;
 
-    if (partition <= 3)
-    {
-        process_base_case_a(a, b, partition, ops);
-        return ;
-    }
-    if (get_mediane(a, &mediane, partition) == -1)
-        return ;
-    i = 0;
-    rotated_count = 0;
-    pushed_count = 0;
-    while (i < partition)
-    {
-        if (a->top->data < mediane) 
-        {
-            push_b(b, a, ops);
-            pushed_count++;
-        }
-        else 
-        {
-            rotate_a(a, ops);
-            rotated_count++;
-        }
-        i++;
-    }
-    if (rotated_count != a->size)
-    {
-        i = 0;
-        while (i < rotated_count)
-        {
-            reverse_rotate_a(a, ops);
-            i++;
-        }
-    }
-    quicksort_a(a, b, rotated_count, ops);
-    quicksort_b(a, b, pushed_count, ops);
+void	partition_b(t_stack *a, t_stack *b,
+	t_partition *partition_infos, t_ops_counter *ops)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < partition_infos->partition_size)
+	{
+		if (b->top->data >= partition_infos->mediane)
+		{
+			push_a(a, b, ops);
+			partition_infos->upper_partition_size++;
+		}
+		else
+		{
+			rotate_b(b, ops);
+			partition_infos->lower_partition_size++;
+		}
+		i++;
+	}
+	if (partition_infos->lower_partition_size != b->size)
+	{
+		i = 0;
+		while (i++ < partition_infos->lower_partition_size)
+			reverse_rotate_b(b, ops);
+	}
 }
 
-void    quicksort_b(t_stack *a, t_stack *b, size_t partition, t_ops_counter *ops)
+void	quicksort_a(t_stack *a, t_stack *b, size_t partition_size,
+			t_ops_counter *ops)
 {
-    int     mediane;
-    size_t  i;
-    size_t  rotated_count;
-    size_t  pushed_count;
+	t_partition	partition_infos;
 
-    if (partition <= 3)
-    {
-        process_base_case_b(b, a, partition, ops);
-        return ;
-    }
-    if (get_mediane(b, &mediane, partition) == -1)
-        return ;
+	if (partition_size <= 3)
+	{
+		process_base_case_a(a, b, partition_size, ops);
+		return ;
+	}
+	if (get_mediane(a, &(partition_infos.mediane), partition_size) == -1)
+		return ;
+	partition_infos.lower_partition_size = 0;
+	partition_infos.upper_partition_size = 0;
+	partition_infos.partition_size = partition_size;
+	partition_a(a, b, &partition_infos, ops);
+	quicksort_a(a, b, partition_infos.upper_partition_size, ops);
+	quicksort_b_and_push_a(a, b, partition_infos.lower_partition_size, ops);
+}
 
-    i = 0;
-    rotated_count = 0;
-    pushed_count = 0;
-    while (i < partition)
-    {
-        if (b->top->data >= mediane)
-        {
-            push_a(a, b, ops);
-            pushed_count++;
-        }
-        else 
-        {
-            rotate_b(b, ops);
-            rotated_count++;
-        }
-        i++;
-    }
-    if (rotated_count != b->size)
-    {
-        i = 0;
-        while (i < rotated_count)
-        {
-            reverse_rotate_b(b, ops);
-            i++;
-        }
-    }
-    quicksort_a(a, b, pushed_count, ops);
-    quicksort_b(a, b, rotated_count, ops);
+void	quicksort_b_and_push_a(t_stack *a, t_stack *b, size_t partition_size,
+			t_ops_counter *ops)
+{
+	t_partition	partition_infos;
+
+	if (partition_size <= 3)
+	{
+		process_base_case_b(b, a, partition_size, ops);
+		return ;
+	}
+	if (get_mediane(b, &(partition_infos.mediane), partition_size) == -1)
+		return ;
+	partition_infos.lower_partition_size = 0;
+	partition_infos.upper_partition_size = 0;
+	partition_infos.partition_size = partition_size;
+	partition_b(a, b, &partition_infos, ops);
+	quicksort_a(a, b, partition_infos.upper_partition_size, ops);
+	quicksort_b_and_push_a(a, b, partition_infos.lower_partition_size, ops);
 }
 
 void	quick_sort(t_stack *a, t_ops_counter *ops)

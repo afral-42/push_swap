@@ -15,6 +15,7 @@ FILES = \
 	algorithms/bucket_sort.c \
 	algorithms/radix_sort.c \
 	algorithms/quick_sort.c \
+	algorithms/quick_sort_utils.c \
 	algorithms/merge_sort.c \
 	algorithms/stack_linearisation.c \
 	parsing/parsing_utils.c \
