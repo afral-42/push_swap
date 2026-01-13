@@ -110,7 +110,7 @@ $(TESTS_BUILD_DIR)/%.o: $(TESTS_DIR)/%.c
 
 norm: $(SRCS)
 	@echo ⏳ Running norminette...
-	@norminette -R CheckForbiddenHeader $(SRCS_DIR) $(INCLUDES_DIR)
+	@norminette -R CheckForbiddenHeader $(SRCS_DIR) $(INCLUDES_DIR) $(LIBFTPRINTF_DIR)
 	@echo ✅ Norminette passed!
 
 clean:
