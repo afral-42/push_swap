@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:20 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/13 10:48:28 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/13 16:31:26 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	bucket_sort(t_stack *a, t_ops_counter *ops);
 void	insertion_sort(t_stack *a, t_ops_counter *ops);
 void	quick_sort(t_stack *a, t_ops_counter *ops);
 void	merge_sort(t_stack *a, t_ops_counter *ops);
+void	selection_sort(t_stack *a, t_ops_counter *ops);
 void	radix_sort(t_stack *a, t_ops_counter *ops);
 int		transfer_stack(t_stack *dest, t_stack *src,
 			t_ops_counter *ops_count,

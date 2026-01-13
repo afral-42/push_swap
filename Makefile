@@ -10,6 +10,7 @@ FILES = \
 	data_structures/operations_swap.c \
 	data_structures/ops_counter.c \
 	algorithms/insertion_sort.c \
+	algorithms/selection_sort.c \
 	algorithms/insertion_sort_utils.c \
 	algorithms/algo_utils.c \
 	algorithms/bucket_sort.c \
@@ -25,8 +26,6 @@ FILES = \
 	parsing/split_args_utils.c \
 	parsing/split_args.c \
 	push_swap.c
-
-# algorithms/selection_sort.c
 
 SRCS_DIR = srcs
 BUILD_DIR = build
@@ -70,7 +69,6 @@ CC += $(CFLAGS) $(CPPFLAGS)
 
 all: $(NAME)
 
-# Règle Debug
 debug: CFLAGS += -g -O0 -DDEBUG
 debug: fclean $(NAME)
 

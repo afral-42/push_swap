@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:25:15 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/12 10:31:38 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/13 16:52:21 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,13 @@ int	parser(int ac, char **av, t_stack **a, int *options)
 	if (*options == -1)
 		return (-1);
 	*a = parse_stack(ac, av);
-	if (!(*a) || lstcheck_duplicate((*a)->top))
+	if (!(*a))
 		return (-1);
+	if (!((*a)->top) || lstcheck_duplicate((*a)->top))
+	{
+		free_stack(*a);
+		return (-1);
+	}
 	if (!compute_disorder(*a))
 		return (1);
 	return (0);

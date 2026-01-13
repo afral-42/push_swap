@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:35 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/08 18:04:05 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/13 16:59:33 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_atoi_secured(const char *nptr, int *error)
 	sign = 1;
 	if (*nptr == '+' || *nptr == '-')
 	{
-		if (*nptr == '-' && *(nptr + 1) == '\0')
+		if ((*nptr == '-' || *nptr == '+') && *(nptr + 1) == '\0')
 		{
 			*error = -1;
 			return (0);
@@ -40,9 +40,10 @@ int	ft_atoi_secured(const char *nptr, int *error)
 		nptr++;
 	}
 	n = 0;
-	while (ft_isdigit(*nptr) && n < 2147483647 && n > -2147483648)
+	while (ft_isdigit(*nptr) && n <= 2147483648)
 		n = 10 * n + *nptr++ - '0';
-	if ((*nptr && !ft_isdigit(*nptr)) || (n > 2147483647 || n < -2147483648))
+	if ((*nptr && !ft_isdigit(*nptr)) || (n * sign > 2147483647
+		|| n * sign < -2147483648))
 	{
 		*error = -1;
 		return (0);
