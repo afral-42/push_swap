@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 10:33:20 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/12 15:39:51 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/13 10:48:28 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ typedef struct s_buckets
 {
 	size_t	number;
 	size_t	size;
-} t_buckets;
+}	t_buckets;
 
-typedef struct	s_linearised_tab
+typedef struct s_linearised_tab
 {
 	int		*tab;
 	size_t	size;
@@ -52,8 +52,8 @@ int		compress_stack(t_stack *a);
 
 int		get_mediane(t_stack *a, int *mediane, size_t partition);
 void	process_base_case_a(t_stack *a, t_stack *b, size_t partition,
-	t_ops_counter *ops);
+			t_ops_counter *ops);
 void	process_base_case_b(t_stack *b, t_stack *a, size_t partition,
-	t_ops_counter *ops);
+			t_ops_counter *ops);
 
 #endif

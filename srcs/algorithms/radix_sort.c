@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:33:36 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/09 15:30:04 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/13 10:46:43 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "algorithms.h"
 #include "list.h"
 
-
-void	split_by_bit(t_stack *a, t_stack *b, unsigned short bit, t_ops_counter *ops)
+void	split_by_bit(t_stack *a, t_stack *b, unsigned short bit,
+	t_ops_counter *ops)
 {
 	size_t	i;
 	size_t	stack_size;
-	
+
 	i = 0;
 	stack_size = a->size;
 	while (i < stack_size)
@@ -40,7 +40,7 @@ void	operate_radix_sort(t_stack *a, t_stack *b, t_ops_counter *ops)
 	while (bit < 32)
 	{
 		if (!compute_disorder(a))
-			break;
+			break ;
 		split_by_bit(a, b, bit, ops);
 		transfer_stack(a, b, ops, &push_a);
 		bit++;

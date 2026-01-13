@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 14:50:55 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/09 15:30:28 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/13 10:43:22 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ size_t	ft_sqrt(size_t nb)
 		sqrt++;
 	return (sqrt - 1);
 }
-

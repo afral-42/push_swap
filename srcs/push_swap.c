@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:15:08 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/09 14:09:25 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/13 10:20:51 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	print_output_debug_info(t_stack *a, t_ops_counter *ops_count)
 
 static t_ops_counter	*select_sort(t_stack *a, int options, double disorder)
 {
-	t_ops_counter *ops;
+	t_ops_counter	*ops;
 
 	ops = new_ops_counter();
 	if (!ops)
@@ -40,9 +40,11 @@ static t_ops_counter	*select_sort(t_stack *a, int options, double disorder)
 		return (ops);
 	if (options & FLAG_SIMPLE || (options & FLAG_ADAPTIVE && disorder < 0.2))
 		insertion_sort(a, ops);
-	else if (options & FLAG_MEDIUM || (options & FLAG_ADAPTIVE && disorder < 0.5))
+	else if (options & FLAG_MEDIUM
+		|| (options & FLAG_ADAPTIVE && disorder < 0.5))
 		bucket_sort(a, ops);
-	else if (options & FLAG_COMPLEX || (options & FLAG_ADAPTIVE && disorder >= 0.5))
+	else if (options & FLAG_COMPLEX
+		|| (options & FLAG_ADAPTIVE && disorder >= 0.5))
 		quick_sort(a, ops);
 	return (ops);
 }

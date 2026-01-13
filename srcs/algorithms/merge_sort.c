@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   merge_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/13 10:43:36 by abounoua          #+#    #+#             */
+/*   Updated: 2026/01/13 10:45:49 by abounoua         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "algorithms.h"
 #include "stack.h"
 #include "list.h"
@@ -23,7 +35,7 @@ void	merge(t_stack *a, t_stack *b, size_t size, t_ops_counter *ops_count)
 	size_t	rotation_count;
 
 	i = 0;
-	while(i < size - size / 2)
+	while (i < size - size / 2)
 	{
 		reverse_rotate_a(a, ops_count);
 		push_b(b, a, ops_count);
@@ -40,16 +52,17 @@ void	merge(t_stack *a, t_stack *b, size_t size, t_ops_counter *ops_count)
 	{
 		if ((b->size && a->top->data > b->top->data) || rotation_count == 0)
 			push_a(a, b, ops_count);
-		else 
+		else
 			rotation_count--;
 		rotate_a(a, ops_count);
 	}
 }
 
-void	merge_sort_procedure(t_stack *a, t_stack *b, size_t size, t_ops_counter *ops_count)
+void	merge_sort_procedure(t_stack *a, t_stack *b, size_t size,
+	t_ops_counter *ops_count)
 {
 	size_t	mid;
-	
+
 	if (size > 2)
 	{
 		mid = size / 2;

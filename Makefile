@@ -22,6 +22,7 @@ FILES = \
 	parsing/parsing.c \
 	parsing/ft_putdouble_fd.c \
 	parsing/bench_display.c \
+	parsing/split_args_utils.c \
 	parsing/split_args.c \
 	push_swap.c
 
