@@ -43,7 +43,7 @@ The project uses a standard **Makefile**. To build the executable, run:
 ```bash
 make
 ```
-Available rules: `all`, `clean`, `fclean`, `re`, `test`.
+Available rules: `all`, `clean`, `fclean`, `re`, `test`, `norm`.
 
 ### Usage
 ```
