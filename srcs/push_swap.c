@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:15:08 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/09 14:09:25 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/13 16:42:10 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,22 @@ static void	print_output_debug_info(t_stack *a, t_ops_counter *ops_count)
 
 static t_ops_counter	*select_sort(t_stack *a, int options, double disorder)
 {
-	if (options & FLAG_SIMPLE || (options & FLAG_ADAPTIVE && disorder < 0.2))
-		return (insertion_sort(a));
-	else if (options & FLAG_MEDIUM || (options & FLAG_ADAPTIVE && disorder < 0.5))
-		return (bucket_sort(a));
-	else if (options & FLAG_COMPLEX || (options & FLAG_ADAPTIVE && disorder >= 0.5))
-		return (quick_sort(a));
-	else
+	t_ops_counter	*ops;
+
+	ops = new_ops_counter();
+	if (!ops)
 		return (NULL);
+	if (!disorder)
+		return (ops);
+	if (options & FLAG_SIMPLE || (options & FLAG_ADAPTIVE && disorder < 0.2))
+		insertion_sort(a, ops);
+	else if (options & FLAG_MEDIUM
+		|| (options & FLAG_ADAPTIVE && disorder < 0.5))
+		bucket_sort(a, ops);
+	else if (options & FLAG_COMPLEX
+		|| (options & FLAG_ADAPTIVE && disorder >= 0.5))
+		quick_sort(a, ops);
+	return (ops);
 }
 
 static int	run_sort_operations(t_stack *a, int options)
@@ -72,10 +80,8 @@ int	main(int ac, char **av)
 	if (ac == 1)
 		return (1);
 	value = parser(ac, av, &a, &options);
-	if (value == -1 || value == 1)
+	if (value == -1)
 	{
-		if (value == 1)
-			return (0);
 		write(2, "Error\n", 6);
 		return (1);
 	}

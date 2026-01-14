@@ -6,28 +6,19 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 14:50:55 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/09 13:42:57 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/13 10:43:22 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "algorithms.h"
 #include "stack.h"
 #include "operations.h"
 
-int	abort_sort_function(t_stack *b)
-{
-	free_stack(b);
-	return (-1);
-}
-
 int	transfer_stack(t_stack *dest, t_stack *src, t_ops_counter *ops_count,
-				int (*push_fct)(t_stack *, t_stack *, t_ops_counter *))
+				void (*push_fct)(t_stack *, t_stack *, t_ops_counter *))
 {
 	while (src->size)
-	{
-		if (push_fct(dest, src, ops_count) < 0)
-			return (-1);
-	}
+		push_fct(dest, src, ops_count);
 	return (dest->size);
 }
 

@@ -1,3 +1,4 @@
+#include "operations.h"
 #include "tests.h"
 
 void	check_list_integrity(t_list *lst)
@@ -71,79 +72,78 @@ int	stack_is_sorted(t_stack *stack)
 	return (compute_disorder(stack) == 0);
 }
 
-void	test_sorting_with_already_sorted_stack(t_ops_counter *(*sort)(t_stack *))
+void	test_sorting_with_already_sorted_stack(void (*sort)(t_stack *, t_ops_counter *counter))
 {
 	t_stack			*stack;
 	t_ops_counter	*counter;
 
-	stack = generate_stack(0);
-	assert(lstcheck_duplicate(stack->top) == 0);
-	assert(stack_is_sorted(stack));
-	counter = sort(stack);
-	assert(lstcheck_duplicate(stack->top) == 0);
-	assert(stack_is_sorted(stack));
-	free_stack(stack);
-	free(counter);
+	counter = new_ops_counter();
 	stack = generate_stack(1);
 	assert(stack_is_sorted(stack));
-	counter = sort(stack);
+	sort(stack, counter);
 	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 	free(counter);
 	stack = generate_stack(2);
+	counter = new_ops_counter();
 	assert(stack_is_sorted(stack));
-	counter = sort(stack);
-	free(counter);
+	sort(stack, counter);
 	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
+	free(counter);
 	stack = generate_stack(10);
+	counter = new_ops_counter();
 	assert(stack_is_sorted(stack));
-	counter = sort(stack);
-	free(counter);
+	sort(stack, counter);
 	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
+	free(counter);
 }
 
-void	test_sorting_with_maximum_disorder_stack(t_ops_counter *(*sort)(t_stack *))
+void	test_sorting_with_maximum_disorder_stack(void (*sort)(t_stack *, t_ops_counter *))
 {
 	t_stack			*stack;
 	t_ops_counter	*counter;
 
 	stack = generate_max_disorder_stack(2);
+	counter = new_ops_counter();
 	assert(compute_disorder(stack) == 1.0);
-	counter = sort(stack);
+	sort(stack, counter);
 	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 	free(counter);
 	stack = generate_max_disorder_stack(3);
+	counter = new_ops_counter();
 	assert(compute_disorder(stack) == 1.0);
-	counter = sort(stack);
+	sort(stack, counter);
 	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 	free(counter);
 	stack = generate_max_disorder_stack(10);
+	counter = new_ops_counter();
 	assert(compute_disorder(stack) == 1.0);
-	counter = sort(stack);
+	sort(stack, counter);
 	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);
 	free(counter);
 }
 
-void	test_sorting_with_average_disorder_stack(t_ops_counter *(*sort)(t_stack *))
+void	test_sorting_with_average_disorder_stack(void (*sort)(t_stack *, t_ops_counter *))
 {
 	int		numbers[10] = {2, 11, 10, 16, 7, 6, 12, 3, 5, 1};
 	t_stack			*stack;
 	t_ops_counter	*counter;
 
+	counter = new_ops_counter();
 	stack = generate_custom_stack(numbers, 10);
 	assert(compute_disorder(stack) < 1.0 && compute_disorder(stack) > 0);
-	counter = sort(stack);
+	sort(stack, counter);
 	assert(lstcheck_duplicate(stack->top) == 0);
 	assert(stack_is_sorted(stack));
 	free_stack(stack);

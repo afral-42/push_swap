@@ -5,55 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/08 18:02:49 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/08 18:03:12 by abounoua         ###   ########lyon.fr   */
+/*   Created: 2026/01/13 10:22:16 by abounoua          #+#    #+#             */
+/*   Updated: 2026/01/13 10:33:35 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
+#include "parsing.h"
 
-static int	is_charset(char c, char *charset)
-{
-	while (*charset)
-	{
-		if (c == *charset)
-			return (1);
-		charset++;
-	}
-	return (0);
-}
-
-static const char	*move_to_next_word(char const *s, char *charset)
-{
-	while (*s && is_charset(*s, charset))
-		s++;
-	return (s);
-}
-
-static const char	*move_to_next_sep(char const *s, char *charset)
-{
-	while (*s && !is_charset(*s, charset))
-		s++;
-	return (s);
-}
-
-static size_t	count_words(char const *s, char *charset)
-{
-	size_t	count;
-
-	count = 0;
-	s = move_to_next_word(s, charset);
-	while (*s)
-	{
-		count++;
-		s = move_to_next_sep(s, charset);
-		s = move_to_next_word(s, charset);
-	}
-	return (count);
-}
-
-static void	*free_split(char **split, size_t l_split)
+static void	*free_all(char **split, size_t l_split)
 {
 	char	**p_split;
 
@@ -88,7 +49,7 @@ char	**split_args(char const *s, char *charset)
 		p_s = move_to_next_sep(s, charset);
 		*p_split = ft_substr(s, 0, p_s - s);
 		if (!(*p_split))
-			return (free_split(split, p_split - split));
+			return (free_all(split, p_split - split));
 		p_split++;
 		s = move_to_next_word(p_s, charset);
 	}

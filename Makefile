@@ -11,15 +11,20 @@ FILES = \
 	data_structures/operations_swap.c \
 	data_structures/ops_counter.c \
 	algorithms/insertion_sort.c \
+	algorithms/selection_sort.c \
 	algorithms/insertion_sort_utils.c \
 	algorithms/algo_utils.c \
 	algorithms/bucket_sort.c \
 	algorithms/radix_sort.c \
 	algorithms/quick_sort.c \
+	algorithms/quick_sort_utils.c \
+	algorithms/merge_sort.c \
+	algorithms/stack_linearisation.c \
 	parsing/parsing_utils.c \
 	parsing/parsing.c \
 	parsing/ft_putdouble_fd.c \
 	parsing/bench_display.c \
+	parsing/split_args_utils.c \
 	parsing/split_args.c \
 	push_swap.c
 
@@ -57,7 +62,9 @@ TESTS_FILES = \
 			test_operations.c \
 			test_compute_disorder.c \
 			test_get_insertion_index.c \
-			test_insertion.c
+			test_insertion.c \
+			test_bucket.c \
+			test_quick.c
 TESTS := $(patsubst %.c, %, $(TESTS_FILES))
 TESTS_SRCS := $(addprefix $(TESTS_DIR)/, $(TESTS_FILES))
 TESTS_OBJS := $(addprefix $(TESTS_BUILD_DIR)/, $(patsubst %.c, %.o, $(TESTS_FILES)))
@@ -120,7 +127,7 @@ $(TESTS_BUILD_DIR)/%.o: $(TESTS_DIR)/%.c
 
 norm: $(SRCS)
 	@echo ⏳ Running norminette...
-	@norminette -R CheckForbiddenHeader $(SRCS_DIR) $(INCLUDES_DIR)
+	@norminette -R CheckForbiddenHeader $(SRCS_DIR) $(INCLUDES_DIR) $(LIBFTPRINTF_DIR)
 	@echo ✅ Norminette passed!
 
 clean:

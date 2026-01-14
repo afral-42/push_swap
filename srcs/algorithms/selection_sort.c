@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 17:58:57 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/05 14:31:25 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/13 10:42:42 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 
 int	find_min(t_stack *a)
 {
-    t_list  *node;
+	t_list	*node;
 	size_t	index;
-    size_t  i;
+	size_t	i;
 	int		min;
 
-    node = a->top;
+	node = a->top;
 	min = node->data;
 	i = 0;
 	index = 0;
-    while (node)
+	while (node)
 	{
 		if (node->data < min)
 		{
@@ -40,34 +40,25 @@ int	find_min(t_stack *a)
 	return (index);
 }
 
-int selection_sort(t_stack *a)
+void	selection_sort(t_stack *a, t_ops_counter *ops)
 {
-    t_stack *b;
+	t_stack	*b;
 	size_t	i;
 	size_t	min_index;
-	int		count;
 
-	count = 0;
-    b = init_stack();
-    if (!b)
-	{
-        return (-1);
-	}
+	b = init_stack();
+	if (!b)
+		return ;
 	while (a->top)
 	{
 		min_index = find_min(a);
 		i = 0;
 		while (i < min_index)
 		{
-			count += rotate_a(a);
+			rotate_a(a, ops);
 			i++;
 		}
-		count += push_b(b, a);
-		// if (push_b(b, a) == -1)
-		// 	return (abort_sort_function(b));
+		push_b(b, a, ops);
 	}
-	count += transfer_stack(a, b, &push_a);
-	// if (transfer_stack(a, b, &push_a) == -1)
-	// 	return (abort_sort_function(b));
-	return (count);
+	transfer_stack(a, b, ops, &push_a);
 }
