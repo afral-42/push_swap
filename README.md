@@ -214,7 +214,7 @@ Let us now link these phases to their respective algorithmic costs to rigorously
 #### Cost Breakdown
 | Step | Operation | Best Case | Average Case | Worst Case |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | **Loop**: For $n$ elements, check against mediane and PUSH to $B$ or ROTATE $A$ | $\frac{3}{2}n$ | $\frac{3}{2}n$ | $\frac{3}{2}n$ |
+| **1** | **Loop**: For $n$ elements, check against median and PUSH to $B$ or ROTATE $A$ | $\frac{3}{2}n$ | $\frac{3}{2}n$ | $\frac{3}{2}n$ |
 | **2** | Recursively sort lower partition on $B$ and upper partition on $A$ | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) |
 | **2** | **Loop :** While Stack $B$ is not empty | $n$  | $n$  | $n$ |
 | **2.1** | Position max node on top of $B$ | $0$ | $k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{4}$ (`rb` or `rrb`) | $k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2}$ (`rb` or `rrb`) |
@@ -299,12 +299,12 @@ Let's breakdown more in details our two-stack adaptation for the Push_swap proje
 ```text
 
 # Phase 0: Indexing / Pre-calc
-Calculate Mediane
+Calculate Median
 
 # Phase 1: Partitionning
 ROTATION_COUNTER = 0
 FOR each element in current partition size:
-    IF element < mediane:
+    IF element < median:
         PUSH B
     ELSE:
         ROTATE A
