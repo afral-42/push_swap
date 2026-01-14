@@ -30,6 +30,15 @@ FILES = \
 
 FILES_BONUS = \
 	checker_bonus.c \
+	data_structures/stack.c \
+	data_structures/list.c \
+	data_structures/list_utils.c \
+	data_structures/operations.c \
+	data_structures/operations_push.c \
+	data_structures/operations_rotate.c \
+	data_structures/operations_reverse_rotate.c \
+	data_structures/operations_swap.c \
+	data_structures/ops_counter.c \
 	data_structures/list.c \
 	data_structures/list_utils.c \
 	data_structures/operations.c \
@@ -39,7 +48,10 @@ FILES_BONUS = \
 	data_structures/operations_swap.c \
 	parsing/parsing_utils.c \
 	parsing/parsing.c \
-	parsing/split_args.c
+	parsing/ft_putdouble_fd.c \
+	parsing/bench_display.c \
+	parsing/split_args_utils.c \
+	parsing/split_args.c \
 
 SRCS_DIR = srcs
 BUILD_DIR = build
