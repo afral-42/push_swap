@@ -285,9 +285,15 @@ xxxxx
 
 xxxxx
 
+## Learners Contributions
+
+The contribution of each learner is as follows:
+- *abounoua*: implementation of data structures and parsing, implementation of selection sort, bucket sort, quick sort and radix sort algorithms, analysis of complex algorithm.
+- *arebilla*: implementation of Makefile, implementation of stack operations, implementation of selection sort and merge sort algorithms, analysis of simple and medium algorithms.
+
 ## Resources
 ### Books
 - Introduction to algorithms / Thomas H. Cormen, Charles E. Lierson, Ronald L. Rivest, Clifford Stein
 
 ### AI assistants
-- Gemini 3 Flash: Assistance for redaction and formatting of `README.md`
+- Gemini 3 Flash: Assistance for complexity analysis, redaction and formatting of `README.md`
