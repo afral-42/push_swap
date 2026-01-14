@@ -458,10 +458,19 @@ This formula confirms that while the algorithm belongs to the standard **$\Theta
 ##### B. Benchmarks: Theory vs. Reality
 The following table confronts our three levels of analysis against actual execution averages.
 
-| Stack Size ($N$) | Standard Theory<br>($1.5 n \log_2 n$) | Precise Model<br>($1.5 n \log_2 n - 1.43n$) | Actual Average<br>(Empirical) | Gap<br>(Model vs. Reality) |
+| Stack Size | Complexity class<br>($n \log_2 n$) | Precise Model<br>($1.5 n \log_2 n - 1.43n$) | Actual Average<br> | Reliability<br> |
 | :---: | :---: | :---: | :---: | :---: |
-| **100** | $\approx 1000$ | $\approx 857$ | **[INSÉRER TA MOYENNE]** | *TBD* |
-| **500** | $\approx 6725$ | $\approx 6009$ | **[INSÉRER TA MOYENNE]** | *TBD* |
+| **5** | $\approx 11$ | $\approx 10$ | $\approx 10$ | 0.0% |
+| **20** | $\approx 86$ | $\approx 100$ | $\approx 85$ | +15.0% |
+| **100** | $\approx 664$ | $\approx 853$ | $\approx 770$ | +9.7% |
+| **250** | $\approx 1991$ | $\approx 2628$ | $\approx 2432$ | +7.5% |
+| **500** | $\approx 4482$ | $\approx 6007$ | $\approx 5608$ | +6.6% |
+| **1000** | $\approx 9965$ | $\approx 13515$ | $\approx 12710$ | +6.0% |
+| **10000** | $\approx 132877$ | $\approx 184985$ | $\approx 175237$ | +5.3% |
+
+<br>
+
+![Algorithm Efficiency Convergence](push_swap_convergence.png)
 
 ##### C. Gap Analysis
 As observed in the benchmarks, the actual algorithm consistently outperforms even our precise mathematical model (by approximately 400-500 operations for $N=500$). This positive discrepancy reveals the limits of a static probabilistic model and highlights the impact of **randomness** on practical efficiency:
@@ -475,11 +484,36 @@ As observed in the benchmarks, the actual algorithm consistently outperforms eve
 
 To conclude, this quicksort implementation provides an interesting mathematical analysis and proves that sometimes, practice doesn't just match theory it beats it !
 
+### Adaptive Strategy
+
+#### Introduction
+Real-world data is rarely uniformly random. To maximize efficiency across all possible stack configurations, our `push_swap` implementation features an **Adaptive Mode**. Instead of forcing a single algorithm onto every dataset, the system first analyzes the "entropy" (or disorder) of the input stack and dynamically selects the most appropriate internal sorting strategy.
+
+#### The Disorder Metric
+We define the disorder of a stack $A$ as the normalized count of **inversions**. An inversion is defined as a pair of indices $(i, j)$ such that $i < j$ and $A[i] > A[j]$.
+
+$$\text{Disorder} = \frac{\sum_{i=0}^{n-1} \sum_{j=i+1}^{n-1} \mathbb{1}_{A[i] > A[j]}}{\text{Total Pairs}}$$
+
+Where the total number of pairs is $\frac{n(n-1)}{2}$.
+This metric produces a scalar value $d \in [0, 1]$:
+* **$d \approx 0$**: The stack is nearly sorted.
+* **$d \approx 0.5$**: The stack is randomly distributed (high entropy).
+* **$d \approx 1$**: The stack is reverse-sorted.
+
+#### Selection Logic & Complexity Targets
+Based on the calculated disorder $d$, the system routes the execution to one of three regimes. This routing ensures that the overhead of complex algorithms is avoided when the data is already structured, while asymptotic efficiency is guaranteed for chaotic data.
+
+| Disorder Score ($d$) | Regime | Selected Algorithm | Target Complexity | Rationale |
+| :---: | :---: | :---: | :---: | :--- |
+| **$d < 0.2$** | **Low** | **Insertion Sort** | $O(n^2)$ | For nearly sorted data, the overhead of recursion (Quicksort) or bucket allocation is counter-productive. Insertion sort, with its low constant factors and ability to skip sorted segments, is faster in practice. |
+| **$0.2 \le d < 0.5$** | **Medium** | **Bucket Sort** | $O(n\sqrt{n})$ | When partial order exists but is not dominant, Bucket Sort provides a middle-ground efficiency, avoiding the worst-case quadratic pitfalls while remaining simpler than a full recursive partition. |
+| **$d \ge 0.5$** | **High** | **Quicksort** | $O(n \log n)$ | For high-entropy random stacks, only a Divide & Conquer approach can satisfy the strict operation limits. The median-pivot Quicksort ensures optimal moves regardless of the input chaos. |
+
 ## Learners Contributions
 
 The contribution of each learner is as follows:
-- *abounoua*: implementation of data structures and parsing, implementation of selection sort, bucket sort, quick sort and radix sort algorithms, analysis of complex algorithm.
-- *arebilla*: implementation of Makefile, implementation of stack operations, implementation of selection sort and merge sort algorithms, analysis of simple and medium algorithms.
+- *abounoua*: implementation of data structures and parsing, implementation of selection sort, bucket sort, quick sort and radix sort algorithms, analysis of complex algorithm and adaptative strategy.
+- *arebilla*: implementation of Makefile, creation of unit tests, implementation of stack operations, implementation of insertion sort and merge sort algorithms, analysis of simple and medium algorithms.
 
 ## Resources
 
