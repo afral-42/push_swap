@@ -5,8 +5,8 @@
 <!--                                                  +:+ +:+         +:+    -->
 <!-- By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+       -->
 <!--                                              +#+#+#+#+#+   +#+          -->
-<!-- Created: 2026/01/10 16:11:12 by arebilla          #+#    #+#            -->
-<!-- Updated: 2026/01/10 16:16:18 by arebilla         ###   ########.fr      -->
+<!-- Created: 2026/01/14 08:47:35 by arebilla          #+#    #+#            -->
+<!-- Updated: 2026/01/14 08:55:26 by arebilla         ###   ########.fr      -->
 <!--                                                                         -->
 <!-- *********************************************************************** -->
 
@@ -261,8 +261,21 @@ To find the optimal k, we balance the two dominant terms:
 
 $$n \cdot k \approx \frac{n^2}{k} \implies k^2 \approx n \implies k = \sqrt{n}$$
 
+##### Numerical estimate in number of operations performed:
+
+| n |  Best Case | Average Case | Worst Case |
+| :--- | :--- | :--- | :--- |
+| **10** | $20$ | $26$ | $31$ |
+| **100** | $200$ | $687$ | $825$ |
+| **500** | $1000$ | $7300$ | $8760$ |
+
 #### Conclusion on performance
-By setting the number of buckets to $\sqrt{n}$, the overall complexity for is optimized to $O(n\sqrt(n))$. While this does not reach the efficiency of $O(n \log n)$ algorithms, it represents a significant optimization over the $O(n2)$ baseline.
+By setting the number of buckets to $\sqrt{n}$, the overall time complexity of the algorithm is optimized to $O(n\sqrt(n))$. While this does not reach the efficiency of $O(n \log n)$ algorithms, it represents a significant optimization over the $O(n2)$ baseline.
+
+As illustrated in the figure below, using $\sqrt{n}$ buckets leads to lower asymptotic growth rate compared to  logarithmic bucket configuration. This behavior arises because, for sufficiently large input sizes, the second term of the complexity expression dominates, causing the $\sqrt{n}$-based strategy to scale more favorably than the $\log n$ alternative.
+
+![Bucket sizes comparison](plot_log_vs_root.png)
+
 
 #### Optimal use case
 
@@ -462,10 +475,16 @@ As observed in the benchmarks, the actual algorithm consistently outperforms eve
 
 To conclude, this quicksort implementation provides an interesting mathematical analysis and proves that sometimes, practice doesn't just match theory it beats it !
 
+## Learners Contributions
+
+The contribution of each learner is as follows:
+- *abounoua*: implementation of data structures and parsing, implementation of selection sort, bucket sort, quick sort and radix sort algorithms, analysis of complex algorithm.
+- *arebilla*: implementation of Makefile, implementation of stack operations, implementation of selection sort and merge sort algorithms, analysis of simple and medium algorithms.
+
 ## Resources
 
 ### Books
 - Introduction to algorithms / Thomas H. Cormen, Charles E. Lierson, Ronald L. Rivest, Clifford Stein
 
 ### AI assistants
-- Gemini 3 Flash: Assistance for redaction and formatting of `README.md`
+- Gemini 3 Flash: Assistance for complexity analysis, redaction and formatting of `README.md`

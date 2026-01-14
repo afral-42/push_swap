@@ -61,4 +61,5 @@ void	selection_sort(t_stack *a, t_ops_counter *ops)
 		push_b(b, a, ops);
 	}
 	transfer_stack(a, b, ops, &push_a);
+	free_stack(b);
 }
