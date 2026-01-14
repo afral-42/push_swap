@@ -47,7 +47,10 @@ int	main(int ac, char **av)
 
 	options = 0;
 	if (ac == 1)
+	{
+		write(2, "Error\n", 6);
 		return (1);
+	}
 	value = parser(ac, av, &a, &options);
 	if (value == -1)
 	{
