@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ops_counter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 12:13:00 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/05 12:35:43 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/15 18:34:25 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_ops_counter	*new_ops_counter(void)
 	ops_counter->sa = 0;
 	ops_counter->sb = 0;
 	ops_counter->ss = 0;
+	ops_counter->print_flag = 1;
 	return (ops_counter);
 }
 

@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 09:23:01 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/07 15:15:26 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 18:30:35 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_ops_counter
 	int	sa;
 	int	sb;
 	int	ss;
+	int	print_flag;
 }	t_ops_counter;
 
 void			push_a(t_stack *a, t_stack *b, t_ops_counter *counter);

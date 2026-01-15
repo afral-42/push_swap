@@ -30,6 +30,7 @@ FILES = \
 
 FILES_BONUS = \
 	checker_bonus.c \
+	checker_utils_bonus.c \
 	data_structures/stack.c \
 	data_structures/list.c \
 	data_structures/list_utils.c \

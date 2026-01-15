@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebilla <arebilla@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 08:50:18 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/12 09:11:46 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/15 18:35:23 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "stack.h"
+
+int	checker(t_stack *a);
 
 int	read_ops(t_stack *a)
 {
@@ -57,7 +59,7 @@ int	main(int ac, char **av)
 		write(2, "Error\n", 6);
 		return (1);
 	}
-	read_ops_result = read_ops(a);
+	read_ops_result = checker(a);
 	free_stack(a);
 	return (process_result(read_ops_result));
 }
