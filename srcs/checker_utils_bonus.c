@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:26:55 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/15 18:57:06 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 19:04:56 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 
 static int	ft_strcmp(char *s1, char *s2)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
-        i++;
-    return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
 static int	free_all(t_stack *b, t_ops_counter *ops_counter)
@@ -34,7 +34,8 @@ static int	free_all(t_stack *b, t_ops_counter *ops_counter)
 	return (-1);
 }
 
-static int	apply_ops(t_stack *a, t_stack *b, char *op, t_ops_counter *ops_counter)
+static int	apply_ops(t_stack *a, t_stack *b, char *op,
+	t_ops_counter *ops_counter)
 {
 	if (!ft_strcmp(op, "sa\n"))
 		swap_a(a, ops_counter);
@@ -63,9 +64,10 @@ static int	apply_ops(t_stack *a, t_stack *b, char *op, t_ops_counter *ops_counte
 	return (0);
 }
 
-static int	read_and_apply_ops(t_stack *a, t_stack *b, t_ops_counter *ops_counter)
+static int	read_and_apply_ops(t_stack *a, t_stack *b,
+	t_ops_counter *ops_counter)
 {
-	char *op;
+	char	*op;
 
 	op = get_next_line(0);
 	while (op)
@@ -87,7 +89,7 @@ int	checker(t_stack *a)
 	t_ops_counter	*ops_counter;
 	double			disorder;
 	int				is_b_empty;
-	
+
 	b = init_stack();
 	if (!b)
 		return (-1);
