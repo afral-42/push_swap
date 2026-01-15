@@ -43,7 +43,7 @@ int	ft_atoi_secured(const char *nptr, int *error)
 	while (ft_isdigit(*nptr) && n <= 2147483648)
 		n = 10 * n + *nptr++ - '0';
 	if ((*nptr && !ft_isdigit(*nptr)) || (n * sign > 2147483647
-		|| n * sign < -2147483648))
+			|| n * sign < -2147483648))
 	{
 		*error = -1;
 		return (0);

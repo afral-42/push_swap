@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 09:02:01 by arebilla          #+#    #+#             */
-/*   Updated: 2026/01/05 12:15:06 by arebilla         ###   ########.fr       */
+/*   Updated: 2026/01/15 18:31:37 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	push_a(t_stack *a, t_stack *b, t_ops_counter *counter)
 	counter->pa++;
 	a->size++;
 	b->size--;
-	ft_printf("pa\n");
+	if (counter->print_flag)
+		ft_printf("pa\n");
 }
 
 void	push_b(t_stack *b, t_stack *a, t_ops_counter *counter)
@@ -29,5 +30,6 @@ void	push_b(t_stack *b, t_stack *a, t_ops_counter *counter)
 	counter->pb++;
 	a->size--;
 	b->size++;
-	ft_printf("pb\n");
+	if (counter->print_flag)
+		ft_printf("pb\n");
 }

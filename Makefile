@@ -1,4 +1,5 @@
 NAME = push_swap
+BONUS = checker
 FILES = \
 	data_structures/stack.c \
 	data_structures/list.c \
@@ -27,11 +28,40 @@ FILES = \
 	parsing/split_args.c \
 	push_swap.c
 
+FILES_BONUS = \
+	checker_bonus.c \
+	checker_utils_bonus.c \
+	data_structures/stack.c \
+	data_structures/list.c \
+	data_structures/list_utils.c \
+	data_structures/operations.c \
+	data_structures/operations_push.c \
+	data_structures/operations_rotate.c \
+	data_structures/operations_reverse_rotate.c \
+	data_structures/operations_swap.c \
+	data_structures/ops_counter.c \
+	data_structures/list.c \
+	data_structures/list_utils.c \
+	data_structures/operations.c \
+	data_structures/operations_push.c \
+	data_structures/operations_rotate.c \
+	data_structures/operations_reverse_rotate.c \
+	data_structures/operations_swap.c \
+	parsing/parsing_utils.c \
+	parsing/parsing.c \
+	parsing/ft_putdouble_fd.c \
+	parsing/bench_display.c \
+	parsing/split_args_utils.c \
+	parsing/split_args.c \
+
 SRCS_DIR = srcs
 BUILD_DIR = build
 SRCS = $(addprefix $(SRCS_DIR)/, $(FILES))
 OBJS := $(patsubst %.c, $(BUILD_DIR)/%.o, $(FILES))
 DEPS := $(patsubst %.c, $(BUILD_DIR)/%.d, $(FILES))
+SRCS_BONUS = $(addprefix $(SRCS_DIR)/, $(FILES_BONUS))
+OBJS_BONUS := $(patsubst %.c, $(BUILD_DIR)/%.o, $(FILES_BONUS))
+DEPS_BONUS := $(patsubst %.c, $(BUILD_DIR)/%.d, $(FILES_BONUS))
 
 LIBFTPRINTF_DIR = libftprintf
 LIBFTPRINTF_FILE = libftprintf.a
@@ -72,17 +102,19 @@ CC += $(CFLAGS) $(CPPFLAGS)
 
 all: $(NAME)
 
+bonus: $(BONUS)
+
 debug: CFLAGS += -g -O0 -DDEBUG
 debug: fclean $(NAME)
 
 $(NAME): $(OBJS) $(LIBFTPRINTF)
 	$(CC) $^ -o $@ 
 
+$(BONUS): $(OBJS_BONUS) $(LIBFTPRINTF)
+	$(CC) $^ -o $@ 
+
 $(LIBFTPRINTF):
 	$(MAKE) -C $(LIBFTPRINTF_DIR)
-
-check:
-	echo $(OBJS)
 
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)
