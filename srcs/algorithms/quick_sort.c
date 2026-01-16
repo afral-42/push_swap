@@ -6,7 +6,7 @@
 /*   By: abounoua <abounoua@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:17:39 by abounoua          #+#    #+#             */
-/*   Updated: 2026/01/16 11:20:44 by abounoua         ###   ########lyon.fr   */
+/*   Updated: 2026/01/16 11:28:20 by abounoua         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "ft_printf.h"
 
 int	quicksort_b_and_push_a(t_stack *a, t_stack *b, size_t partition,
-			t_ops_counter *ops);
+		t_ops_counter *ops);
 
 void	partition_a(t_stack *a, t_stack *b,
 	t_partition *partition_infos, t_ops_counter *ops)
@@ -91,7 +91,8 @@ int	quicksort_a(t_stack *a, t_stack *b, size_t partition_size,
 	partition_a(a, b, &partition_infos, ops);
 	if (quicksort_a(a, b, partition_infos.upper_partition_size, ops) == -1)
 		return (-1);
-	if (quicksort_b_and_push_a(a, b, partition_infos.lower_partition_size, ops) == -1)
+	if (quicksort_b_and_push_a(a, b, partition_infos.lower_partition_size,
+			ops) == -1)
 		return (-1);
 	return (0);
 }
@@ -114,7 +115,8 @@ int	quicksort_b_and_push_a(t_stack *a, t_stack *b, size_t partition_size,
 	partition_b(a, b, &partition_infos, ops);
 	if (quicksort_a(a, b, partition_infos.upper_partition_size, ops) == -1)
 		return (-1);
-	if (quicksort_b_and_push_a(a, b, partition_infos.lower_partition_size, ops) == -1)
+	if (quicksort_b_and_push_a(a, b, partition_infos.lower_partition_size,
+			ops) == -1)
 		return (-1);
 	return (0);
 }
