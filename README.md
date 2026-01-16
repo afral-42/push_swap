@@ -520,5 +520,19 @@ The contribution of each learner is as follows:
 ### Books
 - Introduction to algorithms / Thomas H. Cormen, Charles E. Lierson, Ronald L. Rivest, Clifford Stein
 
+### On-line resources
+- [Sorting algorithm / Wikipedia](https://en.wikipedia.org/wiki/Sorting_algorithm)
+- [Analysis of algorithms / Wikipedia](https://en.wikipedia.org/wiki/Analysis_of_algorithms)
+- [Master Theorm / Clarence Kineider](https://perso.eleves.ens-rennes.fr/people/pierre.le-barbenchon/devinfo/masterthrm.pdf)
+- [Longest Increasing Subsequence (LIS) / GeeksForGeeks](https://www.geeksforgeeks.org/dsa/longest-increasing-subsequence-dp-3/)
+- [Longest Increasing Subsequence Problem Explained / ByteQuest](https://www.youtube.com/watch?v=iQP5XFeXiMQ)
+
+
 ### AI assistants
-- Gemini 3 Flash: Assistance for complexity analysis, redaction and formatting of `README.md`
+- Gemini 3 Flash / Gemini 3 Pro:
+  - Explanation of mathematical concepts required for algorithm analysis
+  - Assistance with the drafting and formatting of `README.md`
+  - Support in exploring potential algorithms optimisation strategies
+
+### Tools
+- [Push Swap Visualizer / Emmanuel Ruaud](https://github.com/o-reo/push_swap_visualizer)
