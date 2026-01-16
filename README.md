@@ -43,7 +43,11 @@ The project uses a standard **Makefile**. To build the executable, run:
 ```bash
 make
 ```
-Available rules: `all`, `clean`, `fclean`, `re`, `test`, `norm`.
+To build the checker use:
+```bash
+make bonus
+```
+Available rules: `all`, `clean`, `fclean`, `re`, `test`, `norm`, `bonus`
 
 ### Usage
 ```
@@ -63,6 +67,33 @@ Examples:
   ./push_swap "3 1 2"
   ./push_swap "100 5 42 0" --complex --bench
   ARG="4 67 3"; ./push_swap "$ARG"
+```
+
+### Checker Usage
+
+The `checker` program reads sorting instructions from the standard input and verifies if they correctly sort the `stack_a`.
+
+**Syntax:**
+`./checker [stack_a]`
+
+**How it works:**
+* The checker waits for instructions (e.g., `sa`, `pb`, `rra`) via `stdin`.
+* Once the instructions are finished (press `Ctrl+D` to send EOF), it displays:
+    * **OK**: If the stack is perfectly sorted and `stack_b` is empty.
+    * **KO**: If the stack remains unsorted.
+    * **Error**: In case of invalid arguments or non-existent instructions.
+
+**Examples:**
+
+```
+# Manual verification
+ARG="3 1 2"; ./push_swap $ARG | ./checker $ARG
+
+# Verification with a specific strategy and benchmark
+ARG="100 5 42 0"; ./push_swap $ARG --complex | ./checker $ARG
+
+# Using a random number generator (Linux/macOS)
+ARG=$(seq 1 100 | shuf | tr '\n' ' '); ./push_swap $ARG --adaptive | ./checker $ARG
 ```
 
 ## Algorithms analysis
