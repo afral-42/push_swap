@@ -305,7 +305,7 @@ By setting the number of buckets to $\sqrt{n}$, the overall time complexity of t
 
 As illustrated in the figure below, using $\sqrt{n}$ buckets leads to lower asymptotic growth rate compared to  logarithmic bucket configuration. This behavior arises because, for sufficiently large input sizes, the second term of the complexity expression dominates, causing the $\sqrt{n}$-based strategy to scale more favorably than the $\log n$ alternative.
 
-![Bucket sizes comparison](plot_log_vs_root.png)
+![Bucket sizes comparison](images/plot_log_vs_root.png)
 
 
 #### Optimal use case
@@ -501,7 +501,7 @@ The following table confronts our three levels of analysis against actual execut
 
 <br>
 
-![Algorithm Efficiency Convergence](push_swap_convergence.png)
+![Algorithm Efficiency Convergence](images/push_swap_convergence.png)
 
 ##### C. Gap Analysis
 As observed in the benchmarks, the actual algorithm consistently outperforms even our precise mathematical model (by approximately 400-500 operations for $N=500$). This positive discrepancy reveals the limits of a static probabilistic model and highlights the impact of **randomness** on practical efficiency:
