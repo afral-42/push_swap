@@ -229,6 +229,7 @@ void	test_push(void)
 	check_list_integrity(b->top);
 	assert(a->size == 2);
 	assert(b->size == 0);
+	free(ops_counter);
 	free_stack(a);
 	free_stack(b);
 }
