@@ -188,6 +188,51 @@ void	test_reverse_rotate_both(void)
 	free(ops_counter);
 }
 
+void	test_push(void)
+{
+	t_stack	*a;
+	t_stack	*b;
+	t_ops_counter	*ops_counter;
+
+	ops_counter = new_ops_counter();
+	a = generate_stack(2);
+	b = generate_stack(0);
+	assert(a->size == 2);
+	assert(b->size == 0);
+	push_b(b, a, ops_counter);
+	check_list_integrity(a->top);
+	check_list_integrity(b->top);
+	assert(a->size == 1);
+	assert(b->size == 1);
+	push_b(b, a, ops_counter);
+	check_list_integrity(a->top);
+	check_list_integrity(b->top);
+	assert(a->size == 0);
+	assert(b->size == 2);
+	push_b(b, a, ops_counter);
+	check_list_integrity(a->top);
+	check_list_integrity(b->top);
+	assert(a->size == 0);
+	assert(b->size == 2);
+	push_a(a, b, ops_counter);
+	check_list_integrity(a->top);
+	check_list_integrity(b->top);
+	assert(a->size == 1);
+	assert(b->size == 1);
+	push_a(a, b, ops_counter);
+	check_list_integrity(a->top);
+	check_list_integrity(b->top);
+	assert(a->size == 2);
+	assert(b->size == 0);
+	push_a(a, b, ops_counter);
+	check_list_integrity(a->top);
+	check_list_integrity(b->top);
+	assert(a->size == 2);
+	assert(b->size == 0);
+	free_stack(a);
+	free_stack(b);
+}
+
 int	main(void)
 {
 	test_swap();
@@ -196,4 +241,5 @@ int	main(void)
 	test_reverse_rotate();
 	test_rotate_both();
 	test_reverse_rotate_both();
+	test_push();
 }

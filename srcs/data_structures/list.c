@@ -76,6 +76,8 @@ void	lst_move_head(t_list **dest, t_list **src)
 {
 	t_list	*tmp_node;
 
+	if (!(*src))
+		return ;
 	tmp_node = *src;
 	*src = (*src)->next;
 	if (*src)

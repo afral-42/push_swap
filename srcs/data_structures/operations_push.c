@@ -16,20 +16,26 @@
 
 void	push_a(t_stack *a, t_stack *b, t_ops_counter *counter)
 {
-	lst_move_head(&(a->top), &(b->top));
+	if (b->size)
+	{
+		lst_move_head(&(a->top), &(b->top));
+		a->size++;
+		b->size--;
+	}
 	counter->pa++;
-	a->size++;
-	b->size--;
 	if (counter->print_flag)
 		ft_printf("pa\n");
 }
 
 void	push_b(t_stack *b, t_stack *a, t_ops_counter *counter)
 {
-	lst_move_head(&(b->top), &(a->top));
+	if (a->size)
+	{
+		lst_move_head(&(b->top), &(a->top));
+		a->size--;
+		b->size++;
+	}
 	counter->pb++;
-	a->size--;
-	b->size++;
 	if (counter->print_flag)
 		ft_printf("pb\n");
 }
