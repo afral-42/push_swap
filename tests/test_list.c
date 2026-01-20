@@ -130,6 +130,14 @@ void	test_lstmove_head()
 	lst_move_head(&lst_dest, &lst_a);
 	check_list_integrity(lst_a);
 	check_list_integrity(lst_dest);
+	assert(lst_a == NULL);
+	assert(lst_dest->data == 3);
+	assert(lst_dest->next->data == 2);
+	assert(lst_dest->next->next->data == 1);
+	lst_move_head(&lst_dest, &lst_a);
+	check_list_integrity(lst_a);
+	check_list_integrity(lst_dest);
+	assert(lst_a == NULL);
 	assert(lst_dest->data == 3);
 	assert(lst_dest->next->data == 2);
 	assert(lst_dest->next->next->data == 1);
