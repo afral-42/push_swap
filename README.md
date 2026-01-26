@@ -234,22 +234,16 @@ WHILE Stack B is not empty
     PUSH top of Stack B to Stack A
 ```
 
-As illustrated in the pseudo-code, our implementation is fundamentally structured around two distinct phases: 
-1. **Partitioning phase** driven by a precise median pivot. This strategy enforces equal partition sizes, ensuring stable time performance and avoiding the $O(n^2)$ Quicksort worst-case scenario.
-2. Recursive **divide-and-conquer** phase. Our implementation strategically offloads lower partitions to Stack B, leveraging the LIFO property to naturally restore order during the reassembly phase.
-
-> **Note on Stack B Logic:** The Quicksort operation on Stack B follows the same partitioning logic but mirrors the flow: it sends unsorted elements / sorted back to Stack A. Crucially, due to the recursion stack and the LIFO nature of the data structure, the algorithm processes and pushes the larger partitions of B first. These elements land on top of the previously sorted (and larger) elements of A. As the recursion unwinds, the smallest elements are pushed last, placing them at the very top of Stack A and finalizing the ascending order.
-
-Let us now link these phases to their respective algorithmic costs to rigorously determine the global complexity of the implementation.
 
 #### Cost Breakdown
 | Step | Operation | Best Case | Average Case | Worst Case |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | **Loop**: For $n$ elements, check against median and PUSH to $B$ or ROTATE $A$ | $\frac{3}{2}n$ | $\frac{3}{2}n$ | $\frac{3}{2}n$ |
-| **2** | Recursively sort lower partition on $B$ and upper partition on $A$ | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) |
+| **1** | **Loop**: For each bucket $i$ from $0$ to $k - 1$ | $k$ | $k$ | $k$ |
+| **1.1** | ROTATE $A$ and PUSH top of $A$ to $B$ if top of $A$ is within bucket $i$ limits $\left[ i \times \frac{n}{k}, (i + 1) \times \frac{n}{k} \right)$ | $n$ | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) | $\sum_{i=0}^{k - 1}{n - i \frac{n}{k}}$ (`ra` or `pb`) |
 | **2** | **Loop :** While Stack $B$ is not empty | $n$  | $n$  | $n$ |
 | **2.1** | Position max node on top of $B$ | $0$ | $k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{4}$ (`rb` or `rrb`) | $k \cdot \sum_{i=1}^{\frac{n}{k}} \frac{i}{2}$ (`rb` or `rrb`) |
 | **2.2** | Push top of $B$ onto $A$ | $n$ (`pa`) | $n$ (`pa`) | $n$ (`pa`) |
+
 
 #### Cost Analysis
 
